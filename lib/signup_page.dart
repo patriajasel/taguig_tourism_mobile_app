@@ -23,6 +23,7 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget build(BuildContext context) {
 
     return Scaffold(
+      backgroundColor: Colors.grey[300],
       // appBar: AppBar(),
       // * PUT YOUR CODES HERE!!
       body: SingleChildScrollView(
@@ -30,6 +31,17 @@ class _SignUpPageState extends State<SignUpPage> {
           padding: const EdgeInsets.all(Sizes.defaultSpace),
           child: Column(
             children: [
+
+              // Sign In title
+              const SizedBox(height: Sizes.xl),
+              const Text(
+                'Sign-Up',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: Sizes.fontSizeLg,
+                ),
+              ),
+              const SizedBox(height: Sizes.xl),
 
               // Form
               Form(child: Column(
@@ -43,7 +55,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           expands: false,
                           decoration: InputDecoration(
                             labelText: 'First Name',
-                            prefixIcon: const Icon(Iconsax.user_copy, size: Sizes.iconMd),
+                            prefixIcon: const Icon(Icons.person_outlined, size: Sizes.iconMd),
                             
                             // Label style size
                             labelStyle: const TextStyle(
@@ -97,7 +109,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     expands: false,
                     decoration: InputDecoration(
                       labelText: 'E-mail',
-                      prefixIcon: const Icon(Iconsax.direct_copy, size: Sizes.iconMd),
+                      prefixIcon: const Icon(Icons.email_outlined, size: Sizes.iconMd),
 
                       // Label style size
                       labelStyle: const TextStyle(
@@ -123,7 +135,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     obscureText: true,
                     decoration: InputDecoration(
                       labelText: 'Password',
-                      prefixIcon: const Icon(Iconsax.lock_1_copy, size: Sizes.iconMd),
+                      prefixIcon: const Icon(Icons.lock_outline, size: Sizes.iconMd),
 
                       // Label style size
                       labelStyle: const TextStyle(
@@ -149,7 +161,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     obscureText: true,
                     decoration: InputDecoration(
                       labelText: 'Confirm Password',
-                      prefixIcon: const Icon(Iconsax.lock_circle_copy, size: Sizes.iconMd),
+                      prefixIcon: const Icon(Icons.lock_rounded, size: Sizes.iconMd),
 
                       // Label style size
                       labelStyle: const TextStyle(
@@ -174,7 +186,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     expands: false,
                     decoration: InputDecoration(
                       labelText: 'Age',
-                      prefixIcon: const Icon(Iconsax.clock_copy, size: Sizes.iconMd),
+                      prefixIcon: const Icon(Icons.schedule_outlined, size: Sizes.iconMd),
 
                       // Label style size
                       labelStyle: const TextStyle(
@@ -208,13 +220,12 @@ class _SignUpPageState extends State<SignUpPage> {
                         });
                       },
                     icon: const Icon(
-                      Iconsax.arrow_circle_down_copy,
+                      Icons.expand_circle_down_outlined,
                       size: Sizes.iconMd,
-                      color: Color.fromARGB(255, 47, 0, 255),
                     ),
                     decoration: InputDecoration(
                       labelText: "Gender",
-                      prefixIcon: const Icon(Iconsax.man_copy, size: Sizes.iconMd),
+                      prefixIcon: const Icon(Icons.wc_outlined, size: Sizes.iconMd),
 
                       labelStyle: const TextStyle(
                         fontSize: Sizes.fontSizeSm,
@@ -231,26 +242,85 @@ class _SignUpPageState extends State<SignUpPage> {
                     height: Sizes.buttonHeight
                     ),
 
-                  // Create an account button
                   SizedBox(
-                    width: double.infinity,
+                    width: 360, // Set the width (adjust as needed)
                     child: ElevatedButton(
-                      onPressed: (){},
-                      child: const Text('Create an Account')
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.black, // Black background
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8), // Rounded corners
+                        ),
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 15), // Adjust padding for height
+                      ),
+                      onPressed: () {},
+                      child: const Text(
+                        "Create an Account",
+                        style: TextStyle(color: Colors.white), // White text
+                      ),
                     ),
                   ),
                   
-                  // Height between Create Account and Google Signin
+                  // Height between Create Account and Google Signin 
                   const SizedBox(
                     height: Sizes.buttonHeight
                     ),
 
-                  // Google Sign In button
+                  // or Sign-up with
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Divider(
+                            thickness: 1.0,
+                            color: Colors.grey[400],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                          child: Text(
+                            'or Sign-up with',
+                            style: TextStyle(color: Colors.grey[700]),
+                          ),
+                        ),
+                        Expanded(
+                          child: Divider(
+                            thickness: 1.0,
+                            color: Colors.grey[400],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  const SizedBox(
+                    height: Sizes.md
+                    ),
+                  
+                  // Google Sign In button (Modified as same as Login UI)
+                  
+                  // ElevatedButton(
+                  //   onPressed: (){}, 
+                  //   child: Image.asset('lib/assets/logo/button_logo/google-icon.png',
+                  //     height: Sizes.iconLg,
+                  //   ),
                   SizedBox(
-                    width: double.infinity,
+                    width: 65, // Set the width (adjust as needed)
                     child: ElevatedButton(
-                      onPressed: (){},
-                      child: const Text('or Sign In via Google')
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.white, // Black background
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8), // Rounded corners
+                        ),
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 15
+                        ), // Adjust padding for height
+                      ),
+                      onPressed: () {},
+                      child: Image.asset('lib/assets/logo/button_logo/google-icon.png',
+                      height: Sizes.iconLg, // White text
+                      ),
                     ),
                   ),
                   
@@ -260,12 +330,19 @@ class _SignUpPageState extends State<SignUpPage> {
                     ),
 
                   // Login button
-                  SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      onPressed: (){},
-                      child: const Text('Already have an account? Login here!')
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text('Already have an account? '),
+                      InkWell(
+                        child: const Text('Login Here'),
+                        onTap: () {
+                          Navigator.pushNamed(
+                            context, '/login_page'
+                          );
+                        }
+                      ),
+                    ],
                   ),
                 ],
               )),
