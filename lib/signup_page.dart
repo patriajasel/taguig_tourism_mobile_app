@@ -21,7 +21,6 @@ class _SignUpPageState extends State<SignUpPage> {
 
   @override
   Widget build(BuildContext context) {
-    final bool obscureText; 
 
     return Scaffold(
       // appBar: AppBar(),

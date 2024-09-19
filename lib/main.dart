@@ -16,7 +16,6 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
 
     return MaterialApp(
-      title: 'Material App',
       routes: {
         '/login_page': (context) => const LoginPage(),
         '/signup_page': (context) => const SignUpPage(),
@@ -25,8 +24,7 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: const Text('Taguig Tourism App'),
         ),
-        body: const SignUpPage(
-        ),
+        body: const LoginPage()
       ),
     );
   }
