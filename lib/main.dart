@@ -10,19 +10,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Material App',
-      routes: {
-        '/login_page': (context) => const LoginPage(),
-        '/signup_page': (context) => const SignUpPage(),
-      },
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Material App Bar'),
-        ),
-        body: const Center(
-          child: Text('Hello World'),
-        ),
-      ),
-    );
+        title: 'Material App',
+        routes: {
+          '/login_page': (context) => const LoginPage(),
+          '/signup_page': (context) => const SignUpPage(),
+        },
+        home: LoginPage());
   }
 }
