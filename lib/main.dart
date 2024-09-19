@@ -4,11 +4,17 @@ import 'package:taguig_tourism_mobile_app/signup_page.dart';
 
 void main() => runApp(const MyApp());
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
   @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
   Widget build(BuildContext context) {
+
     return MaterialApp(
       title: 'Material App',
       routes: {
@@ -17,7 +23,7 @@ class MyApp extends StatelessWidget {
       },
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Material App Bar'),
+          title: const Text('Taguig Tourism App'),
         ),
         body: const SignUpPage(
         ),
