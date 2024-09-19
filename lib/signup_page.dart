@@ -14,14 +14,13 @@ class _SignUpPageState extends State<SignUpPage> {
   _SignUpPageState() {
     genderSelectedVal = genderList[0];
   }
-  
+
   // Gender List Variable
   final genderList = ["Male", "Female", "Rather not to say"];
   String? genderSelectedVal = "";
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       backgroundColor: Colors.grey[300],
       // appBar: AppBar(),
@@ -44,11 +43,11 @@ class _SignUpPageState extends State<SignUpPage> {
               const SizedBox(height: Sizes.xl),
 
               // Form
-              Form(child: Column(
+              Form(
+                  child: Column(
                 children: [
                   Row(
                     children: [
-
                       // First Name form
                       Expanded(
                         child: TextFormField(
@@ -72,17 +71,15 @@ class _SignUpPageState extends State<SignUpPage> {
                       ),
 
                       // Width between First and Last Name
-                      const SizedBox(
-                        width: Sizes.spaceBtwInputFields
-                      ),
-                      
+                      const SizedBox(width: Sizes.spaceBtwInputFields),
+
                       // Last Name form
                       Expanded(
                         child: TextFormField(
                           expands: false,
                           decoration: InputDecoration(
                             labelText: 'Last Name',
-                            
+
                             // Label style size
                             labelStyle: const TextStyle(
                               fontSize: Sizes.fontSizeSm,
@@ -100,10 +97,8 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
 
                   // Height bewteen First and Last Name to Email form
-                  const SizedBox(
-                    height: Sizes.spaceBtwInputFields
-                  ),
-                    
+                  const SizedBox(height: Sizes.spaceBtwInputFields),
+
                   // Email form
                   TextFormField(
                     expands: false,
@@ -125,9 +120,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
 
                   // Height bewteen Email and Password form
-                  const SizedBox(
-                    height: Sizes.spaceBtwInputFields
-                    ),
+                  const SizedBox(height: Sizes.spaceBtwInputFields),
 
                   // Password
                   TextFormField(
@@ -151,9 +144,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
 
                   // Height between Password and Confirm Passw
-                  const SizedBox(
-                    height: Sizes.spaceBtwInputFields
-                  ),
+                  const SizedBox(height: Sizes.spaceBtwInputFields),
 
                   // Confirm Password
                   TextFormField(
@@ -177,10 +168,8 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
 
                   // Height bewteen Email and Age form
-                  const SizedBox(
-                    height: Sizes.spaceBtwInputFields
-                    ),
-                    
+                  const SizedBox(height: Sizes.spaceBtwInputFields),
+
                   //* Placeholder ko muna yung TextFormField para sa Age
                   TextFormField(
                     expands: false,
@@ -200,25 +189,24 @@ class _SignUpPageState extends State<SignUpPage> {
                       ),
                     ),
                   ),
-                  
+
                   // Height bewteen Age and Gender form
-                  const SizedBox(
-                    height: Sizes.spaceBtwInputFields
-                  ),
-                    
+                  const SizedBox(height: Sizes.spaceBtwInputFields),
+
                   // Gender List (Changed: Text Form to Dropdown List)
                   DropdownButtonFormField(
                     value: genderSelectedVal,
-                    items: genderList.map(
-                      (e) => DropdownMenuItem(
-                        value: e,
-                        child: Text(e),
-                      )).toList(),
-                      onChanged: (val){
-                        setState(() {
-                          genderSelectedVal = val as String;
-                        });
-                      },
+                    items: genderList
+                        .map((e) => DropdownMenuItem(
+                              value: e,
+                              child: Text(e),
+                            ))
+                        .toList(),
+                    onChanged: (val) {
+                      setState(() {
+                        genderSelectedVal = val as String;
+                      });
+                    },
                     icon: const Icon(
                       Icons.expand_circle_down_outlined,
                       size: Sizes.iconMd,
@@ -230,17 +218,14 @@ class _SignUpPageState extends State<SignUpPage> {
                       labelStyle: const TextStyle(
                         fontSize: Sizes.fontSizeSm,
                       ),
-
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
                     ),
                   ),
-                  
+
                   // Height bewteen Gender form and Create an Account button
-                  const SizedBox(
-                    height: Sizes.buttonHeight
-                    ),
+                  const SizedBox(height: Sizes.buttonHeight),
 
                   SizedBox(
                     width: 360, // Set the width (adjust as needed)
@@ -323,11 +308,9 @@ class _SignUpPageState extends State<SignUpPage> {
                       ),
                     ),
                   ),
-                  
+
                   // Height between Google Signin and Login button
-                  const SizedBox(
-                    height: Sizes.buttonHeight
-                    ),
+                  const SizedBox(height: Sizes.buttonHeight),
 
                   // Login button
                   Row(
