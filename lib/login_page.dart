@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
 
-
   @override
   Widget build(BuildContext context) {
     final usernameController = TextEditingController();
@@ -91,24 +90,26 @@ class LoginPage extends StatelessWidget {
               const SizedBox(height: 25),
 
               // Sign in button with onTap using GestureDetector
-                SizedBox(
-                  width: 360, // Set the width (adjust as needed)
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.black, // Black background
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8), // Rounded corners
-                      ),
-                      padding: const EdgeInsets.symmetric(vertical: 15), // Adjust padding for height
+              SizedBox(
+                width: 360, // Set the width (adjust as needed)
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.black, // Black background
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8), // Rounded corners
                     ),
-                    onPressed: () {},
-                    child: const Text(
-                      "Sign In",
-                      style: TextStyle(color: Colors.white), // White text
-                    ),
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 15), // Adjust padding for height
+                  ),
+                  onPressed: () {
+                    
+                  },
+                  child: const Text(
+                    "Sign In",
+                    style: TextStyle(color: Colors.white), // White text
                   ),
                 ),
-
+              ),
 
               const SizedBox(height: 50),
 

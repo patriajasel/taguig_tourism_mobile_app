@@ -11,7 +11,9 @@ class _TrafficPageState extends State<TrafficPage> {
   @override
   Widget build(BuildContext context) {
     return const Center(
-      child: Text("Traffic Page"),
+      child: Text(
+        "Traffic Page",
+      ),
     );
   }
 }
