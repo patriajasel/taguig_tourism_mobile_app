@@ -14,14 +14,13 @@ class _SignUpPageState extends State<SignUpPage> {
   _SignUpPageState() {
     genderSelectedVal = genderList[0];
   }
-  
+
   // Gender List Variable
   final genderList = ["Male", "Female", "Rather not to say"];
   String? genderSelectedVal = "";
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       // appBar: AppBar(),
       // * PUT YOUR CODES HERE!!
@@ -30,21 +29,21 @@ class _SignUpPageState extends State<SignUpPage> {
           padding: const EdgeInsets.all(Sizes.defaultSpace),
           child: Column(
             children: [
-
               // Form
-              Form(child: Column(
+              Form(
+                  child: Column(
                 children: [
                   Row(
                     children: [
-
                       // First Name form
                       Expanded(
                         child: TextFormField(
                           expands: false,
                           decoration: InputDecoration(
                             labelText: 'First Name',
-                            prefixIcon: const Icon(Iconsax.user_copy, size: Sizes.iconMd),
-                            
+                            prefixIcon: const Icon(Iconsax.user_copy,
+                                size: Sizes.iconMd),
+
                             // Label style size
                             labelStyle: const TextStyle(
                               fontSize: Sizes.fontSizeSm,
@@ -60,17 +59,15 @@ class _SignUpPageState extends State<SignUpPage> {
                       ),
 
                       // Width between First and Last Name
-                      const SizedBox(
-                        width: Sizes.spaceBtwInputFields
-                      ),
-                      
+                      const SizedBox(width: Sizes.spaceBtwInputFields),
+
                       // Last Name form
                       Expanded(
                         child: TextFormField(
                           expands: false,
                           decoration: InputDecoration(
                             labelText: 'Last Name',
-                            
+
                             // Label style size
                             labelStyle: const TextStyle(
                               fontSize: Sizes.fontSizeSm,
@@ -88,16 +85,15 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
 
                   // Height bewteen First and Last Name to Email form
-                  const SizedBox(
-                    height: Sizes.spaceBtwInputFields
-                  ),
-                    
+                  const SizedBox(height: Sizes.spaceBtwInputFields),
+
                   // Email form
                   TextFormField(
                     expands: false,
                     decoration: InputDecoration(
                       labelText: 'E-mail',
-                      prefixIcon: const Icon(Iconsax.direct_copy, size: Sizes.iconMd),
+                      prefixIcon:
+                          const Icon(Iconsax.direct_copy, size: Sizes.iconMd),
 
                       // Label style size
                       labelStyle: const TextStyle(
@@ -113,9 +109,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
 
                   // Height bewteen Email and Password form
-                  const SizedBox(
-                    height: Sizes.spaceBtwInputFields
-                    ),
+                  const SizedBox(height: Sizes.spaceBtwInputFields),
 
                   // Password
                   TextFormField(
@@ -123,7 +117,8 @@ class _SignUpPageState extends State<SignUpPage> {
                     obscureText: true,
                     decoration: InputDecoration(
                       labelText: 'Password',
-                      prefixIcon: const Icon(Iconsax.lock_1_copy, size: Sizes.iconMd),
+                      prefixIcon:
+                          const Icon(Iconsax.lock_1_copy, size: Sizes.iconMd),
 
                       // Label style size
                       labelStyle: const TextStyle(
@@ -139,9 +134,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
 
                   // Height between Password and Confirm Passw
-                  const SizedBox(
-                    height: Sizes.spaceBtwInputFields
-                  ),
+                  const SizedBox(height: Sizes.spaceBtwInputFields),
 
                   // Confirm Password
                   TextFormField(
@@ -149,7 +142,8 @@ class _SignUpPageState extends State<SignUpPage> {
                     obscureText: true,
                     decoration: InputDecoration(
                       labelText: 'Confirm Password',
-                      prefixIcon: const Icon(Iconsax.lock_circle_copy, size: Sizes.iconMd),
+                      prefixIcon: const Icon(Iconsax.lock_circle_copy,
+                          size: Sizes.iconMd),
 
                       // Label style size
                       labelStyle: const TextStyle(
@@ -165,16 +159,15 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
 
                   // Height bewteen Email and Age form
-                  const SizedBox(
-                    height: Sizes.spaceBtwInputFields
-                    ),
-                    
+                  const SizedBox(height: Sizes.spaceBtwInputFields),
+
                   //* Placeholder ko muna yung TextFormField para sa Age
                   TextFormField(
                     expands: false,
                     decoration: InputDecoration(
                       labelText: 'Age',
-                      prefixIcon: const Icon(Iconsax.clock_copy, size: Sizes.iconMd),
+                      prefixIcon:
+                          const Icon(Iconsax.clock_copy, size: Sizes.iconMd),
 
                       // Label style size
                       labelStyle: const TextStyle(
@@ -188,25 +181,24 @@ class _SignUpPageState extends State<SignUpPage> {
                       ),
                     ),
                   ),
-                  
+
                   // Height bewteen Age and Gender form
-                  const SizedBox(
-                    height: Sizes.spaceBtwInputFields
-                  ),
-                    
+                  const SizedBox(height: Sizes.spaceBtwInputFields),
+
                   // Gender List (Changed: Text Form to Dropdown List)
                   DropdownButtonFormField(
                     value: genderSelectedVal,
-                    items: genderList.map(
-                      (e) => DropdownMenuItem(
-                        value: e,
-                        child: Text(e),
-                      )).toList(),
-                      onChanged: (val){
-                        setState(() {
-                          genderSelectedVal = val as String;
-                        });
-                      },
+                    items: genderList
+                        .map((e) => DropdownMenuItem(
+                              value: e,
+                              child: Text(e),
+                            ))
+                        .toList(),
+                    onChanged: (val) {
+                      setState(() {
+                        genderSelectedVal = val as String;
+                      });
+                    },
                     icon: const Icon(
                       Iconsax.arrow_circle_down_copy,
                       size: Sizes.iconMd,
@@ -214,58 +206,49 @@ class _SignUpPageState extends State<SignUpPage> {
                     ),
                     decoration: InputDecoration(
                       labelText: "Gender",
-                      prefixIcon: const Icon(Iconsax.man_copy, size: Sizes.iconMd),
-
+                      prefixIcon:
+                          const Icon(Iconsax.man_copy, size: Sizes.iconMd),
                       labelStyle: const TextStyle(
                         fontSize: Sizes.fontSizeSm,
                       ),
-
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
                     ),
                   ),
-                  
+
                   // Height bewteen Gender form and Create an Account button
-                  const SizedBox(
-                    height: Sizes.buttonHeight
-                    ),
+                  const SizedBox(height: Sizes.buttonHeight),
 
                   // Create an account button
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: (){},
-                      child: const Text('Create an Account')
-                    ),
+                        onPressed: () {},
+                        child: const Text('Create an Account')),
                   ),
-                  
+
                   // Height between Create Account and Google Signin
-                  const SizedBox(
-                    height: Sizes.buttonHeight
-                    ),
+                  const SizedBox(height: Sizes.buttonHeight),
 
                   // Google Sign In button
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: (){},
-                      child: const Text('or Sign In via Google')
-                    ),
+                        onPressed: () {},
+                        child: const Text('or Sign In via Google')),
                   ),
-                  
+
                   // Height between Google Signin and Login button
-                  const SizedBox(
-                    height: Sizes.buttonHeight
-                    ),
+                  const SizedBox(height: Sizes.buttonHeight),
 
                   // Login button
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: (){},
-                      child: const Text('Already have an account? Login here!')
-                    ),
+                        onPressed: () {},
+                        child:
+                            const Text('Already have an account? Login here!')),
                   ),
                 ],
               )),
