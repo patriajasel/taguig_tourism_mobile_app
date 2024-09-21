@@ -1,3 +1,4 @@
+// ignore: avoid_web_libraries_in_flutter
 import 'package:flutter/material.dart';
 import 'package:taguig_tourism_mobile_app/app_navigation.dart';
 import 'package:taguig_tourism_mobile_app/login_page.dart';

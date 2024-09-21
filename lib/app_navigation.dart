@@ -30,7 +30,18 @@ class _AppNavigationState extends State<AppNavigation> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.red,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Colors.blueAccent.shade700,
+                Colors.redAccent.shade700,
+              ], // Define your gradient colors
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
+            ),
+          ),
+        ),
         leading: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Image.asset(
@@ -44,7 +55,10 @@ class _AppNavigationState extends State<AppNavigation> {
           controller: searchController,
           backgroundColor: Colors.white,
           style: const TextStyle(
-              fontFamily: "Arvo", fontSize: 16, letterSpacing: 1),
+            fontFamily: "Arvo",
+            fontSize: 16,
+            letterSpacing: 1,
+          ),
         ),
         actions: [
           Padding(
@@ -52,9 +66,9 @@ class _AppNavigationState extends State<AppNavigation> {
             child: CircleAvatar(
               backgroundColor: Colors.white,
               child: IconButton(
-                icon: const Icon(
+                icon: Icon(
                   Icons.support_agent,
-                  color: Colors.black,
+                  color: Colors.yellow.shade900,
                 ),
                 alignment: Alignment.center,
                 onPressed: () {},
@@ -66,8 +80,8 @@ class _AppNavigationState extends State<AppNavigation> {
       bottomNavigationBar: Theme(
         data: ThemeData(
           navigationBarTheme: NavigationBarThemeData(
-            backgroundColor: Colors.red,
-            indicatorColor: Colors.red.shade300,
+            backgroundColor: Colors.redAccent.shade700,
+            indicatorColor: Colors.redAccent.shade100,
             labelTextStyle: MaterialStateProperty.all(
               const TextStyle(
                   color: Colors.white, fontFamily: "Arvo", fontSize: 12.0),
