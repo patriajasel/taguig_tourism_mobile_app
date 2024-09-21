@@ -45,7 +45,7 @@ class _AppNavigationState extends State<AppNavigation> {
         leading: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Image.asset(
-            "lib/assets/logo/city_of_taguig_logo.png",
+            "lib/assets/logo/app_logo/city_of_taguig_logo.png",
             fit: BoxFit.fill,
             height: 50,
             width: 50,
