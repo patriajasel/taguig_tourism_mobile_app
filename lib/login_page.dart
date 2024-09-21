@@ -40,7 +40,7 @@ class _LoginPageState extends State<LoginPage> {
                     children: [
                       SizedBox(height: screenHeight / 20),
                       Image.asset(
-                        "lib/assets/logo/city_of_taguig_logo.png",
+                        "lib/assets/logo/app_logo/city_of_taguig_logo.png",
                         fit: BoxFit.fill,
                         height: 150,
                         width: 150,
