@@ -275,7 +275,11 @@ class _SignUpPageState extends State<SignUpPage> {
                             vertical: 15
                             ), // Adjust padding for height
                           ),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pushNamed(
+                            context, '/app_navigation_page'
+                          );
+                        },
                         child: const Text(
                           "Create an Account",
                           style: TextStyle(color: Colors.white), // White text
