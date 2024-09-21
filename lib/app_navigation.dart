@@ -35,10 +35,10 @@ class _AppNavigationState extends State<AppNavigation> {
             gradient: LinearGradient(
               colors: [
                 Colors.blueAccent.shade700,
-                Colors.redAccent.shade700
+                Colors.redAccent.shade700,
               ], // Define your gradient colors
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
             ),
           ),
         ),
