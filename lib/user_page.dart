@@ -102,39 +102,41 @@ class _UserPageState extends State<UserPage> {
           //     ),
           // ),
 
-          Container(
-            height: 120,
-            color: Colors.grey,
-            child: DefaultTabController(
-              length: 3,
-              child: Scaffold(
-                appBar: AppBar(
-                  toolbarHeight: 0,
-                  bottom: const TabBar(
-
-                    tabs: [
-                      Tab(
-                        text: 'Profile',
-                        icon: Icon(Icons.person, size: 50),
-                      ),
-                      Tab(
-                        text: 'History',
-                        icon: Icon(Icons.history, size: 50)
-                      ),
-                      Tab(
-                        text: 'Settings',
-                        icon: Icon(Icons.settings, size: 50)
-                      ),
-                    ]),
-                ),
-                body: TabBarView(
-                  children: [
-                    Center(child: UserProfileTab()),
-                    Center(child: UserHistoryTab()),
-                    Center(child: UserSettingsTab()),
-                  ]
+          Expanded(
+            child: Container(
+              height: 120,
+              color: Colors.grey,
+              child: DefaultTabController(
+                length: 3,
+                child: Scaffold(
+                  appBar: AppBar(
+                    toolbarHeight: 0,
+                    bottom: const TabBar(
+            
+                      tabs: [
+                        Tab(
+                          text: 'Profile',
+                          icon: Icon(Icons.person, size: 50),
+                        ),
+                        Tab(
+                          text: 'History',
+                          icon: Icon(Icons.history, size: 50)
+                        ),
+                        Tab(
+                          text: 'Settings',
+                          icon: Icon(Icons.settings, size: 50)
+                        ),
+                      ]),
                   ),
-              )
+                  body: TabBarView(
+                    children: [
+                      UserProfileTab(),
+                      UserHistoryTab(),
+                      UserSettingsTab(),
+                    ]
+                    ),
+                )
+              ),
             ),
           )
         ],
