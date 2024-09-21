@@ -31,18 +31,19 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      body: SingleChildScrollView(
-        child: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                Colors.blueAccent.shade700,
-                Colors.redAccent.shade700,
-              ],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
+      body: Container(
+        height: double.infinity,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Colors.blueAccent.shade700,
+              Colors.redAccent.shade700,
+            ],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
           ),
+        ),
+        child: SingleChildScrollView(
           child: Column(
             children: [
               Padding(
@@ -50,7 +51,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 child: Column(
                   children: [
                     // Sign In title
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 50),
                     const Text(
                       'Sign Up Form',
                       style: TextStyle(
@@ -58,7 +59,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           fontSize: Sizes.xl,
                           fontWeight: FontWeight.bold),
                     ),
-                    const SizedBox(height: 30),
+                    const SizedBox(height: 50),
 
                     // Form
                     Form(

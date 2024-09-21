@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class GenerateWidget {
+  
   TextField generateTextField(
       String hintText, IconData icon, TextEditingController controller,
       {bool? obscureText}) {

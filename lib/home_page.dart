@@ -17,6 +17,20 @@ class _HomePageState extends State<HomePage> {
     'lib/assets/images/taguig_image5.png'
   ];
 
+  final List<String> nearbyList = [
+    'lib/assets/images/taguig_nearby1.jpg',
+    'lib/assets/images/taguig_nearby2.jpg',
+    'lib/assets/images/taguig_nearby3.jpg',
+    'lib/assets/images/taguig_nearby4.jpg',
+  ];
+
+  final List<String> nearbyNames = [
+    'Heritage Park',
+    'Bonifacio High Tree',
+    'SM Aura',
+    'Market Market',
+  ];
+
   int currentSlide = 0;
 
   @override
@@ -87,17 +101,17 @@ class _HomePageState extends State<HomePage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Text(
-                          "Popular Destinations",
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
+                      ListTile(
+                          title: const Text(
+                            "Popular Destinations",
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            textAlign: TextAlign.left,
                           ),
-                          textAlign: TextAlign.left,
-                        ),
-                      ),
+                          trailing: IconButton(
+                              onPressed: () {}, icon: const Icon(Icons.menu))),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: CarouselSlider(
@@ -124,6 +138,10 @@ class _HomePageState extends State<HomePage> {
                       carouselIndicator()
                     ],
                   ),
+                ),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20.0),
+                  child: Divider(),
                 ),
                 Container(
                   margin: const EdgeInsets.symmetric(horizontal: 30),
@@ -156,14 +174,12 @@ class _HomePageState extends State<HomePage> {
                             return Padding(
                               padding: const EdgeInsets.all(5),
                               child: Column(
-                                mainAxisSize: MainAxisSize
-                                    .min, 
+                                mainAxisSize: MainAxisSize.min,
                                 children: [
                                   ClipOval(
                                     child: Material(
                                       elevation: 10,
-                                      color: Colors.blueAccent
-                                          .shade700,
+                                      color: Colors.blueAccent.shade700,
                                       child: IconButton(
                                         onPressed: () {},
                                         icon: Icon(
@@ -190,9 +206,80 @@ class _HomePageState extends State<HomePage> {
                     ],
                   ),
                 ),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20.0),
+                  child: Divider(),
+                ),
                 Container(
-                  child: Text("Nearby here!"),
-                )
+                  margin: const EdgeInsets.symmetric(horizontal: 30),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text(
+                          "Nearby Places",
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          textAlign: TextAlign.left,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: GridView.builder(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: 4,
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            childAspectRatio: 1,
+                          ),
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: const EdgeInsets.all(5),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color: Colors.blueAccent.shade700,
+                                        width: 2.0,
+                                      ),
+                                      borderRadius: BorderRadius.circular(15),
+                                    ),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(15),
+                                      child: SizedBox(
+                                        height: 100,
+                                        width: 200,
+                                        child: Image.asset(
+                                          nearbyList[index],
+                                          fit: BoxFit.fill,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 5.0),
+                                    child: Text(
+                                      nearbyNames[index],
+                                      style: const TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            );
+                          },
+                        ),
+                      )
+                    ],
+                  ),
+                ),
               ],
             ),
           ],
