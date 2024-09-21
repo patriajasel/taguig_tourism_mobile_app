@@ -1,3 +1,4 @@
+// ignore: avoid_web_libraries_in_flutter
 import 'package:flutter/material.dart';
 import 'package:taguig_tourism_mobile_app/app_navigation.dart';
 import 'package:taguig_tourism_mobile_app/login_page.dart';
@@ -19,6 +20,6 @@ class MyApp extends StatelessWidget {
           '/signup_page': (context) => const SignUpPage(),
           '/app_navigation_page': (context) => const AppNavigation(),
         },
-        home: const AppNavigation());
+        home: const LoginPage());
   }
 }
