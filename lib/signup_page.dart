@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:taguig_tourism_mobile_app/services/auth_services.dart';
 import 'package:taguig_tourism_mobile_app/widgets/widget_generator.dart';
 import 'util/constants/sizes.dart';
 
@@ -29,6 +30,8 @@ class _SignUpPageState extends State<SignUpPage> {
 
   @override
   Widget build(BuildContext context) {
+    void getBuildContext() {}
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Container(
@@ -184,7 +187,8 @@ class _SignUpPageState extends State<SignUpPage> {
                             child: GenerateWidget().generateElevatedButton(
                                 "Create an Account",
                                 Colors.black,
-                                Colors.white)),
+                                Colors.white,
+                                signingUp)),
 
                         // Height between Create Account and Google Sign in
                         const SizedBox(height: Sizes.buttonHeight),
@@ -286,6 +290,18 @@ class _SignUpPageState extends State<SignUpPage> {
           ),
         ),
       ),
+    );
+  }
+
+  void signingUp() async {
+    await AuthenticationServices().signUp(
+      email: email.text,
+      password: password.text,
+      firstName: firstName.text,
+      lastName: lastName.text,
+      age: int.parse(age.text),
+      gender: genderSelectedVal!,
+      context: context,
     );
   }
 }
