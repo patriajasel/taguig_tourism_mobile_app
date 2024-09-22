@@ -3,9 +3,6 @@ import 'package:taguig_tourism_mobile_app/user_history_tab.dart';
 import 'package:taguig_tourism_mobile_app/user_profile_tab.dart';
 import 'package:taguig_tourism_mobile_app/user_settings_tab.dart';
 import 'util/constants/sizes.dart';
-import 'package:taguig_tourism_mobile_app/explore_page.dart';
-import 'package:taguig_tourism_mobile_app/traffic_page.dart';
-import 'package:taguig_tourism_mobile_app/weather_page.dart';
 
 void main() => runApp(const UserPage());
 
@@ -17,14 +14,13 @@ class UserPage extends StatefulWidget {
 }
 
 class _UserPageState extends State<UserPage> {
-  final List<Widget> screens = [
-    const TrafficPage(),
-    const ExplorePage(),
-    const WeatherPage(),
+  // final List<Widget> screens = [
+  //   const TrafficPage(),
+  //   const ExplorePage(),
+  //   const WeatherPage(),
+  // ];
 
-  ];
-
-  int selectedNavIndex = 0;
+  // int selectedNavIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -44,13 +40,14 @@ class _UserPageState extends State<UserPage> {
             ),
             height: 80,
             child: ListTile(
-              leading: Image.asset("lib/assets/logo/app_logo/city_of_taguig_logo.png", // UserImage
-              width: 50,
-              height: 50),
+              leading: const CircleAvatar(
+                child: Icon(Icons.person, size: 30),
+              ),
               title: const Text('Username', // Username
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: Sizes.fontSizeLg
+                  fontSize: Sizes.fontSizeLg,
+                  fontWeight: FontWeight.bold
               )), 
               subtitle: const Text('Username@gmail.com', // Email
                 style: TextStyle(
@@ -102,39 +99,41 @@ class _UserPageState extends State<UserPage> {
           //     ),
           // ),
 
-          Container(
-            height: 120,
-            color: Colors.grey,
-            child: DefaultTabController(
-              length: 3,
-              child: Scaffold(
-                appBar: AppBar(
-                  toolbarHeight: 0,
-                  bottom: const TabBar(
-
-                    tabs: [
-                      Tab(
-                        text: 'Profile',
-                        icon: Icon(Icons.person, size: 50),
-                      ),
-                      Tab(
-                        text: 'History',
-                        icon: Icon(Icons.history, size: 50)
-                      ),
-                      Tab(
-                        text: 'Settings',
-                        icon: Icon(Icons.settings, size: 50)
-                      ),
-                    ]),
-                ),
-                body: TabBarView(
-                  children: [
-                    Center(child: UserProfileTab()),
-                    Center(child: UserHistoryTab()),
-                    Center(child: UserSettingsTab()),
-                  ]
+          Expanded(
+            child: Container(
+              height: 120,
+              color: Colors.grey,
+              child: DefaultTabController(
+                length: 3,
+                child: Scaffold(
+                  appBar: AppBar(
+                    toolbarHeight: 0,
+                    bottom: const TabBar(
+            
+                      tabs: [
+                        Tab(
+                          text: 'Profile',
+                          icon: Icon(Icons.person, size: 50),
+                        ),
+                        Tab(
+                          text: 'History',
+                          icon: Icon(Icons.history, size: 50)
+                        ),
+                        Tab(
+                          text: 'Settings',
+                          icon: Icon(Icons.settings, size: 50)
+                        ),
+                      ]),
                   ),
-              )
+                  body: const TabBarView(
+                    children: [
+                      UserProfileTab(),
+                      UserHistoryTab(),
+                      UserSettingsTab(),
+                    ]
+                    ),
+                )
+              ),
             ),
           )
         ],
