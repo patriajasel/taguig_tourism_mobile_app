@@ -82,11 +82,11 @@ class _AppNavigationState extends State<AppNavigation> {
           navigationBarTheme: NavigationBarThemeData(
             backgroundColor: Colors.redAccent.shade700,
             indicatorColor: Colors.redAccent.shade100,
-            labelTextStyle: MaterialStateProperty.all(
+            labelTextStyle: WidgetStateProperty.all(
               const TextStyle(
                   color: Colors.white, fontFamily: "Arvo", fontSize: 12.0),
             ),
-            iconTheme: MaterialStateProperty.all(
+            iconTheme: WidgetStateProperty.all(
               const IconThemeData(color: Colors.white),
             ),
           ),

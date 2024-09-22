@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:taguig_tourism_mobile_app/services/auth_services.dart';
 import 'package:taguig_tourism_mobile_app/widgets/widget_generator.dart';
 
 class LoginPage extends StatefulWidget {
@@ -10,13 +10,13 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final usernameController = TextEditingController();
+  final passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     final double screenHeight = MediaQuery.of(context).size.height;
     final double screenWidth = MediaQuery.of(context).size.width;
-
-    final usernameController = TextEditingController();
-    final passwordController = TextEditingController();
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -96,7 +96,7 @@ class _LoginPageState extends State<LoginPage> {
                         padding:
                             EdgeInsets.symmetric(horizontal: screenWidth / 15),
                         child: GenerateWidget().generateElevatedButton(
-                            "Sign in", Colors.black, Colors.white),
+                            "Sign in", Colors.black, Colors.white, loggingIn),
                       ),
 
                       SizedBox(height: screenHeight / 25),
@@ -199,6 +199,14 @@ class _LoginPageState extends State<LoginPage> {
           ),
         ),
       ),
+    );
+  }
+
+  void loggingIn() async {
+    await AuthenticationServices().singIn(
+      email: usernameController.text,
+      password: passwordController.text,
+      context: context,
     );
   }
 }

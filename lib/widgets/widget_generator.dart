@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class GenerateWidget {
-  
   TextField generateTextField(
       String hintText, IconData icon, TextEditingController controller,
       {bool? obscureText}) {
@@ -53,8 +52,9 @@ class GenerateWidget {
     );
   }
 
+  // * This is for generating elevated button
   ElevatedButton generateElevatedButton(
-      String text, Color color, Color textColor) {
+      String text, Color color, Color textColor, Function() function) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         backgroundColor: color, // Black background
@@ -64,7 +64,9 @@ class GenerateWidget {
         padding: const EdgeInsets.symmetric(
             vertical: 15), // Adjust padding for height
       ),
-      onPressed: () {},
+      onPressed: () {
+        function();
+      },
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

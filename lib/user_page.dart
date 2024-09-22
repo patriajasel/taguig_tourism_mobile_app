@@ -125,7 +125,7 @@ class _UserPageState extends State<UserPage> {
                         ),
                       ]),
                   ),
-                  body: const TabBarView(
+                  body: TabBarView(
                     children: [
                       UserProfileTab(),
                       UserHistoryTab(),
