@@ -154,7 +154,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             prefixIcon: const Icon(
                               Icons.wc_outlined,
                               size: Sizes.iconMd,
-                              color: Colors.white,
+                              color: Colors.yellowAccent,
                             ),
                             labelStyle: const TextStyle(
                                 fontSize: Sizes.fontSizeSm,
