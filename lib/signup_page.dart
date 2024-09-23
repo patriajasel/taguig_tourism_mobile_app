@@ -139,13 +139,13 @@ class _SignUpPageState extends State<SignUpPage> {
                           icon: const Icon(
                             Icons.expand_circle_down_outlined,
                             size: Sizes.iconMd,
-                            color: Colors.white,
+                            color: Colors.yellowAccent,
                           ),
 
                           style: const TextStyle(
                               color: Colors
                                   .white, // White text for the selected item
-                              fontSize: Sizes.fontSizeSm,
+                              fontSize: Sizes.fontSizeMd,
                               fontFamily: "Arvo"),
                           dropdownColor: Colors
                               .black, // Background color for the dropdown options
@@ -249,7 +249,7 @@ class _SignUpPageState extends State<SignUpPage> {
                               children: [
                                 Image.asset(
                                     'lib/assets/logo/button_logo/google-icon.png',
-                                    height: 30),
+                                    height: 25),
                                 const Padding(
                                   padding: EdgeInsets.symmetric(
                                       horizontal: 10.0, vertical: 15),
