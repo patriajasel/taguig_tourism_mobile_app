@@ -109,29 +109,29 @@ class _UserPageState extends State<UserPage> {
                   appBar: AppBar(
                     toolbarHeight: 0,
                     bottom: const TabBar(
-            
                       tabs: [
                         Tab(
                           text: 'Profile',
-                          icon: Icon(Icons.person, size: 50),
+                          icon: Icon(Icons.person, size: 40)
                         ),
                         Tab(
                           text: 'History',
-                          icon: Icon(Icons.history, size: 50)
+                          icon: Icon(Icons.history, size: 40)
                         ),
                         Tab(
                           text: 'Settings',
-                          icon: Icon(Icons.settings, size: 50)
+                          icon: Icon(Icons.settings, size: 40)
                         ),
-                      ]),
+                      ]
+                    ),
                   ),
-                  body: TabBarView(
+                  body: const TabBarView(
                     children: [
                       UserProfileTab(),
                       UserHistoryTab(),
                       UserSettingsTab(),
                     ]
-                    ),
+                  ),
                 )
               ),
             ),
