@@ -72,7 +72,8 @@ class _LoginPageState extends State<LoginPage> {
                           padding: EdgeInsets.symmetric(
                               horizontal: screenWidth / 15),
                           child: GenerateWidget().generateTextField(
-                              'Password', Icons.lock, passwordController)),
+                              'Password', Icons.lock, passwordController,
+                              obscureText: true)),
                       SizedBox(height: screenHeight / 50),
 
                       // Forgot password
@@ -83,10 +84,11 @@ class _LoginPageState extends State<LoginPage> {
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             GenerateWidget().generateTextLink(
-                                context,
-                                "Forgot Password?",
-                                '/signup_page',
-                                Colors.white)
+                              context,
+                              "Forgot Password?",
+                              '/signup_page',
+                              Colors.white,
+                            )
                           ],
                         ),
                       ),
@@ -96,7 +98,11 @@ class _LoginPageState extends State<LoginPage> {
                         padding:
                             EdgeInsets.symmetric(horizontal: screenWidth / 15),
                         child: GenerateWidget().generateElevatedButton(
-                            "Sign in", Colors.black, Colors.white, loggingIn),
+                          "Sign in",
+                          Colors.black,
+                          Colors.white,
+                          loggingIn,
+                        ),
                       ),
 
                       SizedBox(height: screenHeight / 25),
