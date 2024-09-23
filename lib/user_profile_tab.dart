@@ -86,7 +86,7 @@ class _UserProfileTabState extends State<UserProfileTab> {
                   const SizedBox(
                     height: 20,
                   ),
-                  GenerateWidget().generateElevatedButton('Save', const Color.fromARGB(255, 33, 86, 243), Colors.white)
+                  GenerateWidget().generateElevatedButton('Save', const Color.fromARGB(255, 33, 86, 243), Colors.white, saveButton)
                 ],
               ),
             )
@@ -94,5 +94,8 @@ class _UserProfileTabState extends State<UserProfileTab> {
         ),
       ),
     );
+  }
+  void saveButton (){
+
   }
 }
