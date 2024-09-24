@@ -26,7 +26,6 @@ class _UserPageState extends State<UserPage> {
     return Center(
       child: Column(
         children: [
-          // User Profile
           Container(
             decoration: BoxDecoration(
             gradient: LinearGradient(
@@ -61,55 +60,31 @@ class _UserPageState extends State<UserPage> {
               ),
             )
           ),
-          
-          // Container(
-          //   color: Colors.grey,
-          //   height: 120,
-          //   child: Theme(
-          //     data: ThemeData(
-          //       navigationBarTheme: const NavigationBarThemeData(
-          //         backgroundColor: Colors.white,
-          //         indicatorColor: Colors.red,
-          //         labelTextStyle: WidgetStatePropertyAll(
-          //           TextStyle(
-          //             color: Colors.black, fontFamily: "Arvo", fontSize: 12.0
-          //           )
-          //         ),
-          //         iconTheme: WidgetStatePropertyAll(
-          //           IconThemeData(color: Colors.white, size: 50),
-          //         ),
-                  
-                  
-          //         indicatorShape:RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
-          //       )
-          //     ), 
-          //       child: NavigationBar(
-          //         selectedIndex: selectedNavIndex,
-          //           onDestinationSelected: (index) {
-          //             setState(() {
-          //               selectedNavIndex = index;
-          //             });
-          //           },
-          //         destinations: const [
-          //           NavigationDestination(icon: Icon(Icons.person), label: 'Person'),
-          //           NavigationDestination(icon: Icon(Icons.history), label: 'History'),
-          //           NavigationDestination(icon: Icon(Icons.settings), label: 'Settings'),
-          //         ],
-          //       ),
-          //     ),
-          // ),
 
           Expanded(
             child: Container(
-              height: 120,
               color: Colors.grey,
               child: DefaultTabController(
                 length: 3,
                 child: Scaffold(
                   appBar: AppBar(
                     toolbarHeight: 0,
-                    bottom: const TabBar(
-                      tabs: [
+                    bottom: TabBar(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      labelStyle: const TextStyle(
+                        fontFamily: 'Arvo',
+                        fontSize: Sizes.fontSizeSm,
+                      ),
+                      isScrollable: false,
+                      labelColor: Colors.white,
+                      indicatorSize: TabBarIndicatorSize.tab,
+                      indicatorColor: Colors.redAccent,
+                      indicatorPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                      indicator: BoxDecoration(
+                        color: Colors.blueAccent,
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      tabs: const[
                         Tab(
                           text: 'Profile',
                           icon: Icon(Icons.person, size: 40)
