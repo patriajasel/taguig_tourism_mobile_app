@@ -62,53 +62,50 @@ class _UserPageState extends State<UserPage> {
           ),
 
           Expanded(
-            child: Container(
-              color: Colors.grey,
-              child: DefaultTabController(
-                length: 3,
-                child: Scaffold(
-                  appBar: AppBar(
-                    toolbarHeight: 0,
-                    bottom: TabBar(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      labelStyle: const TextStyle(
-                        fontFamily: 'Arvo',
-                        fontSize: Sizes.fontSizeSm,
-                      ),
-                      isScrollable: false,
-                      labelColor: Colors.white,
-                      indicatorSize: TabBarIndicatorSize.tab,
-                      indicatorColor: Colors.redAccent,
-                      indicatorPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                      indicator: BoxDecoration(
-                        color: Colors.blueAccent,
-                        borderRadius: BorderRadius.circular(5),
-                      ),
-                      tabs: const[
-                        Tab(
-                          text: 'Profile',
-                          icon: Icon(Icons.person, size: 40)
-                        ),
-                        Tab(
-                          text: 'History',
-                          icon: Icon(Icons.history, size: 40)
-                        ),
-                        Tab(
-                          text: 'Settings',
-                          icon: Icon(Icons.settings, size: 40)
-                        ),
-                      ]
+            child: DefaultTabController(
+              length: 3,
+              child: Scaffold(
+                appBar: AppBar(
+                  toolbarHeight: 0,
+                  bottom: TabBar(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    labelStyle: const TextStyle(
+                      fontFamily: 'Arvo',
+                      fontSize: Sizes.fontSizeSm,
                     ),
-                  ),
-                  body: const TabBarView(
-                    children: [
-                      UserProfileTab(),
-                      UserHistoryTab(),
-                      UserSettingsTab(),
+                    isScrollable: false,
+                    labelColor: Colors.white,
+                    indicatorSize: TabBarIndicatorSize.tab,
+                    indicatorColor: Colors.redAccent,
+                    indicatorPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                    indicator: BoxDecoration(
+                      color: Colors.blueAccent,
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    tabs: const[
+                      Tab(
+                        text: 'Profile',
+                        icon: Icon(Icons.person, size: 25)
+                      ),
+                      Tab(
+                        text: 'History',
+                        icon: Icon(Icons.history, size: 25)
+                      ),
+                      Tab(
+                        text: 'Settings',
+                        icon: Icon(Icons.settings, size: 25)
+                      ),
                     ]
                   ),
-                )
-              ),
+                ),
+                body: const TabBarView(
+                  children: [
+                    UserProfileTab(),
+                    UserHistoryTab(),
+                    UserSettingsTab(),
+                  ]
+                ),
+              )
             ),
           )
         ],

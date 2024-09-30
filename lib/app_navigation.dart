@@ -25,6 +25,13 @@ class _AppNavigationState extends State<AppNavigation> {
   int selectedNavIndex = 0;
 
   @override
+  void initState() {
+    super.initState();
+
+    WeatherPage();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final searchController = TextEditingController();
 

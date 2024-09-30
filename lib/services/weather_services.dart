@@ -22,38 +22,30 @@ class WeatherService {
   }
 }
 
-Future <String> getCurrentCity() async {
-    PermissionStatus permission = await Permission.location.status;
-    
-    if (permission.isDenied) {
-      permission = await Permission.locationWhenInUse.request();
-    } else if (permission.isPermanentlyDenied) {
-      await openAppSettings();
-    }
+Future<String> getCurrentCity() async {
+  // Request location permission
+  PermissionStatus permission = await Permission.location.status;
 
-    Position position = await Geolocator.getCurrentPosition(
-    desiredAccuracy: LocationAccuracy.best);
-
-  // convert location into city name 
-    // List<Placemark> placemarks = await placemarkFromCoordinates(position.latitude, position.longitude);
-    GeoCode geoCode = GeoCode();
-     Address city = await geoCode.reverseGeocoding(latitude: position.latitude, longitude: position.longitude);
-
-  // extracting city name from the list placemark
-  return city.toString();
-
-    // if (permission.isGranted) {
-    //   getCurrentLocation();
-    // } else {
-    //   permission = await Permission.locationWhenInUse.request();
-    //   if (permission.isGranted) {
-    //     getCurrentLocation();
-    //   } else if (permission.isDenied) {
-    //     await openAppSettings();
-    //   } else if (permission.isPermanentlyDenied) {
-    //     await openAppSettings();
-    //   }
-    // }
+  if (permission.isDenied) {
+    permission = await Permission.locationWhenInUse.request();
+  } else if (permission.isPermanentlyDenied) {
+    await openAppSettings();
   }
+
+  // Get the current position
+  Position position = await Geolocator.getCurrentPosition(
+    desiredAccuracy: LocationAccuracy.high
+  );
+
+  // Use reverse geocoding to get the address
+  GeoCode geoCode = GeoCode();
+  Address address = await geoCode.reverseGeocoding(
+    latitude: position.latitude, 
+    longitude: position.longitude
+  );
+
+  // Return the city name or 'Unknown City' if unavailable
+  return address.city ?? 'Unknown City';
+}
 }
 

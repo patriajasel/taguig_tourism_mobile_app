@@ -30,14 +30,12 @@ class _WeatherPageState extends State<WeatherPage> {
     }
   }
 
-
   @override
   void initState() {
     super.initState();
 
     _fetchWeather();
-  }
-  
+  } 
   
   @override
   Widget build(BuildContext context) {
@@ -47,8 +45,7 @@ class _WeatherPageState extends State<WeatherPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(_weather?.cityName ?? "Loading City..."),
-            Text('${_weather?.temperature.round()}C'),
-            Text(WeatherService.BASE_URL),
+            Text('${_weather?.temperature.round() ?? "Loading Temp in "}°C'),
           ],
         ),
       ),
