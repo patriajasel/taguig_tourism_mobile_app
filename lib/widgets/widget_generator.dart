@@ -95,47 +95,6 @@ class GenerateWidget {
         });
   }
 
-  // TextFormField generateProfileTextField (String hintText, TextEditingController controller) {
-  //   return TextFormField(textAlign: TextAlign.center,
-  //   decoration: InputDecoration(
-  //     alignLabelWithHint: true,
-  //     labelText: hintText,
-  //     labelStyle: const TextStyle(
-  //       color: Colors.grey,
-  //       fontSize: 14.0,
-  //       fontWeight: FontWeight.bold,
-  //     ),
-  //     enabledBorder: OutlineInputBorder(
-  //       borderRadius: BorderRadius.circular(10),
-  //       borderSide: const BorderSide(
-  //         color: Color.fromARGB(255, 17, 83, 138), // White border for the enabled state
-  //       ),
-  //     ),
-  //     focusedBorder: OutlineInputBorder(
-  //       borderRadius: BorderRadius.circular(10),
-  //       borderSide: const BorderSide(
-  //         color:
-  //             Colors.blueGrey, // White border when the field is focused
-  //         width: 2.0, // Optional: you can increase the border width
-  //       ),
-  //     ),
-  //     errorBorder: OutlineInputBorder(
-  //       borderRadius: BorderRadius.circular(10),
-  //       borderSide: const BorderSide(
-  //         color: Colors.red, // Red border for the error state
-  //       ),
-  //     ),
-  //     focusedErrorBorder: OutlineInputBorder(
-  //       borderRadius: BorderRadius.circular(10),
-  //       borderSide: const BorderSide(
-  //         color: Colors.red, // Red border when focused with error
-  //         width: 2.0,
-  //       ),
-  //     ), 
-  //   ),
-  //   );
-  // }
-
   Text generateTitleField (String title) {
     return Text(title ,style: const TextStyle(
       fontSize: 15,
