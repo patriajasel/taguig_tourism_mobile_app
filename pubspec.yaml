@@ -78,6 +78,7 @@ flutter:
      - lib/assets/logo/app_logo/
      - lib/assets/logo/button_logo/
      - lib/assets/images/
+     - lib/assets/anim/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
