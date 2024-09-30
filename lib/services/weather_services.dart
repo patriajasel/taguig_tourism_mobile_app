@@ -34,7 +34,7 @@ Future<String> getCurrentCity() async {
 
   // Get the current position
   Position position = await Geolocator.getCurrentPosition(
-    desiredAccuracy: LocationAccuracy.high
+    desiredAccuracy: LocationAccuracy.best
   );
 
   // Use reverse geocoding to get the address
