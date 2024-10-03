@@ -17,14 +17,16 @@ class AuthenticationServices {
     try {
       await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
-      await FirebaseAuth.instance.currentUser?.sendEmailVerification();
+
+      String uid = FirebaseAuth.instance.currentUser!.uid;
 
       FirestoreServices()
-          .addUsers(firstName, lastName, email, age, gender, false);
+          .addUsers(uid, firstName, lastName, email, age, gender);
 
-      await FirebaseAuth.instance.signOut();
+      await FirebaseAuth.instance.currentUser?.sendEmailVerification();
 
       await Future.delayed(const Duration(seconds: 1));
+      await FirebaseAuth.instance.signOut();
       Navigator.pushNamedAndRemoveUntil(
           context, '/login_page', (Route<dynamic> route) => false);
     } on FirebaseAuthException catch (e) {
@@ -46,7 +48,7 @@ class AuthenticationServices {
     }
   }
 
-  Future<void> singIn(
+  Future<void> signIn(
       {required String email,
       required String password,
       required BuildContext context}) async {

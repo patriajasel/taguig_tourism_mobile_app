@@ -5,15 +5,15 @@ class FirestoreServices {
       FirebaseFirestore.instance.collection('users');
 
   // * Creating users
-  Future<void> addUsers(String firstName, String lastName, String email,
-      int age, String gender, bool isVerified) {
+  Future<void> addUsers(String uid, String firstName, String lastName,
+      String email, int age, String gender) {
     return users.add({
+      'user_id': uid,
       'first_name': firstName,
       'last_name': lastName,
       'email': email,
       'age': age,
       'gender': gender,
-      'is_verified': isVerified
     });
   }
 

@@ -209,7 +209,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void loggingIn() async {
-    await AuthenticationServices().singIn(
+    await AuthenticationServices().signIn(
       email: usernameController.text,
       password: passwordController.text,
       context: context,
