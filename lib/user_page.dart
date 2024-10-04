@@ -1,73 +1,38 @@
 import 'package:flutter/material.dart';
+import 'package:taguig_tourism_mobile_app/services/user_info.dart';
 import 'package:taguig_tourism_mobile_app/user_history_tab.dart';
 import 'package:taguig_tourism_mobile_app/user_profile_tab.dart';
 import 'package:taguig_tourism_mobile_app/user_settings_tab.dart';
 import 'util/constants/sizes.dart';
 
-void main() => runApp(const UserPage());
-
 class UserPage extends StatefulWidget {
-  const UserPage({super.key});
+  final UserInformation userInformation;
+  const UserPage({super.key, required this.userInformation});
 
   @override
   State<UserPage> createState() => _UserPageState();
 }
 
 class _UserPageState extends State<UserPage> {
-  // final List<Widget> screens = [
-  //   const TrafficPage(),
-  //   const ExplorePage(),
-  //   const WeatherPage(),
-  // ];
+  UserInformation? userInfo;
 
-  // int selectedNavIndex = 0;
+  @override
+  void initState() {
+    userInfo = widget.userInformation;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
+    return Scaffold(
+      body: Column(
         children: [
-          Container(
-            decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                Colors.blueAccent.shade700,
-                Colors.redAccent.shade700,
-              ], // Define your gradient colors
-                begin: Alignment.centerLeft,
-                end: Alignment.centerRight,
-              ),
-            ),
-            height: 80,
-            child: ListTile(
-              leading: const CircleAvatar(
-                child: Icon(Icons.person, size: 30),
-              ),
-              title: const Text('Username', // Username
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: Sizes.fontSizeLg,
-                  fontWeight: FontWeight.bold
-              )), 
-              subtitle: const Text('Username@gmail.com', // Email
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: Sizes.fontSizeSm
-              )), 
-              trailing: IconButton(
-                onPressed: (){},
-                icon: const Icon(Icons.edit, 
-                color: Colors.white,)
-              ),
-            )
-          ),
-
           Expanded(
             child: DefaultTabController(
               length: 3,
-              child: Scaffold(
-                appBar: AppBar(
-                  toolbarHeight: 0,
-                  bottom: TabBar(
+              child: Column(
+                children: [
+                  TabBar(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     labelStyle: const TextStyle(
                       fontFamily: 'Arvo',
@@ -77,37 +42,33 @@ class _UserPageState extends State<UserPage> {
                     labelColor: Colors.white,
                     indicatorSize: TabBarIndicatorSize.tab,
                     indicatorColor: Colors.redAccent,
-                    indicatorPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                    indicatorPadding: const EdgeInsets.symmetric(
+                        horizontal: 15, vertical: 10),
                     indicator: BoxDecoration(
                       color: Colors.blueAccent,
                       borderRadius: BorderRadius.circular(5),
                     ),
-                    tabs: const[
+                    tabs: const [
+                      Tab(text: 'Profile', icon: Icon(Icons.person, size: 25)),
+                      Tab(text: 'History', icon: Icon(Icons.history, size: 25)),
                       Tab(
-                        text: 'Profile',
-                        icon: Icon(Icons.person, size: 25)
-                      ),
-                      Tab(
-                        text: 'History',
-                        icon: Icon(Icons.history, size: 25)
-                      ),
-                      Tab(
-                        text: 'Settings',
-                        icon: Icon(Icons.settings, size: 25)
-                      ),
-                    ]
+                          text: 'Settings',
+                          icon: Icon(Icons.settings, size: 25)),
+                    ],
                   ),
-                ),
-                body: const TabBarView(
-                  children: [
-                    UserProfileTab(),
-                    UserHistoryTab(),
-                    UserSettingsTab(),
-                  ]
-                ),
-              )
+                  Expanded(
+                    child: TabBarView(
+                      children: [
+                        UserProfileTab(userInformation: userInfo!,),
+                        UserHistoryTab(),
+                        UserSettingsTab(),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
-          )
+          ),
         ],
       ),
     );

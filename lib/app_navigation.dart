@@ -1,39 +1,77 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:taguig_tourism_mobile_app/explore_page.dart';
 import 'package:taguig_tourism_mobile_app/home_page.dart';
+import 'package:taguig_tourism_mobile_app/services/firestore_services.dart';
+import 'package:taguig_tourism_mobile_app/services/user_info.dart';
 import 'package:taguig_tourism_mobile_app/traffic_page.dart';
 import 'package:taguig_tourism_mobile_app/user_page.dart';
 import 'package:taguig_tourism_mobile_app/weather_page.dart';
 
 class AppNavigation extends StatefulWidget {
-  const AppNavigation({super.key});
+  final String userID;
+  const AppNavigation({super.key, required this.userID});
 
   @override
   State<AppNavigation> createState() => _AppNavigationState();
 }
 
 class _AppNavigationState extends State<AppNavigation> {
-  final List<Widget> screens = [
-    const HomePage(),
-    const TrafficPage(),
-    const ExplorePage(),
-    const WeatherPage(),
-    const UserPage()
-  ];
-
   int selectedNavIndex = 0;
+
+  UserInformation? userInfo;
+  bool isLoading = true;
 
   @override
   void initState() {
+    _fetchUserData();
     super.initState();
 
     WeatherPage();
   }
 
+  void _fetchUserData() async {
+    try {
+      UserInformation? fetchedUser =
+          await FirestoreServices().getUserData(widget.userID);
+      setState(() {
+        userInfo = fetchedUser;
+        isLoading = false;
+      });
+    } catch (e) {
+      setState(() {
+        isLoading = false;
+      });
+      print('Error fetching user data: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    if (isLoading) {
+      return Center(child: CircularProgressIndicator());
+    }
+
+    // If user data is null, show an error message
+    if (userInfo == null) {
+      return Center(child: Text('User data not found.'));
+    }
+
     final searchController = TextEditingController();
+
+    final List<Widget> screens = [
+      HomePage(
+        userInformation: userInfo!,
+      ),
+      const TrafficPage(),
+      const ExplorePage(),
+      const WeatherPage(),
+      UserPage(
+        userInformation: userInfo!,
+      )
+    ];
 
     return Scaffold(
       appBar: AppBar(

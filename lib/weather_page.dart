@@ -25,8 +25,7 @@ class _WeatherPageState extends State<WeatherPage> {
       setState(() {
         _weather = weather;
       });
-    }
-    catch (e) {
+    } catch (e) {
       print(e);
     }
   }
@@ -36,12 +35,12 @@ class _WeatherPageState extends State<WeatherPage> {
     super.initState();
 
     _fetchWeather();
-  } 
+  }
 
-  String getWeatherAnimation (String? mainCondition) {
+  String getWeatherAnimation(String? mainCondition) {
     if (mainCondition == null) return 'lib/assets/anim/loading.json';
 
-    switch (mainCondition.toLowerCase()){
+    switch (mainCondition.toLowerCase()) {
       case 'clouds':
       case 'mist':
       case 'smoke':
@@ -58,10 +57,10 @@ class _WeatherPageState extends State<WeatherPage> {
       case 'clear':
         return 'lib/assets/anim/weather_sunny.json';
       default:
-        return 'lib/assets/anim/weather_sunny.json'; 
+        return 'lib/assets/anim/weather_sunny.json';
     }
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

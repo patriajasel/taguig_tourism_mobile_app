@@ -54,7 +54,8 @@ class GenerateWidget {
 
   // * This is for generating elevated button
   ElevatedButton generateElevatedButton(
-      String text, Color color, Color textColor, Function() function) {
+      String text, Color color, Color textColor, Function() function,
+      {Icon? icon}) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         backgroundColor: color, // Black background
@@ -70,9 +71,13 @@ class GenerateWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(
-            text,
-            style: TextStyle(color: textColor, fontSize: 14.0), // White text
+          if (icon != null) icon,
+          Padding(
+            padding: const EdgeInsets.only(left: 5.0),
+            child: Text(
+              text,
+              style: TextStyle(color: textColor, fontSize: 14.0), // White text
+            ),
           ),
         ],
       ),
@@ -95,47 +100,43 @@ class GenerateWidget {
         });
   }
 
-  Text generateTitleField (String title) {
-    return Text(title ,style: const TextStyle(
-      fontSize: 15,
-      fontWeight: FontWeight.bold,
-      color: Colors.black87
-      ),
+  Text generateTitleField(String title) {
+    return Text(
+      title,
+      style: const TextStyle(
+          fontSize: 15, fontWeight: FontWeight.bold, color: Colors.black87),
       textAlign: TextAlign.left,
     );
   }
 
-  Flexible generatedProfileTextField (String placeholders) {
-    return  Flexible(
+  Flexible generatedProfileTextField(String placeholders) {
+    return Flexible(
       fit: FlexFit.tight,
       child: Container(
         height: 50,
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              Colors.blueAccent.shade700,
-              Colors.redAccent.shade700,
-            ],
-            begin: Alignment.centerLeft,
-            end: Alignment.centerRight,
-          ),
-          borderRadius: BorderRadius.circular(10)
-        ),
+            gradient: LinearGradient(
+              colors: [
+                Colors.blueAccent.shade700,
+                Colors.redAccent.shade700,
+              ],
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
+            ),
+            borderRadius: BorderRadius.circular(10)),
         child: Padding(
           padding: const EdgeInsets.all(1.5),
           child: Container(
             decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(8)
-            ),
+                color: Colors.white, borderRadius: BorderRadius.circular(8)),
             child: Center(
-              child: Text(placeholders,
+                child: Text(
+              placeholders,
               style: const TextStyle(
-                color:  Colors.black87,
+                color: Colors.black87,
                 fontSize: 14,
-                ),
-              )
-            ),
+              ),
+            )),
           ),
         ),
       ),

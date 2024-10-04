@@ -1,101 +1,255 @@
 import 'package:flutter/material.dart';
-import 'widgets/widget_generator.dart';
-
+import 'package:taguig_tourism_mobile_app/services/auth_services.dart';
+import 'package:taguig_tourism_mobile_app/services/user_info.dart';
+import 'package:taguig_tourism_mobile_app/widgets/widget_generator.dart';
 
 class UserProfileTab extends StatefulWidget {
-  const UserProfileTab({super.key});
+  final UserInformation userInformation;
+  const UserProfileTab({super.key, required this.userInformation});
 
   @override
   State<UserProfileTab> createState() => _UserProfileTabState();
 }
 
 class _UserProfileTabState extends State<UserProfileTab> {
+  UserInformation? userInfo;
+
+  @override
+  void initState() {
+    userInfo = widget.userInformation;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Container(
-        height: 421,
-        padding: const EdgeInsets.fromLTRB(25, 15, 25, 15),
-        child: Column(
-          children: [
-            Row(
-              children: [
-                Expanded(
-                  child: GenerateWidget().generateTitleField('Personal Information')
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            margin: const EdgeInsets.all(10.0),
+            height: 120,
+            width: 120,
+            decoration: BoxDecoration(
+                gradient: LinearGradient(colors: [
+                  Colors.blueAccent.shade700,
+                  Colors.redAccent.shade700,
+                ], begin: Alignment.topLeft, end: Alignment.bottomRight),
+                shape: BoxShape.circle),
+            child: Padding(
+              //this padding will be you border size
+              padding: const EdgeInsets.all(3.0),
+              child: Container(
+                decoration: const BoxDecoration(
+                    color: Colors.white, shape: BoxShape.circle),
+                child: const CircleAvatar(
+                  backgroundColor: Colors.white,
+                  foregroundImage: NetworkImage(
+                      "https://i.ibb.co/rkG8cCs/112921315-gettyimages-876284806.jpg"),
                 ),
-              ],
-            ),
-            
-            const SizedBox(
-              height: 15,
-            ),
-            
-            Row(
-              children: [
-                GenerateWidget().generatedProfileTextField("First Name Last Name"),
-              ],
-            ),
-            
-            const SizedBox(
-              height: 10,
-            ),
-      
-            Row(
-              children: [
-                Expanded(child: GenerateWidget().generatedProfileTextField("Gender"),),
-      
-                const SizedBox(
-                  width: 10,
-                ),
-      
-                Expanded(child: GenerateWidget().generatedProfileTextField("01/01/2001"),),
-              ],
-            ),
-            
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Row(
-                    children: [
-                      GenerateWidget().generateTitleField('E-mail and Password'),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  // GenerateWidget().generateProfileTextField("Email", email),
-                  Row(
-                    children: [
-                      GenerateWidget().generatedProfileTextField("Username@gmail.com"),
-                    ]
-                  ),
-                  
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    children: [
-                      GenerateWidget().generatedProfileTextField("Password"),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  GenerateWidget().generateElevatedButton('Save', const Color.fromARGB(255, 33, 86, 243), Colors.white, saveButton)
-                ],
               ),
-            )
-          ],
-        ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 5),
+            child: Text(
+              "${userInfo?.firstName} ${userInfo?.lastName}",
+              style: TextStyle(
+                  fontSize: 20, fontWeight: FontWeight.bold, letterSpacing: 2),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 5.0),
+            child: Text(
+              userInfo!.email,
+              style: TextStyle(fontSize: 14),
+            ),
+          ),
+          Column(
+            children: [
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 10.0),
+                width: double.infinity,
+                child: Card(
+                  color: Colors.blueAccent.shade100,
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(20, 20, 20, 10),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.white,
+                          ),
+                          height: 40, // Adjust height as needed
+                          width: double.infinity,
+                          padding: EdgeInsets.symmetric(horizontal: 15),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment
+                                .spaceBetween, // Space between leading and trailing
+                            crossAxisAlignment:
+                                CrossAxisAlignment.center, // Center vertically
+                            children: [
+                              Text(
+                                "Age",
+                                style: TextStyle(fontSize: 14),
+                              ),
+                              Text(
+                                userInfo!.age.toString(),
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.grey.shade700,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(20, 10, 20, 20),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.white,
+                          ),
+                          height: 40, // Adjust height as needed
+                          width: double.infinity,
+                          padding: EdgeInsets.symmetric(horizontal: 15),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment
+                                .spaceBetween, // Space between leading and trailing
+                            crossAxisAlignment:
+                                CrossAxisAlignment.center, // Center vertically
+                            children: [
+                              Text(
+                                "Gender",
+                                style: TextStyle(fontSize: 14),
+                              ),
+                              Text(
+                                userInfo!.gender,
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.grey.shade700,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 25.0),
+                width: double.infinity,
+                child: Card(
+                  color: Colors.blueAccent.shade100,
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(20, 20, 20, 10),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.white,
+                          ),
+                          height: 40, // Adjust height as needed
+                          width: double.infinity,
+                          padding: EdgeInsets.symmetric(horizontal: 15),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment
+                                .spaceBetween, // Space between leading and trailing
+                            crossAxisAlignment:
+                                CrossAxisAlignment.center, // Center vertically
+                            children: [
+                              Text(
+                                "Change Email Address",
+                                style: TextStyle(fontSize: 14),
+                              ),
+                              IconButton(
+                                  onPressed: () {},
+                                  icon: Icon(Icons.arrow_right))
+                            ],
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.white,
+                          ),
+                          height: 40, // Adjust height as needed
+                          width: double.infinity,
+                          padding: EdgeInsets.symmetric(horizontal: 15),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment
+                                .spaceBetween, // Space between leading and trailing
+                            crossAxisAlignment:
+                                CrossAxisAlignment.center, // Center vertically
+                            children: [
+                              Text(
+                                "Change Password",
+                                style: TextStyle(fontSize: 14),
+                              ),
+                              IconButton(
+                                  onPressed: () {},
+                                  icon: Icon(Icons.arrow_right))
+                            ],
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(20, 10, 20, 20),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.white,
+                          ),
+                          height: 40, // Adjust height as needed
+                          width: double.infinity,
+                          padding: EdgeInsets.symmetric(horizontal: 15),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment
+                                .spaceBetween, // Space between leading and trailing
+                            crossAxisAlignment:
+                                CrossAxisAlignment.center, // Center vertically
+                            children: [
+                              Text(
+                                "Change Mobile Number",
+                                style: TextStyle(fontSize: 14),
+                              ),
+                              IconButton(
+                                  onPressed: () {},
+                                  icon: Icon(Icons.arrow_right))
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 100, vertical: 20),
+                child: GenerateWidget().generateElevatedButton("Sign out",
+                    Colors.blueAccent.shade700, Colors.white, signOutButton,
+                    icon: Icon(
+                      Icons.logout,
+                      color: Colors.white,
+                    )),
+              )
+            ],
+          )
+        ],
       ),
     );
   }
-  void saveButton (){
 
+  void signOutButton() {
+    AuthenticationServices().signOut(context: context);
   }
 }
