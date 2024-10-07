@@ -29,7 +29,6 @@ class _AppNavigationState extends State<AppNavigation> {
     _fetchUserData();
     super.initState();
 
-    WeatherPage();
   }
 
   void _fetchUserData() async {
@@ -47,6 +46,8 @@ class _AppNavigationState extends State<AppNavigation> {
       print('Error fetching user data: $e');
     }
   }
+
+  
 
   @override
   Widget build(BuildContext context) {

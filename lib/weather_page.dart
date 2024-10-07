@@ -11,7 +11,7 @@ class WeatherPage extends StatefulWidget {
 }
 
 class _WeatherPageState extends State<WeatherPage> {
-  final _weatherService = WeatherService('517a29f205aad1d2521b34cb01294453');
+  final _weatherService = WeatherService('a786e9363cae616d391836e9a3a4f905');
   Weather? _weather;
 
   // fetch weather
@@ -64,45 +64,77 @@ class _WeatherPageState extends State<WeatherPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
+      body: Padding(
+        padding: const EdgeInsets.all(10),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             // City
-            Text(
-              _weather?.cityName ?? 'Loading City...',
-              style: TextStyle(
-                fontSize: 20,
-                color: Colors.black87,
-              ),
-            ),
-
-            // Weather City State with Animation
-            Lottie.asset(getWeatherAnimation(_weather?.mainCondition)),
-
-            // Spaces
-
             SizedBox(
               height: 10,
             ),
-
-            // Temperature
             Text(
-              '${_weather?.temperature.round() ?? "Loading Temp in "}°C',
+              _weather?.cityName ?? 'Loading City...',
               style: TextStyle(
-                fontSize: 30,
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
+                fontSize: 26,
+                color: Colors.black87,
               ),
             ),
+        
+            
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                // Weather Animation
+                SizedBox(
+                  width: 100,
+                  height: 100,
+                  child: Lottie.asset(getWeatherAnimation(_weather?.mainCondition)),
+                  ),
 
-            // Weather Condition/State
-            Text(
-              _weather?.mainCondition ?? '',
-              style: TextStyle(
-                fontSize: 16,
-                color: Colors.grey,
-              ),
+                SizedBox(
+                  width: 100,
+                ),
+                Column(
+                  children: [
+                    SizedBox(
+                      height: 30,
+                    ),
+                    Row(
+                      children: [
+                        // Temperature
+                        Text(
+                          '${_weather?.temperature.round() ?? "--"}°C',
+                          style: TextStyle(
+                            fontSize: 36,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        
+                        SizedBox(
+                          width: 10,
+                        ),
+                                
+                        // Weather Condition/State
+                        Column(
+                          children: [
+                            SizedBox(
+                              height: 15,
+                            ),
+                            Text(
+                              _weather?.mainCondition ?? '',
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: Colors.grey,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ],
             ),
           ],
         ),
