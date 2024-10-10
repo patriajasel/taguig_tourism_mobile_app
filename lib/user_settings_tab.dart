@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:taguig_tourism_mobile_app/widgets/widget_generator.dart';
 
-class UserSettingsTab extends StatelessWidget {
+class UserSettingsTab extends StatefulWidget {
   const UserSettingsTab({super.key});
 
+  @override
+  State<UserSettingsTab> createState() => _UserSettingsTabState();
+}
+
+class _UserSettingsTabState extends State<UserSettingsTab> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(

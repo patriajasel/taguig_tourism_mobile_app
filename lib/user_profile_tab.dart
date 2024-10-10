@@ -37,7 +37,7 @@ class _UserProfileTabState extends State<UserProfileTab> {
                 ], begin: Alignment.topLeft, end: Alignment.bottomRight),
                 shape: BoxShape.circle),
             child: Padding(
-              //this padding will be you border size
+              // This padding will be the border size
               padding: const EdgeInsets.all(3.0),
               child: Container(
                 decoration: const BoxDecoration(
@@ -81,14 +81,14 @@ class _UserProfileTabState extends State<UserProfileTab> {
                             borderRadius: BorderRadius.circular(10),
                             color: Colors.white,
                           ),
-                          height: 40, // Adjust height as needed
+                          height: 40, 
                           width: double.infinity,
                           padding: EdgeInsets.symmetric(horizontal: 15),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment
-                                .spaceBetween, // Space between leading and trailing
+                                .spaceBetween, 
                             crossAxisAlignment:
-                                CrossAxisAlignment.center, // Center vertically
+                                CrossAxisAlignment.center, 
                             children: [
                               Text(
                                 "Age",
@@ -112,14 +112,14 @@ class _UserProfileTabState extends State<UserProfileTab> {
                             borderRadius: BorderRadius.circular(10),
                             color: Colors.white,
                           ),
-                          height: 40, // Adjust height as needed
+                          height: 40, 
                           width: double.infinity,
                           padding: EdgeInsets.symmetric(horizontal: 15),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment
-                                .spaceBetween, // Space between leading and trailing
+                                .spaceBetween, 
                             crossAxisAlignment:
-                                CrossAxisAlignment.center, // Center vertically
+                                CrossAxisAlignment.center,
                             children: [
                               Text(
                                 "Gender",

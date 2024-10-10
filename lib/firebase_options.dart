@@ -63,6 +63,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '258109280748',
     projectId: 'taguig-tourism-app',
     storageBucket: 'taguig-tourism-app.appspot.com',
+    iosClientId: '258109280748-svc2l8i8q9sqgr3tqhsmtsf1otef4b7t.apps.googleusercontent.com',
     iosBundleId: 'com.example.taguigTourismMobileApp',
   );
 
@@ -72,6 +73,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '258109280748',
     projectId: 'taguig-tourism-app',
     storageBucket: 'taguig-tourism-app.appspot.com',
+    iosClientId: '258109280748-svc2l8i8q9sqgr3tqhsmtsf1otef4b7t.apps.googleusercontent.com',
     iosBundleId: 'com.example.taguigTourismMobileApp',
   );
 
@@ -83,4 +85,5 @@ class DefaultFirebaseOptions {
     authDomain: 'taguig-tourism-app.firebaseapp.com',
     storageBucket: 'taguig-tourism-app.appspot.com',
   );
+
 }

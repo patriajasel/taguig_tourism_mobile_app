@@ -37,7 +37,8 @@ class _HomePageState extends State<HomePage> {
 
   int currentSlide = 0;
 
-  UserInformation? userInfo;
+  UserInformation?
+      userInfo; // Storing the user's details here from the database
 
   @override
   void initState() {
@@ -55,7 +56,7 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // * User Info Section
+              // This is where the user's name and profile picture is displayed
               Container(
                 height: 100,
                 decoration: BoxDecoration(
@@ -95,7 +96,7 @@ class _HomePageState extends State<HomePage> {
                           userInfo!.firstName,
                           style: TextStyle(
                             color: Colors.white,
-                            fontSize: 14,
+                            fontSize: 16,
                           ),
                         ),
                       ],
@@ -104,11 +105,12 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
 
-              // * Main Body Here
+              // Main Content starts here!
 
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  // This is where the popular destination carousel is displayed
                   Container(
                     margin: const EdgeInsets.symmetric(
                         horizontal: 30, vertical: 30),
@@ -156,6 +158,8 @@ class _HomePageState extends State<HomePage> {
                     padding: EdgeInsets.symmetric(horizontal: 20.0),
                     child: Divider(),
                   ),
+
+                  // This is where the categories is displayed
                   Container(
                     margin: const EdgeInsets.symmetric(horizontal: 30),
                     child: Column(
@@ -223,6 +227,8 @@ class _HomePageState extends State<HomePage> {
                     padding: EdgeInsets.symmetric(horizontal: 20.0),
                     child: Divider(),
                   ),
+
+                  // This is where the nearby places is being displayed
                   Container(
                     margin: const EdgeInsets.symmetric(horizontal: 30),
                     child: Column(
@@ -302,6 +308,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  // This is the function where the carousel slider is being handled
   carouselIndicator() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -321,7 +328,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  // Function to return different icons based on index
+  // This is the function that returns the icon for the categories
   IconData getIconForIndex(int index) {
     switch (index) {
       case 0:
@@ -345,11 +352,11 @@ class _HomePageState extends State<HomePage> {
       case 9:
         return Icons.location_city;
       default:
-        return Icons.help_outline; // Default icon if the index is out of range
+        return Icons.help_outline;
     }
   }
 
-// Function to return different text labels based on index
+// This is the function that returns the text for the categories
   String getTextForIndex(int index) {
     switch (index) {
       case 0:
@@ -373,7 +380,7 @@ class _HomePageState extends State<HomePage> {
       case 9:
         return "LGUs";
       default:
-        return "Unknown"; // Default text if index is out of range
+        return "Unknown";
     }
   }
 }
