@@ -2,6 +2,7 @@
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:taguig_tourism_mobile_app/categories_page.dart';
 import 'package:taguig_tourism_mobile_app/services/user_info.dart';
 
 class HomePage extends StatefulWidget {
@@ -198,7 +199,15 @@ class _HomePageState extends State<HomePage> {
                                         elevation: 10,
                                         color: Colors.blueAccent.shade700,
                                         child: IconButton(
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            Navigator.of(context).push(
+                                                MaterialPageRoute(
+                                                    builder: (builder) =>
+                                                        CategoriesPage(
+                                                            headline:
+                                                                getTextForIndex(
+                                                                    index))));
+                                          },
                                           icon: Icon(
                                             getIconForIndex(index),
                                             color: Colors.white,
