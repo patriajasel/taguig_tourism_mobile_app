@@ -46,32 +46,30 @@ class _WeatherPageState extends State<WeatherPage> {
     return weatherList.where((weather) => weather.date.startsWith(today)).toList();
   }
 
-  // Method to get the next days' weather based on today's 3rd forecast time
-  List<HoursAndDaysWeatherForecast> getNextDaysWeatherBasedOnThirdToday(List<HoursAndDaysWeatherForecast> weatherList) {
-    // Find today's 3rd forecast entry
-    List<HoursAndDaysWeatherForecast> todayWeather = getTodayWeather(weatherList);
-    if (todayWeather.length < 3) return []; // Make sure there are at least 3 entries for today
-
-    // Get the time of the 3rd entry in today's weather
-    String targetTime = DateFormat('HH:mm:ss').format(DateTime.parse(todayWeather[2].date));
-
+  // Method to filter next 4 days' weather data based on the same time slot as today's forecast
+  List<HoursAndDaysWeatherForecast> getNextDaysWeather(List<HoursAndDaysWeatherForecast> weatherList) {
     List<HoursAndDaysWeatherForecast> nextDaysWeather = [];
-    Set<String> uniqueDays = {}; // To ensure one entry per day
     DateTime now = DateTime.now();
     String todayDate = DateFormat('yyyy-MM-dd').format(now);
 
+    // Find today's first forecast time
+    String targetTime = DateFormat('HH:mm:ss').format(DateTime.parse(weatherList[0].date));
+    Set<String> uniqueDays = {};
+    
     for (HoursAndDaysWeatherForecast weather in weatherList) {
       DateTime weatherDate = DateTime.parse(weather.date);
+
+      // Get the day part (yyyy-MM-dd) and time part (HH:mm:ss)
       String dayString = DateFormat('yyyy-MM-dd').format(weatherDate);
       String timeString = DateFormat('HH:mm:ss').format(weatherDate);
 
       // Skip today's forecasts
       if (dayString == todayDate) continue;
 
-      // Match the time slot and ensure no duplicate days
+      // Select only forecasts matching the same time slot (e.g., 12:00 PM) and for the next 4 days
       if (timeString == targetTime && uniqueDays.length < 4 && !uniqueDays.contains(dayString)) {
         nextDaysWeather.add(weather);
-        uniqueDays.add(dayString); // Track unique days
+        uniqueDays.add(dayString);  // Track days to ensure only one entry per day
       }
 
       // Stop once we've collected the next 4 days
@@ -149,14 +147,14 @@ class _WeatherPageState extends State<WeatherPage> {
             return Center(child: Text('Error loading data'));
           } else if (snapshot.hasData) {
             List<HoursAndDaysWeatherForecast> todayWeather = getTodayWeather(snapshot.data!.weatherList);
-            List<HoursAndDaysWeatherForecast> nextDaysWeather = getNextDaysWeatherBasedOnThirdToday(snapshot.data!.weatherList);
+            List<HoursAndDaysWeatherForecast> nextDaysWeather = getNextDaysWeather(snapshot.data!.weatherList);
 
           return SingleChildScrollView(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             child: Column(
               children: [
-                
                 // City
+
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 15),
                   child: Row(
@@ -185,10 +183,7 @@ class _WeatherPageState extends State<WeatherPage> {
                   ),
                 ),
 
-                SizedBox(
-                  height: 10,
-                ),
-
+                
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -368,10 +363,10 @@ class _WeatherPageState extends State<WeatherPage> {
                 ),
 
                 SizedBox(
-                  height: 25,
+                  height: 10,
                 ),
 
-                // Display the Next Days weather forecast
+                // List of Next days weather forecast
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                   decoration: BoxDecoration(
@@ -392,7 +387,7 @@ class _WeatherPageState extends State<WeatherPage> {
                       
                       SizedBox(height: 10),
 
-                      // List of weather forecast for the next days based on the 3rd forecast of today
+                      // List of weather forecast for the next days
                       Column(
                         children: nextDaysWeather.map((weather) {
                           return Container(
@@ -402,7 +397,7 @@ class _WeatherPageState extends State<WeatherPage> {
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween, // Spread the content horizontally
                                   children: [
-                                    // Day (e.g., Sun, Mon)
+                                    // Day (e.g., Sat, Sun)
                                     Text(
                                       DateFormat('EEE').format(DateTime.parse(weather.date)),
                                       style: TextStyle(fontSize: 14),
