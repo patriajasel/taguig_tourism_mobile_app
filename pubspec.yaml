@@ -50,7 +50,7 @@ dependencies:
   cloud_firestore: ^5.4.4
   custom_info_window: ^1.0.1
   firebase_storage: ^12.3.3
-  location: ^6.0.2
+  location: ^7.0.1
   flutter_polyline_points: ^2.1.0
   
 dev_dependencies:

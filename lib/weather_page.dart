@@ -46,38 +46,39 @@ class _WeatherPageState extends State<WeatherPage> {
     return weatherList.where((weather) => weather.date.startsWith(today)).toList();
   }
 
-  // Method to filter next 4 days' weather data based on the same time slot as today's forecast
-  List<HoursAndDaysWeatherForecast> getNextDaysWeather(List<HoursAndDaysWeatherForecast> weatherList) {
-    List<HoursAndDaysWeatherForecast> nextDaysWeather = [];
-    DateTime now = DateTime.now();
-    String todayDate = DateFormat('yyyy-MM-dd').format(now);
+// Method to filter next 4 days' weather data based on the same time slot as today's forecast
+List<HoursAndDaysWeatherForecast> getNextDaysWeather(List<HoursAndDaysWeatherForecast> weatherList) {
+  List<HoursAndDaysWeatherForecast> nextDaysWeather = [];
+  DateTime now = DateTime.now();
+  String todayDate = DateFormat('yyyy-MM-dd').format(now);
 
-    // Find today's first forecast time
-    String targetTime = DateFormat('HH:mm:ss').format(DateTime.parse(weatherList[0].date));
-    Set<String> uniqueDays = {};
-    
-    for (HoursAndDaysWeatherForecast weather in weatherList) {
-      DateTime weatherDate = DateTime.parse(weather.date);
+  // Find today's first forecast time (to match across next days)
+  String targetTime = DateFormat('HH:mm:ss').format(DateTime.parse(weatherList[0].date));
+  Set<String> uniqueDays = {};
+  
+  for (HoursAndDaysWeatherForecast weather in weatherList) {
+    DateTime weatherDate = DateTime.parse(weather.date);
 
-      // Get the day part (yyyy-MM-dd) and time part (HH:mm:ss)
-      String dayString = DateFormat('yyyy-MM-dd').format(weatherDate);
-      String timeString = DateFormat('HH:mm:ss').format(weatherDate);
+    // Get the day part (yyyy-MM-dd) and time part (HH:mm:ss)
+    String dayString = DateFormat('yyyy-MM-dd').format(weatherDate);
+    String timeString = DateFormat('HH:mm:ss').format(weatherDate);
 
-      // Skip today's forecasts
-      if (dayString == todayDate) continue;
-
-      // Select only forecasts matching the same time slot (e.g., 12:00 PM) and for the next 4 days
-      if (timeString == targetTime && uniqueDays.length < 4 && !uniqueDays.contains(dayString)) {
+    // Skip today's forecasts and only include forecasts for future days
+    if (weatherDate.isAfter(now) && timeString == targetTime && uniqueDays.length < 4) {
+      // Ensure no duplicate days in the next days forecast
+      if (!uniqueDays.contains(dayString)) {
         nextDaysWeather.add(weather);
-        uniqueDays.add(dayString);  // Track days to ensure only one entry per day
+        uniqueDays.add(dayString);
       }
-
-      // Stop once we've collected the next 4 days
-      if (nextDaysWeather.length == 4) break;
     }
 
-    return nextDaysWeather;
+    // Stop once we've collected the next 4 days
+    if (nextDaysWeather.length == 4) break;
   }
+
+  return nextDaysWeather;
+}
+
 
   // Method to format time in 12-hour format
   String formatTime(String dateTime) {
@@ -397,7 +398,7 @@ class _WeatherPageState extends State<WeatherPage> {
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween, // Spread the content horizontally
                                   children: [
-                                    // Day (e.g., Sat, Sun)
+                                    // Day (e.g., Sun, Mon)
                                     Text(
                                       DateFormat('EEE').format(DateTime.parse(weather.date)),
                                       style: TextStyle(fontSize: 14),
