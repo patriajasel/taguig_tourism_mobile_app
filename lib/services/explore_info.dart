@@ -8,13 +8,15 @@ class ExploreDestinations {
   final LatLng siteLatLng;
   final String siteBanner;
   final String siteMarker;
+  final String siteInfo;
 
   ExploreDestinations(
       {required this.siteName,
       required this.siteAddress,
       required this.siteLatLng,
       required this.siteBanner,
-      required this.siteMarker});
+      required this.siteMarker,
+      required this.siteInfo});
 
   factory ExploreDestinations.fromSnapshot(Map<String, dynamic> snapshot) {
     print("Snapshot here: $snapshot");
@@ -32,7 +34,8 @@ class ExploreDestinations {
           siteAddress: snapshot['site_address'] ?? '',
           siteLatLng: LatLng(latitude, longitude),
           siteBanner: snapshot['site_banner'] ?? '',
-          siteMarker: snapshot['site_marker'] ?? '');
+          siteMarker: snapshot['site_marker'] ?? '',
+          siteInfo: snapshot['site_info'] ?? '');
     } catch (e) {
       print("Error parsing snapshot: $e");
       throw e;

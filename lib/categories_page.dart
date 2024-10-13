@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:taguig_tourism_mobile_app/services/explore_info.dart';
+import 'package:taguig_tourism_mobile_app/services/firestore_services.dart';
 import 'individual_place_page.dart'; // Ensure the correct import
 
 class CategoriesPage extends StatefulWidget {
@@ -12,6 +14,33 @@ class CategoriesPage extends StatefulWidget {
 class CategoriesPageState extends State<CategoriesPage> {
   // Track the like status for each card
   List<bool> likedItems = List.generate(8, (index) => false);
+  List<ExploreDestinations>? categoryTitle = [];
+  List<String> destinationImage = [];
+
+  @override
+  void initState() {
+    getCategory();
+    super.initState();
+  }
+
+  Future<void> getCategory() async {
+    categoryTitle!.clear();
+    destinationImage.clear();
+    List<ExploreDestinations>? category = await FirestoreServices()
+        .getDestinationIds(widget.headline.toLowerCase());
+
+    if (category != null) {
+      categoryTitle = category;
+      for (int i = 0; i < category.length; i++) {
+        String image =
+            await FirestoreServices().getImageUrl(categoryTitle![i].siteBanner);
+        destinationImage.add(image);
+      }
+
+      // Make sure to update the UI
+      setState(() {});
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,10 +71,10 @@ class CategoriesPageState extends State<CategoriesPage> {
       ),
       backgroundColor: Colors.white.withOpacity(0.9),
       body: ListView.builder(
-        itemCount: 8,
+        itemCount: categoryTitle!.length,
         itemBuilder: (container, index) {
           return Container(
-            height: 146,
+            height: 155,
             margin: EdgeInsets.all(8), // Add margin for spacing
             child: Card(
               elevation: 10,
@@ -57,8 +86,8 @@ class CategoriesPageState extends State<CategoriesPage> {
                       children: [
                         ClipRRect(
                           borderRadius: BorderRadius.circular(8.0),
-                          child: Image.asset(
-                            'lib/assets/images/taguig_nearby3.jpg',
+                          child: Image.network(
+                            destinationImage[index],
                             height: 100,
                             width: 100, // Provide explicit width and height
                             fit: BoxFit.cover,
@@ -73,7 +102,8 @@ class CategoriesPageState extends State<CategoriesPage> {
                             children: [
                               SizedBox(height: 13),
                               Text(
-                                'SM Aura',
+                                categoryTitle![index].siteName,
+                                maxLines: 2,
                                 style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
@@ -92,7 +122,7 @@ class CategoriesPageState extends State<CategoriesPage> {
                                       width: 4), // Space between icon and text
                                   Expanded(
                                     child: Text(
-                                      '26th Street, Corner McKinley Pkwy, Taguig, 1630 Metro Manila',
+                                      categoryTitle![index].siteAddress,
                                       style: TextStyle(fontSize: 11.5),
                                       overflow: TextOverflow
                                           .ellipsis, // Prevents overflow
@@ -115,7 +145,18 @@ class CategoriesPageState extends State<CategoriesPage> {
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) =>
-                                              IndividualPlacePage(),
+                                              IndividualPlacePage(
+                                                  address:
+                                                      categoryTitle![index]
+                                                          .siteAddress,
+                                                  name:
+                                                      categoryTitle![index]
+                                                          .siteName,
+                                                  banner:
+                                                      categoryTitle![index]
+                                                          .siteBanner,
+                                                  info: categoryTitle![index]
+                                                      .siteInfo),
                                         ),
                                       );
                                     },
@@ -161,23 +202,19 @@ class CategoriesPageState extends State<CategoriesPage> {
                       ],
                     ),
                   ),
-                  Positioned(
-                    top: 8,
-                    right: 8,
-                    child: IconButton(
-                      icon: Icon(
-                        likedItems[index]
-                            ? Icons.favorite
-                            : Icons.favorite_border,
-                        color: likedItems[index] ? Colors.red : Colors.grey,
-                        size: 20,
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          likedItems[index] = !likedItems[index];
-                        });
-                      },
+                  IconButton(
+                    icon: Icon(
+                      likedItems[index]
+                          ? Icons.favorite
+                          : Icons.favorite_border,
+                      color: likedItems[index] ? Colors.red : Colors.grey,
+                      size: 20,
                     ),
+                    onPressed: () {
+                      setState(() {
+                        likedItems[index] = !likedItems[index];
+                      });
+                    },
                   ),
                 ],
               ),

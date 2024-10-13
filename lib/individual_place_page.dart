@@ -1,9 +1,25 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
-class IndividualPlacePage extends StatelessWidget {
-  IndividualPlacePage({super.key});
+class IndividualPlacePage extends StatefulWidget {
+  final String banner;
+  final String name;
+  final String address;
+  final String info;
 
+  IndividualPlacePage({
+    super.key,
+    required this.banner,
+    required this.name,
+    required this.address,
+    required this.info,
+  });
+
+  @override
+  State<IndividualPlacePage> createState() => _IndividualPlacePageState();
+}
+
+class _IndividualPlacePageState extends State<IndividualPlacePage> {
   final List<String> imgList = [
     'lib/assets/images/taguig_image1.png',
     'lib/assets/images/taguig_image2.png',
@@ -31,8 +47,8 @@ class IndividualPlacePage extends StatelessWidget {
             child: Container(
               height:
                   260, // Set the height of the image container (adjust as needed)
-              child: Image.asset(
-                'lib/assets/images/taguig_nearby3.jpg',
+              child: Image.network(
+                widget.banner,
                 fit: BoxFit.cover, // Ensure the image covers the container
               ),
             ),
@@ -59,7 +75,7 @@ class IndividualPlacePage extends StatelessWidget {
                     Container(
                       margin: EdgeInsets.all(8.0),
                       child: Text(
-                        'SM Aura',
+                        widget.name,
                         style: TextStyle(
                           fontSize: 30,
                           fontWeight: FontWeight.bold,
@@ -75,7 +91,7 @@ class IndividualPlacePage extends StatelessWidget {
                           SizedBox(width: 12),
                           Expanded(
                             child: Text(
-                              '26th St. corner McKinley Parkway, Taguig, Metro Manila',
+                              widget.address,
                               style: TextStyle(
                                 fontSize: 12,
                                 color: Colors.grey[700],
@@ -95,8 +111,7 @@ class IndividualPlacePage extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'SM Aura Premier is the 13th SM Supermall in Metro Manila and 47th SM Prime mall in the Philippines. The SM Aura name is derived from the two elements gold (which has the chemical symbol Au) and radium. '
-                              'According to SM Prime, putting them together defines “luxury and elegance that emanates from within.',
+                              widget.info,
                               textAlign: TextAlign
                                   .justify, // Changed from left to justify
                               style: TextStyle(fontSize: 14),
