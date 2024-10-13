@@ -74,7 +74,7 @@ class CategoriesPageState extends State<CategoriesPage> {
         itemCount: categoryTitle!.length,
         itemBuilder: (container, index) {
           return Container(
-            height: 155,
+            height: 160,
             margin: EdgeInsets.all(8), // Add margin for spacing
             child: Card(
               elevation: 10,
@@ -134,7 +134,7 @@ class CategoriesPageState extends State<CategoriesPage> {
                               ),
                               SizedBox(
                                   height:
-                                      2), // Spacing between text and buttons
+                                      5), // Spacing between text and buttons
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
@@ -146,50 +146,57 @@ class CategoriesPageState extends State<CategoriesPage> {
                                         MaterialPageRoute(
                                           builder: (context) =>
                                               IndividualPlacePage(
-                                                  address:
-                                                      categoryTitle![index]
-                                                          .siteAddress,
-                                                  name:
-                                                      categoryTitle![index]
-                                                          .siteName,
-                                                  banner:
-                                                      categoryTitle![index]
-                                                          .siteBanner,
-                                                  info: categoryTitle![index]
-                                                      .siteInfo),
+                                            address: categoryTitle![index]
+                                                .siteAddress,
+                                            name:
+                                                categoryTitle![index].siteName,
+                                            banner: destinationImage[index],
+                                            info:
+                                                categoryTitle![index].siteInfo,
+                                            contact: categoryTitle![index]
+                                                .siteContact,
+                                            links:
+                                                categoryTitle![index].siteLinks,
+                                          ),
                                         ),
                                       );
                                     },
                                     style: ElevatedButton.styleFrom(
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10.0)),
                                       backgroundColor: Colors
                                           .blueAccent.shade700, // Button color
                                       foregroundColor:
                                           Colors.white, // Text color
                                     ),
                                     icon:
-                                        Icon(Icons.info, size: 14), // Info icon
+                                        Icon(Icons.info, size: 10), // Info icon
                                     label: Text(
                                       'View Info',
                                       style: TextStyle(
-                                        fontSize: 10,
+                                        fontSize: 8,
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
                                   ),
-                                  SizedBox(width: 5), // Space between buttons
+                                  SizedBox(width: 10), // Space between buttons
                                   ElevatedButton.icon(
                                     onPressed: () {},
                                     style: ElevatedButton.styleFrom(
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10.0)),
                                       backgroundColor: Colors
                                           .blueAccent.shade700, // Button color
                                       foregroundColor:
                                           Colors.white, // Text color
                                     ),
-                                    icon: Icon(Icons.map, size: 14), // Map icon
+                                    icon: Icon(Icons.map, size: 10), // Map icon
                                     label: Text(
                                       'See on Maps',
                                       style: TextStyle(
-                                        fontSize: 10,
+                                        fontSize: 8,
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
@@ -202,19 +209,23 @@ class CategoriesPageState extends State<CategoriesPage> {
                       ],
                     ),
                   ),
-                  IconButton(
-                    icon: Icon(
-                      likedItems[index]
-                          ? Icons.favorite
-                          : Icons.favorite_border,
-                      color: likedItems[index] ? Colors.red : Colors.grey,
-                      size: 20,
+                  Positioned(
+                    right: 5,
+                    top: 5,
+                    child: IconButton(
+                      icon: Icon(
+                        likedItems[index]
+                            ? Icons.favorite
+                            : Icons.favorite_border,
+                        color: likedItems[index] ? Colors.red : Colors.grey,
+                        size: 20,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          likedItems[index] = !likedItems[index];
+                        });
+                      },
                     ),
-                    onPressed: () {
-                      setState(() {
-                        likedItems[index] = !likedItems[index];
-                      });
-                    },
                   ),
                 ],
               ),

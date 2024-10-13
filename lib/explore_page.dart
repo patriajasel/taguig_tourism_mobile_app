@@ -10,6 +10,7 @@ import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:location/location.dart';
+import 'package:taguig_tourism_mobile_app/individual_place_page.dart';
 import 'package:taguig_tourism_mobile_app/services/explore_info.dart';
 import 'package:taguig_tourism_mobile_app/services/firestore_services.dart';
 
@@ -255,14 +256,28 @@ class _ExplorePageState extends State<ExplorePage> {
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                        child: Text(
-                          textAlign: TextAlign.center,
-                          destinations![i].siteName,
-                          style: TextStyle(
-                            fontSize: 10,
-                            fontWeight: FontWeight.bold,
+                        child: GestureDetector(
+                          onTap: () async {
+                            String image = await FirestoreServices()
+                                .getImageUrl(destinations![i].siteBanner);
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (builder) => IndividualPlacePage(
+                                    banner: image,
+                                    name: destinations![i].siteName,
+                                    address: destinations![i].siteAddress,
+                                    info: destinations![i].siteInfo,
+                                    contact: destinations![i].siteContact,
+                                    links: destinations![i].siteLinks)));
+                          },
+                          child: Text(
+                            textAlign: TextAlign.center,
+                            destinations![i].siteName,
+                            style: TextStyle(
+                              fontSize: 10,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            maxLines: 2,
                           ),
-                          maxLines: 2,
                         ),
                       ),
                       SizedBox(

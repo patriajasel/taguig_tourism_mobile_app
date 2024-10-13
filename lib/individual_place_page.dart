@@ -1,18 +1,23 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class IndividualPlacePage extends StatefulWidget {
   final String banner;
   final String name;
   final String address;
   final String info;
+  final String contact;
+  final String links;
 
-  IndividualPlacePage({
+  const IndividualPlacePage({
     super.key,
     required this.banner,
     required this.name,
     required this.address,
     required this.info,
+    required this.contact,
+    required this.links,
   });
 
   @override
@@ -28,14 +33,21 @@ class _IndividualPlacePageState extends State<IndividualPlacePage> {
     'lib/assets/images/taguig_image5.png',
   ];
 
+  Future<void> _launchURL() async {
+    final Uri url = Uri.parse(widget.links);
+    if (!await launchUrl(url)) {
+      throw 'Could not launch ${widget.links}';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    print("Links: ${widget.links}");
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         backgroundColor: Colors.transparent, // Make AppBar transparent
-        iconTheme: IconThemeData(
-            color: Colors.white), // Set back button color to white
+        foregroundColor: Colors.white, // Set back button color to white
       ),
       body: Stack(
         children: [
@@ -44,7 +56,7 @@ class _IndividualPlacePageState extends State<IndividualPlacePage> {
             top: 0, // Start from the top
             left: 0,
             right: 0,
-            child: Container(
+            child: SizedBox(
               height:
                   260, // Set the height of the image container (adjust as needed)
               child: Image.network(
@@ -67,148 +79,189 @@ class _IndividualPlacePageState extends State<IndividualPlacePage> {
               ),
               elevation: 5,
               child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                padding: const EdgeInsets.all(20),
+                child: Stack(
                   children: [
-                    // Title aligned to the left
-                    Container(
-                      margin: EdgeInsets.all(8.0),
-                      child: Text(
-                        widget.name,
-                        style: TextStyle(
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                    // Address row with icon
-                    Container(
-                      margin: EdgeInsets.only(left: 8.0, bottom: 16.0),
-                      child: Row(
-                        children: [
-                          Icon(Icons.pin_drop, color: Colors.blue),
-                          SizedBox(width: 12),
-                          Expanded(
-                            child: Text(
-                              widget.address,
-                              style: TextStyle(
-                                fontSize: 12,
-                                color: Colors.grey[700],
-                              ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        // Title aligned to the left
+                        Container(
+                          margin: EdgeInsets.all(8.0),
+                          child: Text(
+                            maxLines: 2,
+                            widget.name,
+                            style: TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
-                        ],
-                      ),
-                    ),
-                    Divider(),
-                    SizedBox(height: 20),
-                    // Scrollable Description with Carousel
-                    Container(
-                      height: 400,
-                      child: SingleChildScrollView(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              widget.info,
-                              textAlign: TextAlign
-                                  .justify, // Changed from left to justify
-                              style: TextStyle(fontSize: 14),
-                            ),
-                            SizedBox(height: 4), // Add space after the text
-                            GestureDetector(
-                              onTap: () {
-                                // Implement the action for booking appointment
-                                print('Booking appointment...');
-                              },
-                              child: RichText(
-                                text: TextSpan(
-                                  text: 'Book for appointment here',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 14,
-                                    color: Colors.blueAccent,
-                                    decoration: TextDecoration
-                                        .underline, // Makes it look like a hyperlink
-                                  ),
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                                height: 50), // Add space after the hyperlink
-                            Text(
-                              'StreetView',
-                              textAlign: TextAlign.left,
-                              style: TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.bold),
-                            ),
-                            // Centered Carousel
-                            Center(
-                              child: Container(
-                                width: MediaQuery.of(context).size.width * 0.7,
-                                child: CarouselSlider(
-                                  options: CarouselOptions(
-                                    initialPage: 0,
-                                    autoPlay: true,
-                                    enlargeCenterPage: true,
-                                    enlargeFactor: 0.3,
-                                    height: 150,
-                                    onPageChanged: (value, _) {},
-                                  ),
-                                  items: imgList.map((item) {
-                                    return Container(
-                                      margin: const EdgeInsets.all(8),
-                                      width: 400,
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(10),
-                                        child: Image.asset(
-                                          item,
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
-                                    );
-                                  }).toList(),
-                                ),
-                              ),
-                            ),
-                          ],
                         ),
-                      ),
-                    ),
-                    // Button positioned at the bottom
-                    Positioned(
-                      bottom: 20, // Adjust the bottom padding as needed
-                      left: 0,
-                      right: 0,
-                      child: Center(
-                        child: ElevatedButton(
-                          onPressed: () {},
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors
-                                .blue, // Set button background color to blue
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 18, vertical: 6),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                          ),
+                        // Address row with icon
+                        Container(
+                          margin: EdgeInsets.only(left: 10.0, bottom: 10.0),
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Icon(Icons.map,
-                                  color:
-                                      Colors.white), // Icon color remains white
+                              Icon(Icons.pin_drop, color: Colors.blue),
                               SizedBox(width: 12),
-                              Text(
-                                'View location on map',
-                                style: TextStyle(
-                                    fontSize: 16,
-                                    color: Colors
-                                        .white), // Text color remains white
+                              Expanded(
+                                child: Text(
+                                  widget.address,
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    color: Colors.grey[700],
+                                  ),
+                                ),
                               ),
                             ],
                           ),
+                        ),
+                        Divider(),
+                        SizedBox(height: 10),
+                        // Scrollable Description with Carousel
+                        SizedBox(
+                          height: 300,
+                          child: SingleChildScrollView(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  widget.info,
+                                  textAlign: TextAlign
+                                      .justify, // Changed from left to justify
+                                  style: TextStyle(fontSize: 14),
+                                ),
+                                SizedBox(
+                                    height: 20), // Add space after the text
+                                Text(
+                                  "Bookings or Links",
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                SizedBox(height: 10),
+                                SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        "Website Link: ",
+                                        style: TextStyle(fontSize: 14.0),
+                                      ),
+                                      GestureDetector(
+                                        onTap: widget.links == "Not Available"
+                                            ? null
+                                            : _launchURL,
+                                        child: Text(
+                                          widget.links,
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                            color:
+                                                widget.links == "Not Available"
+                                                    ? null
+                                                    : Colors.blueAccent,
+                                            decoration: widget.links ==
+                                                    "Not Available"
+                                                ? null
+                                                : TextDecoration
+                                                    .underline, // Makes it look like a hyperlink
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                SizedBox(
+                                    height: 20), // Add space after the text
+                                Text(
+                                  "Contact Information",
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                SizedBox(height: 10),
+                                Text(
+                                  widget.contact,
+                                  style: TextStyle(fontSize: 14.0),
+                                ),
+                                SizedBox(
+                                    height:
+                                        20), // Add space after the hyperlink
+                                Text(
+                                  'Street View',
+                                  textAlign: TextAlign.left,
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                // Centered Carousel
+                                Center(
+                                  child: SizedBox(
+                                    width:
+                                        MediaQuery.of(context).size.width * 0.7,
+                                    child: CarouselSlider(
+                                      options: CarouselOptions(
+                                        initialPage: 0,
+                                        autoPlay: true,
+                                        enlargeCenterPage: true,
+                                        enlargeFactor: 0.3,
+                                        height: 150,
+                                        onPageChanged: (value, _) {},
+                                      ),
+                                      items: imgList.map((item) {
+                                        return Container(
+                                          margin: const EdgeInsets.all(8),
+                                          width: 400,
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            child: Image.asset(
+                                              item,
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                        );
+                                      }).toList(),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    // Button positioned at the bottom
+                    Positioned(
+                      bottom: 0,
+                      right: 30,
+                      left: 30,
+                      child: ElevatedButton(
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors
+                              .blue, // Set button background color to blue
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 18, vertical: 6),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(Icons.map,
+                                color:
+                                    Colors.white), // Icon color remains white
+                            SizedBox(width: 12),
+                            Text(
+                              'View location on map',
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  color:
+                                      Colors.white), // Text color remains white
+                            ),
+                          ],
                         ),
                       ),
                     ),

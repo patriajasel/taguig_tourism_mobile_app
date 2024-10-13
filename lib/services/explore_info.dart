@@ -5,18 +5,23 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 class ExploreDestinations {
   final String siteName;
   final String siteAddress;
+  final String siteInfo;
+  final String siteContact;
+  final String siteLinks;
   final LatLng siteLatLng;
   final String siteBanner;
   final String siteMarker;
-  final String siteInfo;
 
-  ExploreDestinations(
-      {required this.siteName,
-      required this.siteAddress,
-      required this.siteLatLng,
-      required this.siteBanner,
-      required this.siteMarker,
-      required this.siteInfo});
+  ExploreDestinations({
+    required this.siteName,
+    required this.siteAddress,
+    required this.siteInfo,
+    required this.siteContact,
+    required this.siteLinks,
+    required this.siteLatLng,
+    required this.siteBanner,
+    required this.siteMarker,
+  });
 
   factory ExploreDestinations.fromSnapshot(Map<String, dynamic> snapshot) {
     print("Snapshot here: $snapshot");
@@ -30,12 +35,15 @@ class ExploreDestinations {
           : 0.0;
 
       return ExploreDestinations(
-          siteName: snapshot['site_name'] ?? '',
-          siteAddress: snapshot['site_address'] ?? '',
-          siteLatLng: LatLng(latitude, longitude),
-          siteBanner: snapshot['site_banner'] ?? '',
-          siteMarker: snapshot['site_marker'] ?? '',
-          siteInfo: snapshot['site_info'] ?? '');
+        siteName: snapshot['site_name'] ?? '',
+        siteAddress: snapshot['site_address'] ?? '',
+        siteInfo: snapshot['site_info'] ?? '',
+        siteContact: snapshot['site_contact'] ?? '',
+        siteLinks: snapshot['site_link'] ?? '',
+        siteLatLng: LatLng(latitude, longitude),
+        siteBanner: snapshot['site_banner'] ?? '',
+        siteMarker: snapshot['site_marker'] ?? '',
+      );
     } catch (e) {
       print("Error parsing snapshot: $e");
       throw e;
