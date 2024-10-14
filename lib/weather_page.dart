@@ -61,34 +61,23 @@ HoursAndDaysWeatherForecast getNearestForecast(List<HoursAndDaysWeatherForecast>
   return nearestForecast;
 }
 
-// Method to filter next 4 days' weather data based on the nearest time slot
-List<HoursAndDaysWeatherForecast> getNextDaysWeather(List<HoursAndDaysWeatherForecast> weatherList, String targetTime) {
+// Method to filter next 4 days' weather data 
+List<HoursAndDaysWeatherForecast> getNextDaysWeather(List<HoursAndDaysWeatherForecast> weatherList) {
   List<HoursAndDaysWeatherForecast> nextDaysWeather = [];
-  DateTime now = DateTime.now();
-  String todayDate = DateFormat('yyyy-MM-dd').format(now);
-  Set<String> uniqueDays = {};
 
-  for (HoursAndDaysWeatherForecast weather in weatherList) {
-    DateTime weatherDate = DateTime.parse(weather.date);
-
-    // Get the day part (yyyy-MM-dd) and time part (HH:mm:ss)
-    String dayString = DateFormat('yyyy-MM-dd').format(weatherDate);
-    String timeString = DateFormat('HH:mm:ss').format(weatherDate);
-
-    // Skip today's forecasts and include only future days matching the nearest time
-    if (weatherDate.isAfter(now) && dayString != todayDate && timeString == targetTime && uniqueDays.length < 4) {
-      if (!uniqueDays.contains(dayString)) {
-        nextDaysWeather.add(weather);
-        uniqueDays.add(dayString);
-      }
-    }
-
-    // Stop once we've collected the next 4 days
-    if (nextDaysWeather.length == 4) break;
+  // Ensure we have at least 40 items in the list (5 days * 8 items per day)
+  if (weatherList.length >= 40) {
+    // We want the 11th, 19th, 27th, and 35th items, which are index positions: 10, 18, 26, 34
+    nextDaysWeather.add(weatherList[10]); // 11th forecast
+    nextDaysWeather.add(weatherList[18]); // 19th forecast
+    nextDaysWeather.add(weatherList[26]); // 27th forecast
+    nextDaysWeather.add(weatherList[34]); // 35th forecast
   }
 
   return nextDaysWeather;
 }
+
+
   // Method to format time in 12-hour format
   String formatTime(String dateTime) {
     DateTime time = DateTime.parse(dateTime);
@@ -159,14 +148,8 @@ Widget build(BuildContext context) {
           // Today's forecast list
           List<HoursAndDaysWeatherForecast> todayWeather = getTodayWeather(snapshot.data!.weatherList);
 
-          // Find nearest forecast to the current time
-          HoursAndDaysWeatherForecast nearestForecast = getNearestForecast(todayWeather);
-
-          // Use nearest forecast's time for next days
-          String targetTime = DateFormat('HH:mm:ss').format(DateTime.parse(nearestForecast.date));
-
           // Next days' forecast based on nearest forecast time
-          List<HoursAndDaysWeatherForecast> nextDaysWeather = getNextDaysWeather(snapshot.data!.weatherList, targetTime);
+          List<HoursAndDaysWeatherForecast> nextDaysWeather = getNextDaysWeather(snapshot.data!.weatherList);
 
           return SingleChildScrollView(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -201,7 +184,7 @@ Widget build(BuildContext context) {
                   ),
                 ),
 
-Row(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     // Current Weather Animation
