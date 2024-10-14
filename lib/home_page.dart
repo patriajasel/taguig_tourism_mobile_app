@@ -369,17 +369,17 @@ class _HomePageState extends State<HomePage> {
   String getTextForIndex(int index) {
     switch (index) {
       case 0:
-        return "Diners";
+        return "XDiners";
       case 1:
         return "Malls";
       case 2:
         return "Hotels";
       case 3:
-        return "Stores";
+        return "XStores";
       case 4:
-        return "ATMs";
+        return "Banks";
       case 5:
-        return "Terminals";
+        return "XTerminals";
       case 6:
         return "Hospitals";
       case 7:
@@ -387,7 +387,7 @@ class _HomePageState extends State<HomePage> {
       case 8:
         return "Police";
       case 9:
-        return "LGUs";
+        return "LGU";
       default:
         return "Unknown";
     }
