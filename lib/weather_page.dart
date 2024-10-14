@@ -198,7 +198,7 @@ Widget build(BuildContext context) {
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         Text(
-                          '${_mainWeather?.temperature.round() ?? "--"} °',
+                          '${_mainWeather?.temperature.round() ?? "--"}°',
                           style: TextStyle(
                             fontSize: 42,
                             color: Colors.black,
