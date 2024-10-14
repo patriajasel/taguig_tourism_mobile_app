@@ -46,24 +46,21 @@ class _WeatherPageState extends State<WeatherPage> {
     return weatherList.where((weather) => weather.date.startsWith(today)).toList();
   }
 
+  // Method to filter next 4 days' weather data 
+  List<HoursAndDaysWeatherForecast> getNextDaysWeather(List<HoursAndDaysWeatherForecast> weatherList) {
+    List<HoursAndDaysWeatherForecast> nextDaysWeather = [];
 
+    // Ensure we have at least 40 items in the list (5 days * 8 items per day)
+    if (weatherList.length >= 40) {
+      // We want the 11th, 19th, 27th, and 35th items, which are index positions: 10, 18, 26, 34
+      nextDaysWeather.add(weatherList[10]); // 11th forecast
+      nextDaysWeather.add(weatherList[18]); // 19th forecast
+      nextDaysWeather.add(weatherList[26]); // 27th forecast
+      nextDaysWeather.add(weatherList[34]); // 35th forecast
+    }
 
-// Method to filter next 4 days' weather data 
-List<HoursAndDaysWeatherForecast> getNextDaysWeather(List<HoursAndDaysWeatherForecast> weatherList) {
-  List<HoursAndDaysWeatherForecast> nextDaysWeather = [];
-
-  // Ensure we have at least 40 items in the list (5 days * 8 items per day)
-  if (weatherList.length >= 40) {
-    // We want the 11th, 19th, 27th, and 35th items, which are index positions: 10, 18, 26, 34
-    nextDaysWeather.add(weatherList[10]); // 11th forecast
-    nextDaysWeather.add(weatherList[18]); // 19th forecast
-    nextDaysWeather.add(weatherList[26]); // 27th forecast
-    nextDaysWeather.add(weatherList[34]); // 35th forecast
+    return nextDaysWeather;
   }
-
-  return nextDaysWeather;
-}
-
 
   // Method to format time in 12-hour format
   String formatTime(String dateTime) {
@@ -321,7 +318,7 @@ Widget build(BuildContext context) {
                         color: const Color.fromARGB(255, 228, 232, 238),
                         child: Container(
                           width: 100,
-                          height: 150, // Set a width for the card
+                          height: 150,
                           padding: EdgeInsets.all(12),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
