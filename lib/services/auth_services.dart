@@ -54,11 +54,9 @@ class AuthenticationServices {
     } on FirebaseAuthException catch (e) {
       String message = '';
       if (e.code == 'weak-password') {
-
         //  If created password is weak this message will appear
         message = 'The password provided is too weak';
       } else if (e.code == 'email-already-in-use') {
-        
         //  If the email user is already registered
         message = 'An account already exist with the email provided';
       }
@@ -164,6 +162,7 @@ class AuthenticationServices {
       print(e.code);
       if (e.code == 'invalid-credential') {
         //  If user's credential does not match the database this message will appear
+
         message = 'Invalid Email or Password';
       }
 

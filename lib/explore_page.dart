@@ -40,12 +40,12 @@ class _ExplorePageState extends State<ExplorePage> {
   Map<PolylineId, Polyline> polylines = {};
 
   List<String> filters = [
-    "Diners",
+    "XDiners",
     "Malls",
     "Hotels",
-    "Stores",
+    "XStores",
     "Banks",
-    "Terminals",
+    "XTerminals",
     "Hospitals",
     "Churches",
     "Police",
@@ -294,9 +294,9 @@ class _ExplorePageState extends State<ExplorePage> {
                                     RoundedRectangleBorder(
                                         borderRadius:
                                             BorderRadius.circular(5)))),
-                            onPressed: () {
-                              setState(() async {
-                                await _fetchLocationUpdate();
+                            onPressed: () async {
+                              await _fetchLocationUpdate();
+                              setState(() {
                                 isNavigating = true;
                                 ExploreDestinations userDestination =
                                     destinations![i];
@@ -394,12 +394,12 @@ class _ExplorePageState extends State<ExplorePage> {
       if (currentLocation.latitude != null &&
           currentLocation.longitude != null) {
         if (isNavigating) {
-          setState(() async {
-            usersLatLng =
-                LatLng(currentLocation.latitude!, currentLocation.longitude!);
+          usersLatLng =
+              LatLng(currentLocation.latitude!, currentLocation.longitude!);
 
-            final coordinates = await _fetchPolylinePoints();
+          final coordinates = await _fetchPolylinePoints();
 
+          setState(() {
             _generatePolylineFromPoints(coordinates);
             _setCustomMarkerForUser();
             _updateCameraPositionWithBearing(coordinates);
