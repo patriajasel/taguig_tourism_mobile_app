@@ -46,20 +46,7 @@ class _WeatherPageState extends State<WeatherPage> {
     return weatherList.where((weather) => weather.date.startsWith(today)).toList();
   }
 
-  // Method to find the nearest forecast time to the current time
-HoursAndDaysWeatherForecast getNearestForecast(List<HoursAndDaysWeatherForecast> weatherList) {
-  DateTime now = DateTime.now();
-  
-  // Find the forecast closest to the current time
-  HoursAndDaysWeatherForecast? nearestForecast = weatherList.reduce((a, b) {
-    DateTime aDate = DateTime.parse(a.date);
-    DateTime bDate = DateTime.parse(b.date);
-    
-    return (aDate.isBefore(now) && now.difference(aDate).abs() < now.difference(bDate).abs()) ? a : b;
-  });
 
-  return nearestForecast;
-}
 
 // Method to filter next 4 days' weather data 
 List<HoursAndDaysWeatherForecast> getNextDaysWeather(List<HoursAndDaysWeatherForecast> weatherList) {
