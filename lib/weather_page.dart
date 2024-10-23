@@ -120,6 +120,9 @@ class _WeatherPageState extends State<WeatherPage> {
 
   @override
 Widget build(BuildContext context) {
+  double screenWidth = MediaQuery.of(context).size.width;
+  double screenHeight = MediaQuery.of(context).size.height;
+  
   return Scaffold(
     body: FutureBuilder<HoursAndDaysWeatherResponse>(
       future: _hoursAndDayForecast,
@@ -136,12 +139,15 @@ Widget build(BuildContext context) {
           List<HoursAndDaysWeatherForecast> nextDaysWeather = getNextDaysWeather(snapshot.data!.weatherList);
 
           return SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            padding: EdgeInsets.symmetric(
+              horizontal: screenWidth * 0.05556,
+              vertical: screenHeight * 0.02039
+            ),
             child: Column(
               children: [
                 // City and date display
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 15),
+                  padding: EdgeInsets.only(bottom: screenHeight * 0.02039),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
@@ -151,14 +157,14 @@ Widget build(BuildContext context) {
                           Text(
                             _mainWeather?.cityName ?? 'Loading City...',
                             style: TextStyle(
-                              fontSize: 26,
+                              fontSize: screenHeight * 0.03533,
                               color: Colors.black87,
                             ),
                           ),
                           Text(
-                            DateFormat('MMMM dd, yyyy').format(DateTime.now()),
+                            '${DateFormat('MMMM dd, yyyy').format(DateTime.now())} ($screenWidth, $screenHeight)',
                             style: TextStyle(
-                              fontSize: 14,
+                              fontSize: screenHeight * 0.01903,
                               color: Colors.black54,
                             ),
                           ),
@@ -173,8 +179,8 @@ Widget build(BuildContext context) {
                   children: [
                     // Current Weather Animation
                     SizedBox(
-                      width: 75,
-                      height: 75,
+                      width: screenWidth * 0.20834,
+                      height: screenHeight * 0.10193,
                       child: Lottie.asset(getMainWeatherAnimation(_mainWeather?.mainCondition)),
                     ),
           
@@ -184,7 +190,7 @@ Widget build(BuildContext context) {
                         Text(
                           '${_mainWeather?.temperature.round() ?? "--"}°',
                           style: TextStyle(
-                            fontSize: 42,
+                            fontSize: screenHeight * 0.0571,
                             color: Colors.black,
                             fontWeight: FontWeight.bold,
                           ),
@@ -196,13 +202,13 @@ Widget build(BuildContext context) {
                             Text(
                               _mainWeather?.mainCondition ?? '',
                               style: TextStyle(
-                                fontSize: 14,
+                                fontSize: screenHeight * 0.01903,
                                 color: Colors.grey,
                               ),
                             ),
 
                             SizedBox(
-                              height: 12,
+                              height: screenHeight * 0.01631,
                             ),
                           ],
                         ),
@@ -212,7 +218,7 @@ Widget build(BuildContext context) {
                 ),
                 
                 SizedBox(
-                  height: 10,
+                  height: screenHeight * 0.01359,
                 ),
                 
                 // Current more details weather forecast
@@ -223,9 +229,9 @@ Widget build(BuildContext context) {
                       children: [
                         // For wind speed
                         Container(
-                          width: 60,
-                          height: 60,
-                          padding: const EdgeInsets.all(16),
+                          width: screenWidth * 0.15278,
+                          height: screenHeight * 0.07473,
+                          padding: EdgeInsets.all(screenHeight * 0.02174),
                           decoration: BoxDecoration(
                             color: const Color.fromARGB(255, 228, 232, 238),
                             borderRadius: BorderRadius.circular(15),
@@ -235,9 +241,9 @@ Widget build(BuildContext context) {
 
                         // For clouds
                         Container(
-                          width: 60,
-                          height: 60,
-                          padding: const EdgeInsets.all(16),
+                          width: screenWidth * 0.15278,
+                          height: screenHeight * 0.07473,
+                          padding: EdgeInsets.all(screenHeight * 0.02174),
                           decoration: BoxDecoration(
                             color: const Color.fromARGB(255, 228, 232, 238),
                             borderRadius: BorderRadius.circular(15),
@@ -247,9 +253,9 @@ Widget build(BuildContext context) {
 
                         // For humidity
                         Container(
-                          width: 60,
-                          height: 60,
-                          padding: const EdgeInsets.all(16),
+                          width: screenWidth * 0.15278,
+                          height: screenHeight * 0.07473,
+                          padding: EdgeInsets.all(screenHeight * 0.02174),
                           decoration: BoxDecoration(
                             color: const Color.fromARGB(255, 228, 232, 238),
                             borderRadius: BorderRadius.circular(15),
@@ -260,35 +266,35 @@ Widget build(BuildContext context) {
                     ),
 
                     SizedBox(
-                      height: 5,
+                      height: screenHeight * 0.0068,
                     ),
 
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         SizedBox(
-                          height: 20,
-                          width: 60,
+                          height: screenHeight * 0.02718,
+                          width: screenWidth * 0.15278,
                           child: Text('${_mainWeather?.windSpeed ?? '--'}km/h',
-                          style: const TextStyle(fontSize: 12),
+                          style: TextStyle(fontSize: screenHeight * 0.01359),
                           textAlign: TextAlign.center
                           ),
                         ),
 
                         SizedBox(
-                          height: 20,
-                          width: 60,
+                          height: screenHeight * 0.02718,
+                          width: screenWidth * 0.15278,
                           child: Text('${_mainWeather?.clouds ?? '--'}%',
-                          style: const TextStyle(fontSize: 12),
+                          style: TextStyle(fontSize: screenHeight * 0.01359),
                           textAlign: TextAlign.center
                           ),
                         ),
 
                         SizedBox(
-                          height: 20,
-                          width: 60,
+                          height: screenHeight * 0.02718,
+                          width: screenWidth * 0.15278,
                           child: Text('${_mainWeather?.humidity?? '--'}%',
-                          style: const TextStyle(fontSize: 12),
+                          style: TextStyle(fontSize: screenHeight * 0.01359),
                           textAlign: TextAlign.center
                           ),
                         )
@@ -299,10 +305,13 @@ Widget build(BuildContext context) {
 
                 // Display today's weather in a scrollable row
                 Padding(
-                  padding: const EdgeInsets.only(top: 20, bottom: 10),
+                  padding: EdgeInsets.only(
+                    top: screenHeight * 0.02039,
+                    bottom: screenHeight * 0.01359
+                  ),
                   child: Text('Today',
                   style: TextStyle(
-                    fontSize: 18,
+                    fontSize: screenHeight * 0.02446,
                     fontWeight: FontWeight.bold)
                   ),
                 ),
@@ -317,26 +326,29 @@ Widget build(BuildContext context) {
                         ),
                         color: const Color.fromARGB(255, 228, 232, 238),
                         child: Container(
-                          width: 100,
-                          height: 150,
-                          padding: EdgeInsets.all(12),
+                          width: screenWidth * 0.27778,
+                          height: screenHeight * 0.20381,
+                          padding: EdgeInsets.all(screenHeight * 0.01631),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
                                 formatTime(weather.date),
-                                style: TextStyle(fontSize: 12),
+                                style: TextStyle(fontSize: screenHeight * 0.01631),
                               ),
-                              SizedBox(height: 10),
+                              SizedBox(height: screenHeight * 0.01359),
                               Image.asset(
                                 getForecastWeatherIcon(weather.mainCondition),
-                                width: 50,
-                                height: 50,
-                              ), // Display Lottie animation
-                              SizedBox(height: 10),
+                                width: screenWidth * 0.13889,
+                                height: screenHeight * 0.06794,
+                              ),
+                              SizedBox(height: screenHeight * 0.01359),
                               Text(
                                 '${weather.temperature.round()} °C',
-                                style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                                style: TextStyle(
+                                  fontSize: screenHeight * 0.01631,
+                                  fontWeight: FontWeight.bold
+                                ),
                               ),
                             ],
                           ),
@@ -346,11 +358,11 @@ Widget build(BuildContext context) {
                   ),
                 ),
 
-                SizedBox(height: 10),
+                SizedBox(height: screenHeight * 0.01359),
 
                 // Display next days' forecast based on nearest forecast time
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                  padding: EdgeInsets.fromLTRB(screenWidth * 0.04445, screenHeight * 0.01631, screenWidth * 0.04445, screenHeight * 0.00816),
                   decoration: BoxDecoration(
                     color: const Color.fromARGB(255, 228, 232, 238),
                     borderRadius: BorderRadius.circular(10), // Rounded rectangle
@@ -362,18 +374,18 @@ Widget build(BuildContext context) {
                       Text(
                         'Next Days',
                         style: TextStyle(
-                          fontSize: 16,
+                          fontSize: screenHeight * 0.02174,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
 
-                      SizedBox(height: 10),
+                      SizedBox(height: screenHeight * 0.01359),
 
                       // List of weather forecast for the next days
                       Column(
                         children: nextDaysWeather.map((weather) {
                           return Container(
-                            padding: const EdgeInsets.symmetric(vertical: 8),
+                            padding: EdgeInsets.symmetric(vertical: screenHeight * 0.01087),
                             child: Column(
                               children: [
                                 Row(
@@ -381,16 +393,16 @@ Widget build(BuildContext context) {
                                   children: [
                                     Text(
                                       '${DateFormat('EEE').format(DateTime.parse(weather.date))} • ${formatTime(weather.date)}',
-                                      style: TextStyle(fontSize: 12),
+                                      style: TextStyle(fontSize: screenHeight * 0.01631),
                                     ),
                                     Image.asset(
                                       getForecastWeatherIcon(weather.mainCondition),
-                                      width: 40,
-                                      height: 40,
+                                      width: screenWidth * 0.11112,
+                                      height: screenHeight * 0.05435,
                                     ),
                                     Text(
                                       '${weather.temperature.round()} °C',
-                                      style: TextStyle(fontSize: 12),
+                                      style: TextStyle(fontSize: screenHeight * 0.01631),
                                     ),
                                   ],
                                 ),

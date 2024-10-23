@@ -6,7 +6,7 @@ class WeatherService {
   static const WEATHER_URL = 'https://api.openweathermap.org/data/2.5/weather';
   String getApiKey() {
     // API key:
-    return '';
+    return 'insert the weather API key here';
   }
 
   Future<MainWeather> getWeather(String cityName) async {

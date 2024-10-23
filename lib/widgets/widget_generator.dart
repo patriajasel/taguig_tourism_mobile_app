@@ -3,8 +3,11 @@ import 'package:flutter/material.dart';
 class GenerateWidget {
   TextField generateTextField(
       String hintText, IconData icon, TextEditingController controller,
-      {bool? obscureText}) {
+      {bool? obscureText}) 
+      {
     return TextField(
+      cursorHeight: 14,
+      cursorColor: Colors.white,
       obscureText: obscureText ?? false,
       controller: controller,
       expands: false,
@@ -48,7 +51,7 @@ class GenerateWidget {
           ),
         ),
       ),
-      style: const TextStyle(color: Colors.white), // Text color set to white
+      style: const TextStyle(color: Colors.white, fontSize: 14), // Text color set to white
     );
   }
 
@@ -85,15 +88,18 @@ class GenerateWidget {
   }
 
   InkWell generateTextLink(
-      BuildContext context, String text, String routeName, Color color) {
+    BuildContext context, String text, String routeName, Color color) {
+    double screenHeight = MediaQuery.of(context).size.height;
     return InkWell(
         child: Text(
           text,
           style: TextStyle(
               fontWeight: FontWeight.bold,
+              fontSize: screenHeight * 0.018,
               color: Colors.yellowAccent,
               decoration: TextDecoration.underline,
-              decorationColor: color),
+              decorationColor: color,
+              ),
         ),
         onTap: () {
           Navigator.pushNamed(context, routeName);
