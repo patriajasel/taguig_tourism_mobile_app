@@ -162,7 +162,7 @@ Widget build(BuildContext context) {
                             ),
                           ),
                           Text(
-                            '${DateFormat('MMMM dd, yyyy').format(DateTime.now())} ($screenWidth, $screenHeight)',
+                            DateFormat('MMMM dd, yyyy').format(DateTime.now()),
                             style: TextStyle(
                               fontSize: screenHeight * 0.01903,
                               color: Colors.black54,
@@ -208,7 +208,7 @@ Widget build(BuildContext context) {
                             ),
 
                             SizedBox(
-                              height: screenHeight * 0.01631,
+                              height: screenHeight * 0.01053,
                             ),
                           ],
                         ),
@@ -222,85 +222,88 @@ Widget build(BuildContext context) {
                 ),
                 
                 // Current more details weather forecast
-                Column (
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        // For wind speed
-                        Container(
-                          width: screenWidth * 0.15278,
-                          height: screenHeight * 0.07473,
-                          padding: EdgeInsets.all(screenHeight * 0.02174),
-                          decoration: BoxDecoration(
-                            color: const Color.fromARGB(255, 228, 232, 238),
-                            borderRadius: BorderRadius.circular(15),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.04167),
+                  child: Column (
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          // For wind speed
+                          Container(
+                            width: screenWidth * 0.15278,
+                            height: screenHeight * 0.07473,
+                            padding: EdgeInsets.all(screenHeight * 0.02174),
+                            decoration: BoxDecoration(
+                              color: const Color.fromARGB(255, 228, 232, 238),
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            child: Image.asset('lib/assets/icons/windspeed.png'),
                           ),
-                          child: Image.asset('lib/assets/icons/windspeed.png'),
-                        ),
-
-                        // For clouds
-                        Container(
-                          width: screenWidth * 0.15278,
-                          height: screenHeight * 0.07473,
-                          padding: EdgeInsets.all(screenHeight * 0.02174),
-                          decoration: BoxDecoration(
-                            color: const Color.fromARGB(255, 228, 232, 238),
-                            borderRadius: BorderRadius.circular(15),
+                  
+                          // For clouds
+                          Container(
+                            width: screenWidth * 0.15278,
+                            height: screenHeight * 0.07473,
+                            padding: EdgeInsets.all(screenHeight * 0.02174),
+                            decoration: BoxDecoration(
+                              color: const Color.fromARGB(255, 228, 232, 238),
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            child: Image.asset('lib/assets/icons/clouds.png'),
                           ),
-                          child: Image.asset('lib/assets/icons/clouds.png'),
-                        ),
-
-                        // For humidity
-                        Container(
-                          width: screenWidth * 0.15278,
-                          height: screenHeight * 0.07473,
-                          padding: EdgeInsets.all(screenHeight * 0.02174),
-                          decoration: BoxDecoration(
-                            color: const Color.fromARGB(255, 228, 232, 238),
-                            borderRadius: BorderRadius.circular(15),
+                  
+                          // For humidity
+                          Container(
+                            width: screenWidth * 0.15278,
+                            height: screenHeight * 0.07473,
+                            padding: EdgeInsets.all(screenHeight * 0.02174),
+                            decoration: BoxDecoration(
+                              color: const Color.fromARGB(255, 228, 232, 238),
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            child: Image.asset('lib/assets/icons/humidity.png'),
+                          )
+                        ],
+                      ),
+                  
+                      SizedBox(
+                        height: screenHeight * 0.0068,
+                      ),
+                  
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          SizedBox(
+                            height: screenHeight * 0.02718,
+                            width: screenWidth * 0.15278,
+                            child: Text('${_mainWeather?.windSpeed ?? '--'}km/h',
+                            style: TextStyle(fontSize: screenHeight * 0.01579),
+                            textAlign: TextAlign.center
+                            ),
                           ),
-                          child: Image.asset('lib/assets/icons/humidity.png'),
-                        )
-                      ],
-                    ),
-
-                    SizedBox(
-                      height: screenHeight * 0.0068,
-                    ),
-
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        SizedBox(
-                          height: screenHeight * 0.02718,
-                          width: screenWidth * 0.15278,
-                          child: Text('${_mainWeather?.windSpeed ?? '--'}km/h',
-                          style: TextStyle(fontSize: screenHeight * 0.01359),
-                          textAlign: TextAlign.center
+                  
+                          SizedBox(
+                            height: screenHeight * 0.02718,
+                            width: screenWidth * 0.15278,
+                            child: Text('${_mainWeather?.clouds ?? '--'}%',
+                            style: TextStyle(fontSize: screenHeight * 0.01579),
+                            textAlign: TextAlign.center
+                            ),
                           ),
-                        ),
-
-                        SizedBox(
-                          height: screenHeight * 0.02718,
-                          width: screenWidth * 0.15278,
-                          child: Text('${_mainWeather?.clouds ?? '--'}%',
-                          style: TextStyle(fontSize: screenHeight * 0.01359),
-                          textAlign: TextAlign.center
-                          ),
-                        ),
-
-                        SizedBox(
-                          height: screenHeight * 0.02718,
-                          width: screenWidth * 0.15278,
-                          child: Text('${_mainWeather?.humidity?? '--'}%',
-                          style: TextStyle(fontSize: screenHeight * 0.01359),
-                          textAlign: TextAlign.center
-                          ),
-                        )
-                      ],
-                    )
-                  ],
+                  
+                          SizedBox(
+                            height: screenHeight * 0.02718,
+                            width: screenWidth * 0.15278,
+                            child: Text('${_mainWeather?.humidity?? '--'}%',
+                            style: TextStyle(fontSize: screenHeight * 0.01579),
+                            textAlign: TextAlign.center
+                            ),
+                          )
+                        ],
+                      )
+                    ],
+                  ),
                 ),
 
                 // Display today's weather in a scrollable row

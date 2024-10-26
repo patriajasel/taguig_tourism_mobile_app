@@ -19,6 +19,7 @@ class _UserSettingsTabState extends State<UserSettingsTab> {
             const SizedBox(height: 65),
             Container(
               child: GenerateWidget().generateElevatedButton(
+                  context,
                   'Notification', // Text of the button
                   Colors.blueAccent.shade700, // Background Color
                   Colors.white,
@@ -27,6 +28,7 @@ class _UserSettingsTabState extends State<UserSettingsTab> {
             const SizedBox(height: 35),
             Container(
               child: GenerateWidget().generateElevatedButton(
+                  context,
                   'Language', // Text of the button
                   Colors.blueAccent.shade700, // Background Color
                   Colors.white, // Text Color
@@ -35,6 +37,7 @@ class _UserSettingsTabState extends State<UserSettingsTab> {
             const SizedBox(height: 35),
             Container(
               child: GenerateWidget().generateElevatedButton(
+                  context,
                   'Help and Support', // Text of the button
                   Colors.blueAccent.shade700, // Background Color
                   Colors.white,
@@ -44,6 +47,7 @@ class _UserSettingsTabState extends State<UserSettingsTab> {
             const SizedBox(height: 35),
             Container(
               child: GenerateWidget().generateElevatedButton(
+                  context,
                   'Send Feedback', // Text of the button
                   Colors.blueAccent.shade700, // Background Color
                   Colors.white, // Text Color
@@ -52,6 +56,7 @@ class _UserSettingsTabState extends State<UserSettingsTab> {
             const SizedBox(height: 35),
             Container(
               child: GenerateWidget().generateElevatedButton(
+                  context,
                   'Log out', // Text of the button
                   Colors.blueAccent.shade700, // Background Color
                   Colors.white, // Text Color

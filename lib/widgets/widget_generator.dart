@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 
 class GenerateWidget {
   TextField generateTextField(
-      String hintText, IconData icon, TextEditingController controller,
+      BuildContext context, String hintText, IconData icon, TextEditingController controller,
       {bool? obscureText}) 
       {
+      double screenWidth = MediaQuery.of(context).size.width;
     return TextField(
-      cursorHeight: 14,
+      cursorHeight: screenWidth * 0.03889,
       cursorColor: Colors.white,
       obscureText: obscureText ?? false,
       controller: controller,
@@ -16,9 +17,9 @@ class GenerateWidget {
         prefixIcon: Icon(icon, color: Colors.yellowAccent),
 
         // Label style size
-        labelStyle: const TextStyle(
+        labelStyle: TextStyle(
           color: Colors.white,
-          fontSize: 14.0,
+          fontSize: screenWidth * 0.03889,
           fontWeight: FontWeight.bold,
         ),
 
@@ -51,22 +52,23 @@ class GenerateWidget {
           ),
         ),
       ),
-      style: const TextStyle(color: Colors.white, fontSize: 14), // Text color set to white
+      style: TextStyle(color: Colors.white, fontSize: screenWidth * 0.03889), // Text color set to white
     );
   }
 
   // * This is for generating elevated button
   ElevatedButton generateElevatedButton(
-      String text, Color color, Color textColor, Function() function,
+      BuildContext context, String text, Color color, Color textColor, Function() function,
       {Icon? icon}) {
+        double screenWidth = MediaQuery.of(context).size.width;
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         backgroundColor: color, // Black background
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8), // Rounded corners
         ),
-        padding: const EdgeInsets.symmetric(
-            vertical: 15), // Adjust padding for height
+        padding: EdgeInsets.symmetric(
+            vertical: screenWidth * 0.04167), // Adjust padding for height
       ),
       onPressed: () {
         function();
@@ -76,10 +78,10 @@ class GenerateWidget {
         children: [
           if (icon != null) icon,
           Padding(
-            padding: const EdgeInsets.only(left: 5.0),
+            padding: EdgeInsets.only(left: screenWidth * 0.01389),
             child: Text(
               text,
-              style: TextStyle(color: textColor, fontSize: 14.0), // White text
+              style: TextStyle(color: textColor, fontSize: screenWidth * 0.03889), // White text
             ),
           ),
         ],
@@ -89,13 +91,13 @@ class GenerateWidget {
 
   InkWell generateTextLink(
     BuildContext context, String text, String routeName, Color color) {
-    double screenHeight = MediaQuery.of(context).size.height;
+    double screenWidth = MediaQuery.of(context).size.width;
     return InkWell(
         child: Text(
           text,
           style: TextStyle(
               fontWeight: FontWeight.bold,
-              fontSize: screenHeight * 0.018,
+              fontSize: screenWidth * 0.03889,
               color: Colors.yellowAccent,
               decoration: TextDecoration.underline,
               decorationColor: color,

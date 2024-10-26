@@ -235,7 +235,9 @@ class _UserProfileTabState extends State<UserProfileTab> {
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 100, vertical: 20),
-                child: GenerateWidget().generateElevatedButton("Sign out",
+                child: GenerateWidget().generateElevatedButton(
+                    context,
+                    "Sign out",
                     Colors.blueAccent.shade700, Colors.white, signOutButton,
                     icon: Icon(
                       Icons.logout,

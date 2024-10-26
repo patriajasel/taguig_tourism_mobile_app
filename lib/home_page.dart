@@ -49,6 +49,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
     return PopScope(
       canPop: false,
       child: Scaffold(
@@ -59,7 +60,7 @@ class _HomePageState extends State<HomePage> {
             children: [
               // This is where the user's name and profile picture is displayed
               Container(
-                height: 100,
+                height: screenWidth * 0.26389,
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: [
@@ -73,12 +74,12 @@ class _HomePageState extends State<HomePage> {
                 child: Row(
                   children: [
                     Padding(
-                      padding: EdgeInsets.all(20.0),
+                      padding: EdgeInsets.all(screenWidth * 0.05556),
                       child: CircleAvatar(
                         // ! This widget will be changed to ImageAsset once there is a function for uploading pictures
                         child: Icon(
                           Icons.person,
-                          size: 30,
+                          size: screenWidth * 0.08334,
                         ),
                       ),
                     ),
@@ -90,14 +91,14 @@ class _HomePageState extends State<HomePage> {
                           "Welcome!",
                           style: TextStyle(
                               color: Colors.white,
-                              fontSize: 18,
+                              fontSize: screenWidth * 0.05,
                               fontWeight: FontWeight.bold),
                         ),
                         Text(
                           userInfo!.firstName,
                           style: TextStyle(
                             color: Colors.white,
-                            fontSize: 16,
+                            fontSize: screenWidth * 0.04445,
                           ),
                         ),
                       ],
@@ -113,16 +114,20 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   // This is where the popular destination carousel is displayed
                   Container(
-                    margin: const EdgeInsets.symmetric(
-                        horizontal: 30, vertical: 30),
+                    margin: EdgeInsets.fromLTRB(
+                      screenWidth * 0.08334,
+                      0,
+                      screenWidth * 0.08334,
+                      screenWidth * 0.01778
+                    ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         ListTile(
-                            title: const Text(
+                            title: Text(
                               "Popular Destinations",
                               style: TextStyle(
-                                fontSize: 18,
+                                fontSize: screenWidth * 0.05,
                                 fontWeight: FontWeight.bold,
                               ),
                               textAlign: TextAlign.left,
@@ -131,7 +136,7 @@ class _HomePageState extends State<HomePage> {
                                 onPressed: () {},
                                 icon: const Icon(Icons.menu))),
                         Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: EdgeInsets.all(screenWidth * 0.02223),
                           child: CarouselSlider(
                             items: imgList
                                 .map((e) => Image.asset(
@@ -155,30 +160,30 @@ class _HomePageState extends State<HomePage> {
                       ],
                     ),
                   ),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20.0),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05556),
                     child: Divider(),
                   ),
 
                   // This is where the categories is displayed
                   Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 30),
+                    margin: EdgeInsets.symmetric(horizontal: screenWidth * 0.08334),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Padding(
-                          padding: EdgeInsets.all(8.0),
+                        Padding(
+                          padding: EdgeInsets.all(screenWidth * 0.02223),
                           child: Text(
                             "Categories",
                             style: TextStyle(
-                              fontSize: 18,
+                              fontSize: screenWidth * 0.05,
                               fontWeight: FontWeight.bold,
                             ),
                             textAlign: TextAlign.left,
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.all(5.0),
+                          padding: EdgeInsets.all(screenWidth * 0.01389),
                           child: GridView.builder(
                             shrinkWrap: true,
                             physics: const NeverScrollableScrollPhysics(),
@@ -190,7 +195,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                             itemBuilder: (context, index) {
                               return Padding(
-                                padding: const EdgeInsets.all(5),
+                                padding: EdgeInsets.all(screenWidth * 0.01389),
                                 child: Column(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
@@ -211,17 +216,17 @@ class _HomePageState extends State<HomePage> {
                                           icon: Icon(
                                             getIconForIndex(index),
                                             color: Colors.white,
-                                            size: 35, // Icon size
+                                            size: screenWidth * 0.09723, // Icon size
                                           ),
                                         ),
                                       ),
                                     ),
-                                    const SizedBox(
-                                      height: 10,
+                                    SizedBox(
+                                      height: screenWidth * 0.02778,
                                     ),
                                     Text(
                                       getTextForIndex(index),
-                                      style: const TextStyle(fontSize: 12),
+                                      style: TextStyle(fontSize: screenWidth * 0.03334),
                                     ),
                                   ],
                                 ),
@@ -232,30 +237,30 @@ class _HomePageState extends State<HomePage> {
                       ],
                     ),
                   ),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20.0),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05556),
                     child: Divider(),
                   ),
 
                   // This is where the nearby places is being displayed
                   Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 30),
+                    margin: EdgeInsets.symmetric(horizontal: screenWidth * 0.08334),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Padding(
-                          padding: EdgeInsets.all(8.0),
+                        Padding(
+                          padding: EdgeInsets.all(screenWidth * 0.02223),
                           child: Text(
                             "Nearby Places",
                             style: TextStyle(
-                              fontSize: 18,
+                              fontSize: screenWidth * 0.05,
                               fontWeight: FontWeight.bold,
                             ),
                             textAlign: TextAlign.left,
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.all(5.0),
+                          padding: EdgeInsets.all(screenWidth * 0.01389),
                           child: GridView.builder(
                             shrinkWrap: true,
                             physics: const NeverScrollableScrollPhysics(),
@@ -267,7 +272,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                             itemBuilder: (context, index) {
                               return Padding(
-                                padding: const EdgeInsets.all(5),
+                                padding: EdgeInsets.all(screenWidth * 0.01389),
                                 child: Column(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
@@ -282,8 +287,8 @@ class _HomePageState extends State<HomePage> {
                                       child: ClipRRect(
                                         borderRadius: BorderRadius.circular(15),
                                         child: SizedBox(
-                                          height: 100,
-                                          width: 200,
+                                          height: screenWidth * 0.27778,
+                                          width: screenWidth * 0.55556,
                                           child: Image.asset(
                                             nearbyList[index],
                                             fit: BoxFit.fill,
@@ -292,7 +297,7 @@ class _HomePageState extends State<HomePage> {
                                       ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.only(top: 5.0),
+                                      padding: EdgeInsets.only(top: screenWidth * 0.01389),
                                       child: Text(
                                         nearbyNames[index],
                                         style: const TextStyle(

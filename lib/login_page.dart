@@ -61,6 +61,7 @@ class _LoginPageState extends State<LoginPage> {
                           padding: EdgeInsets.symmetric(
                               horizontal: screenWidth / 15),
                           child: GenerateWidget().generateTextField(
+                              context,
                               'Username or Email',
                               Icons.person,
                               usernameController)),
@@ -72,6 +73,7 @@ class _LoginPageState extends State<LoginPage> {
                           padding: EdgeInsets.symmetric(
                               horizontal: screenWidth / 15),
                           child: GenerateWidget().generateTextField(
+                              context,
                               'Password', Icons.lock, passwordController,
                               obscureText: true)),
                       SizedBox(height: screenHeight / 50),
@@ -98,6 +100,7 @@ class _LoginPageState extends State<LoginPage> {
                         padding:
                             EdgeInsets.symmetric(horizontal: screenWidth / 15),
                         child: GenerateWidget().generateElevatedButton(
+                          context,
                           "Sign in",
                           Colors.black,
                           Colors.white,
