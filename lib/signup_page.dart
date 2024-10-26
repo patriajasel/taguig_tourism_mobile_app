@@ -32,6 +32,7 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget build(BuildContext context) {
     void getBuildContext() {}
     double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -55,7 +56,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 child: Column(
                   children: [
                     // Sign In title
-                    SizedBox(height: screenWidth * 0.13889),
+                    SizedBox(height: screenHeight * 0.0658),
                     const Text(
                       'Sign Up Form',
                       style: TextStyle(
@@ -64,7 +65,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           fontWeight: FontWeight.bold
                         ),
                     ),
-                    SizedBox(height: screenWidth * 0.08334),
+                    SizedBox(height: screenHeight * 0.03947),
 
                     // Form
                     Form(
@@ -81,7 +82,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                   firstName)),
 
                             // Width between First and Last Name
-                            SizedBox(width: screenWidth * 0.04445),
+                            SizedBox(width: screenHeight * 0.02105),
 
                             // Last Name form
                             Expanded(
@@ -94,14 +95,14 @@ class _SignUpPageState extends State<SignUpPage> {
                         ),
 
                         // Height between First and Last Name to Email form
-                        SizedBox(height: screenWidth * 0.04445),
+                        SizedBox(height: screenHeight * 0.02105),
 
                         // Email form
                         GenerateWidget().generateTextField(
                             context, "E-mail", Icons.email_outlined, email),
 
                         // Height between Email and Password form
-                        SizedBox(height: screenWidth * 0.04445),
+                        SizedBox(height: screenHeight * 0.02105),
 
                         // Password
                         GenerateWidget().generateTextField(
@@ -109,7 +110,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             obscureText: true),
 
                         // Height between Password and Confirm Password
-                        SizedBox(height: screenWidth * 0.04445),
+                        SizedBox(height: screenHeight * 0.02105),
 
                         // Confirm Password
                         GenerateWidget().generateTextField(
@@ -117,14 +118,14 @@ class _SignUpPageState extends State<SignUpPage> {
                             obscureText: true),
 
                         // Height between Email and Age form
-                        SizedBox(height: screenWidth * 0.04445),
+                        SizedBox(height: screenHeight * 0.02105),
 
                         //* Placeholder ko muna yung TextFormField para sa Age
                         GenerateWidget().generateTextField(
                             context, "Age", Icons.schedule_outlined, age),
 
                         // Height between Age and Gender form
-                        SizedBox(height: screenWidth * 0.04445),
+                        SizedBox(height: screenHeight * 0.02105),
 
                         // Gender List (Changed: Text Form to Dropdown List)
                         DropdownButtonFormField(
@@ -142,14 +143,14 @@ class _SignUpPageState extends State<SignUpPage> {
                           },
                           icon: Icon(
                             Icons.expand_circle_down_outlined,
-                            size: screenWidth * 0.06667,
+                            size: screenHeight * 0.03158,
                             color: Colors.yellowAccent,
                           ),
 
                           style: TextStyle(
                               color: Colors
                                   .white, // White text for the selected item
-                              fontSize: screenWidth * 0.03889,
+                              fontSize: screenHeight * 0.01945,
                               fontFamily: "Arvo"),
                           dropdownColor: Colors
                               .black, // Background color for the dropdown options
@@ -157,11 +158,11 @@ class _SignUpPageState extends State<SignUpPage> {
                             labelText: "Gender",
                             prefixIcon: Icon(
                               Icons.wc_outlined,
-                              size: screenWidth * 0.06667,
+                              size: screenHeight * 0.03158,
                               color: Colors.yellowAccent,
                             ),
                             labelStyle: TextStyle(
-                                fontSize: screenWidth * 0.03334,
+                                fontSize: screenHeight * 0.01579,
                                 color: Colors.white),
                             enabledBorder: OutlineInputBorder(
                               borderSide: const BorderSide(
@@ -184,7 +185,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         ),
 
                         // Height between Gender form and Create an Account button
-                        SizedBox(height: screenWidth * 0.05),
+                        SizedBox(height: screenHeight * 0.02369),
 
                         SizedBox(
                             width: screenWidth, // Set the width (adjust as needed)
@@ -196,11 +197,11 @@ class _SignUpPageState extends State<SignUpPage> {
                               signingUp)),
 
                         // Height between Create Account and Google Sign in
-                        SizedBox(height: screenWidth * 0.05),
+                        SizedBox(height: screenHeight * 0.02369),
 
                         // or Sign-up with
                         Padding(
-                          padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.02778),
+                          padding: EdgeInsets.symmetric(horizontal: screenHeight * 0.01316),
                           child: Row(
                             children: [
                               Expanded(
@@ -210,7 +211,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.02778),
+                                padding: EdgeInsets.symmetric(horizontal: screenHeight * 0.01316),
                                 child: Text(
                                   'or Sign-up with',
                                   style: TextStyle(color: Colors.white),
@@ -226,7 +227,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           ),
                         ),
 
-                        SizedBox(height: screenWidth * 0.04445),
+                        SizedBox(height: screenHeight * 0.02105),
 
                         // Google Sign In button (Modified as same as Login UI)
 
@@ -254,13 +255,13 @@ class _SignUpPageState extends State<SignUpPage> {
                               children: [
                                 Image.asset(
                                     'lib/assets/logo/button_logo/google-icon.png',
-                                    height: screenWidth * 0.06945),
+                                    height: screenHeight * 0.0329),
                                 Padding(
                                   padding: EdgeInsets.symmetric(
-                                      horizontal: screenWidth * 0.02778, vertical: screenWidth * 0.04167),
+                                      horizontal: screenHeight * 0.01316, vertical: screenHeight * 0.01974),
                                   child: Text(
                                     "Sign-In with Google",
-                                    style: TextStyle(fontSize: screenWidth * 0.03889),
+                                    style: TextStyle(fontSize: screenHeight * 0.01842),
                                   ),
                                 ),
                               ],
@@ -269,7 +270,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         ),
 
                         // Height between Google Sign in and Login button
-                        SizedBox(height: screenWidth * 0.05),
+                        SizedBox(height: screenHeight * 0.02369),
 
                         // Login button
                         Row(
@@ -279,7 +280,7 @@ class _SignUpPageState extends State<SignUpPage> {
                               'Already have an account? ',
                               style: TextStyle(
                                 color: Colors.white,
-                                fontSize: screenWidth * 0.03889
+                                fontSize: screenHeight * 0.01842
                               ),
                             ),
                             GenerateWidget().generateTextLink(
