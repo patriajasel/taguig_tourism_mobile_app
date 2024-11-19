@@ -2,11 +2,12 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:taguig_tourism_mobile_app/customer_support_page.dart';
 import 'package:taguig_tourism_mobile_app/explore_page.dart';
 import 'package:taguig_tourism_mobile_app/home_page.dart';
 import 'package:taguig_tourism_mobile_app/services/firestore_services.dart';
 import 'package:taguig_tourism_mobile_app/services/user_info.dart';
-import 'package:taguig_tourism_mobile_app/traffic_page.dart';
+import 'package:taguig_tourism_mobile_app/news_page.dart';
 import 'package:taguig_tourism_mobile_app/user_page.dart';
 import 'package:taguig_tourism_mobile_app/weather_page.dart';
 
@@ -28,7 +29,6 @@ class _AppNavigationState extends State<AppNavigation> {
   void initState() {
     _fetchUserData();
     super.initState();
-
   }
 
   void _fetchUserData() async {
@@ -47,8 +47,6 @@ class _AppNavigationState extends State<AppNavigation> {
     }
   }
 
-  
-
   @override
   Widget build(BuildContext context) {
     if (isLoading) {
@@ -66,7 +64,7 @@ class _AppNavigationState extends State<AppNavigation> {
       HomePage(
         userInformation: userInfo!,
       ),
-      const TrafficPage(),
+      const NewsPage(),
       const ExplorePage(),
       const WeatherPage(),
       UserPage(
@@ -117,7 +115,12 @@ class _AppNavigationState extends State<AppNavigation> {
                   color: Colors.yellow.shade900,
                 ),
                 alignment: Alignment.center,
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (builder) => ChatSupportPage()));
+                },
               ),
             ),
           )
@@ -146,7 +149,7 @@ class _AppNavigationState extends State<AppNavigation> {
           },
           destinations: const [
             NavigationDestination(icon: Icon(Icons.home), label: "Home"),
-            NavigationDestination(icon: Icon(Icons.traffic), label: "Traffic"),
+            NavigationDestination(icon: Icon(Icons.newspaper), label: "News"),
             NavigationDestination(icon: Icon(Icons.explore), label: "Explore"),
             NavigationDestination(icon: Icon(Icons.cloud), label: "Weather"),
             NavigationDestination(icon: Icon(Icons.person), label: "User"),

@@ -70,6 +70,7 @@ class _ExplorePageState extends State<ExplorePage> {
             initialCameraPosition: CameraPosition(target: taguigCity, zoom: 15),
             markers: marker,
             polylines: Set<Polyline>.of(polylines.values),
+            trafficEnabled: true,
             onMapCreated: (controller) {
               customInfoWindowController.googleMapController = controller;
             },
