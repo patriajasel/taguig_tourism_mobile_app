@@ -114,12 +114,8 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   // This is where the popular destination carousel is displayed
                   Container(
-                    margin: EdgeInsets.fromLTRB(
-                      screenHeight * 0.03948,
-                      0,
-                      screenHeight * 0.03948,
-                      screenHeight * 0.01316
-                    ),
+                    margin: EdgeInsets.fromLTRB(screenHeight * 0.03948, 0,
+                        screenHeight * 0.03948, screenHeight * 0.01316),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -161,13 +157,15 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: screenHeight * 0.02632),
+                    padding: EdgeInsets.symmetric(
+                        horizontal: screenHeight * 0.02632),
                     child: Divider(),
                   ),
 
                   // This is where the categories is displayed
                   Container(
-                    margin: EdgeInsets.symmetric(horizontal: screenHeight * 0.03948),
+                    margin: EdgeInsets.symmetric(
+                        horizontal: screenHeight * 0.03948),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -216,7 +214,8 @@ class _HomePageState extends State<HomePage> {
                                           icon: Icon(
                                             getIconForIndex(index),
                                             color: Colors.white,
-                                            size: screenHeight * 0.03948, // Icon size
+                                            size: screenHeight *
+                                                0.03948, // Icon size
                                           ),
                                         ),
                                       ),
@@ -226,7 +225,8 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                     Text(
                                       getTextForIndex(index),
-                                      style: TextStyle(fontSize: screenHeight * 0.01579),
+                                      style: TextStyle(
+                                          fontSize: screenHeight * 0.01579),
                                     ),
                                   ],
                                 ),
@@ -238,13 +238,15 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: screenHeight * 0.02632),
+                    padding: EdgeInsets.symmetric(
+                        horizontal: screenHeight * 0.02632),
                     child: Divider(),
                   ),
 
                   // This is where the nearby places is being displayed
                   Container(
-                    margin: EdgeInsets.symmetric(horizontal: screenHeight * 0.03948),
+                    margin: EdgeInsets.symmetric(
+                        horizontal: screenHeight * 0.03948),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -297,7 +299,8 @@ class _HomePageState extends State<HomePage> {
                                       ),
                                     ),
                                     Padding(
-                                      padding: EdgeInsets.only(top: screenHeight * 0.00658),
+                                      padding: EdgeInsets.only(
+                                          top: screenHeight * 0.00658),
                                       child: Text(
                                         nearbyNames[index],
                                         style: const TextStyle(
