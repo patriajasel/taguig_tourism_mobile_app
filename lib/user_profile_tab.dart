@@ -22,14 +22,15 @@ class _UserProfileTabState extends State<UserProfileTab> {
 
   @override
   Widget build(BuildContext context) {
+    double screenHeight = MediaQuery.of(context).size.height;
     return SingleChildScrollView(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-            margin: const EdgeInsets.all(10.0),
-            height: 120,
-            width: 120,
+            margin: EdgeInsets.all(screenHeight * 0.01315),
+            height: screenHeight * 0.15789,
+            width: screenHeight * 0.15789,
             decoration: BoxDecoration(
                 gradient: LinearGradient(colors: [
                   Colors.blueAccent.shade700,
@@ -38,7 +39,7 @@ class _UserProfileTabState extends State<UserProfileTab> {
                 shape: BoxShape.circle),
             child: Padding(
               // This padding will be the border size
-              padding: const EdgeInsets.all(3.0),
+              padding: EdgeInsets.all(screenHeight * 0.00394),
               child: Container(
                 decoration: const BoxDecoration(
                     color: Colors.white, shape: BoxShape.circle),
@@ -51,53 +52,61 @@ class _UserProfileTabState extends State<UserProfileTab> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(bottom: 5),
+            padding: EdgeInsets.only(bottom: screenHeight * 0.00657),
             child: Text(
               "${userInfo?.firstName} ${userInfo?.lastName}",
               style: TextStyle(
-                  fontSize: 20, fontWeight: FontWeight.bold, letterSpacing: 2),
+                fontSize: screenHeight * 0.01578,
+                fontWeight: FontWeight.bold,
+                letterSpacing: 2
+              ),
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(bottom: 5.0),
+            padding: EdgeInsets.only(bottom: screenHeight * 0.00657),
             child: Text(
               userInfo!.email,
-              style: TextStyle(fontSize: 14),
+              style: TextStyle(fontSize: screenHeight * 0.01842),
             ),
           ),
           Column(
             children: [
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 10.0),
+                padding: EdgeInsets.symmetric(
+                  horizontal: screenHeight * 0.03289,
+                  vertical: screenHeight * 0.01315
+                ),
                 width: double.infinity,
                 child: Card(
                   color: Colors.blueAccent.shade100,
                   child: Column(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(20, 20, 20, 10),
+                        padding: EdgeInsets.fromLTRB(
+                          screenHeight * 0.02631,
+                          screenHeight * 0.02631,
+                          screenHeight * 0.02631,
+                          screenHeight * 0.01315),
                         child: Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                             color: Colors.white,
                           ),
-                          height: 40, 
+                          height: screenHeight * 0.05263, 
                           width: double.infinity,
-                          padding: EdgeInsets.symmetric(horizontal: 15),
+                          padding: EdgeInsets.symmetric(horizontal: screenHeight * 0.01973),
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment
-                                .spaceBetween, 
-                            crossAxisAlignment:
-                                CrossAxisAlignment.center, 
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween, 
+                            crossAxisAlignment: CrossAxisAlignment.center, 
                             children: [
                               Text(
                                 "Age",
-                                style: TextStyle(fontSize: 14),
+                                style: TextStyle(fontSize: screenHeight * 0.01842),
                               ),
                               Text(
                                 userInfo!.age.toString(),
                                 style: TextStyle(
-                                  fontSize: 12,
+                                  fontSize: screenHeight * 0.01578,
                                   color: Colors.grey.shade700,
                                 ),
                               ),
@@ -106,29 +115,32 @@ class _UserProfileTabState extends State<UserProfileTab> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(20, 10, 20, 20),
+                        padding: EdgeInsets.fromLTRB(
+                          screenHeight * 0.02631,
+                          screenHeight * 0.01315,
+                          screenHeight * 0.02631,
+                          screenHeight * 0.02631
+                        ),
                         child: Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                             color: Colors.white,
                           ),
-                          height: 40, 
+                          height: screenHeight * 0.05263, 
                           width: double.infinity,
-                          padding: EdgeInsets.symmetric(horizontal: 15),
+                          padding: EdgeInsets.symmetric(horizontal: screenHeight * 0.01973),
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment
-                                .spaceBetween, 
-                            crossAxisAlignment:
-                                CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween, 
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Text(
                                 "Gender",
-                                style: TextStyle(fontSize: 14),
+                                style: TextStyle(fontSize: screenHeight * 0.01842),
                               ),
                               Text(
                                 userInfo!.gender,
                                 style: TextStyle(
-                                  fontSize: 12,
+                                  fontSize: screenHeight * 0.01578,
                                   color: Colors.grey.shade700,
                                 ),
                               ),
@@ -141,31 +153,34 @@ class _UserProfileTabState extends State<UserProfileTab> {
                 ),
               ),
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 25.0),
+                padding: EdgeInsets.symmetric(horizontal: screenHeight * 0.03289),
                 width: double.infinity,
                 child: Card(
                   color: Colors.blueAccent.shade100,
                   child: Column(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(20, 20, 20, 10),
+                        padding: EdgeInsets.fromLTRB(
+                          screenHeight * 0.02631,
+                          screenHeight * 0.02631,
+                          screenHeight * 0.02631,
+                          screenHeight * 0.01315
+                        ),
                         child: Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                             color: Colors.white,
                           ),
-                          height: 40, // Adjust height as needed
+                          height: screenHeight * 0.05263, // Adjust height as needed
                           width: double.infinity,
-                          padding: EdgeInsets.symmetric(horizontal: 15),
+                          padding: EdgeInsets.symmetric(horizontal: screenHeight * 0.01973),
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment
-                                .spaceBetween, // Space between leading and trailing
-                            crossAxisAlignment:
-                                CrossAxisAlignment.center, // Center vertically
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween, // Space between leading and trailing
+                            crossAxisAlignment: CrossAxisAlignment.center, // Center vertically
                             children: [
                               Text(
                                 "Change Email Address",
-                                style: TextStyle(fontSize: 14),
+                                style: TextStyle(fontSize: screenHeight * 0.01842),
                               ),
                               IconButton(
                                   onPressed: () {},
@@ -175,24 +190,27 @@ class _UserProfileTabState extends State<UserProfileTab> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                        padding: EdgeInsets.fromLTRB(
+                          screenHeight * 0.02631,
+                          screenHeight * 0.01315,
+                          screenHeight * 0.02631,
+                          screenHeight * 0.01315
+                        ),
                         child: Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                             color: Colors.white,
                           ),
-                          height: 40, // Adjust height as needed
+                          height: screenHeight * 0.05263, // Adjust height as needed
                           width: double.infinity,
-                          padding: EdgeInsets.symmetric(horizontal: 15),
+                          padding: EdgeInsets.symmetric(horizontal: screenHeight * 0.01973),
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment
-                                .spaceBetween, // Space between leading and trailing
-                            crossAxisAlignment:
-                                CrossAxisAlignment.center, // Center vertically
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween, // Space between leading and trailing
+                            crossAxisAlignment: CrossAxisAlignment.center, // Center vertically
                             children: [
                               Text(
                                 "Change Password",
-                                style: TextStyle(fontSize: 14),
+                                style: TextStyle(fontSize: screenHeight * 0.01842),
                               ),
                               IconButton(
                                   onPressed: () {},
@@ -202,15 +220,19 @@ class _UserProfileTabState extends State<UserProfileTab> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(20, 10, 20, 20),
+                        padding: EdgeInsets.fromLTRB(
+                          screenHeight * 0.02631,
+                          screenHeight * 0.01315, 
+                          screenHeight * 0.02631,
+                          screenHeight * 0.02631),
                         child: Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                             color: Colors.white,
                           ),
-                          height: 40, // Adjust height as needed
+                          height: screenHeight * 0.05263, // Adjust height as needed
                           width: double.infinity,
-                          padding: EdgeInsets.symmetric(horizontal: 15),
+                          padding: EdgeInsets.symmetric(horizontal: screenHeight * 0.01973),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment
                                 .spaceBetween, // Space between leading and trailing
@@ -219,7 +241,7 @@ class _UserProfileTabState extends State<UserProfileTab> {
                             children: [
                               Text(
                                 "Change Mobile Number",
-                                style: TextStyle(fontSize: 14),
+                                style: TextStyle(fontSize: screenHeight * 0.01842),
                               ),
                               IconButton(
                                   onPressed: () {},
@@ -233,8 +255,10 @@ class _UserProfileTabState extends State<UserProfileTab> {
                 ),
               ),
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 100, vertical: 20),
+                padding: EdgeInsets.symmetric(
+                  horizontal: screenHeight * 0.13157,
+                  vertical: screenHeight * 0.02631
+                ),
                 child: GenerateWidget().generateElevatedButton(
                     context,
                     "Sign out",

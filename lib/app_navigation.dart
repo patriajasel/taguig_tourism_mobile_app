@@ -51,6 +51,8 @@ class _AppNavigationState extends State<AppNavigation> {
 
   @override
   Widget build(BuildContext context) {
+    double screenHeight = MediaQuery.of(context).size.height;
+
     if (isLoading) {
       return Center(child: CircularProgressIndicator());
     }
@@ -89,26 +91,26 @@ class _AppNavigationState extends State<AppNavigation> {
           ),
         ),
         leading: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: EdgeInsets.all(screenHeight * 0.01),
           child: Image.asset(
             "lib/assets/logo/app_logo/city_of_taguig_logo.png",
             fit: BoxFit.fill,
-            height: 50,
-            width: 50,
+            height: screenHeight * 0.0625,
+            width: screenHeight * 0.0625,
           ),
         ),
         title: CupertinoSearchTextField(
           controller: searchController,
           backgroundColor: Colors.white,
-          style: const TextStyle(
+          style: TextStyle(
             fontFamily: "Arvo",
-            fontSize: 16,
+            fontSize: screenHeight * 0.02,
             letterSpacing: 1,
           ),
         ),
         actions: [
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: EdgeInsets.all(screenHeight * 0.01),
             child: CircleAvatar(
               backgroundColor: Colors.white,
               child: IconButton(
@@ -129,8 +131,8 @@ class _AppNavigationState extends State<AppNavigation> {
             backgroundColor: Colors.redAccent.shade700,
             indicatorColor: Colors.redAccent.shade100,
             labelTextStyle: WidgetStateProperty.all(
-              const TextStyle(
-                  color: Colors.white, fontFamily: "Arvo", fontSize: 12.0),
+              TextStyle(
+                  color: Colors.white, fontFamily: "Arvo", fontSize: screenHeight * 0.015),
             ),
             iconTheme: WidgetStateProperty.all(
               const IconThemeData(color: Colors.white),

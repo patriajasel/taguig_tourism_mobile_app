@@ -3,7 +3,6 @@ import 'package:taguig_tourism_mobile_app/services/user_info.dart';
 import 'package:taguig_tourism_mobile_app/user_history_tab.dart';
 import 'package:taguig_tourism_mobile_app/user_profile_tab.dart';
 import 'package:taguig_tourism_mobile_app/user_settings_tab.dart';
-import 'util/constants/sizes.dart';
 
 class UserPage extends StatefulWidget {
   final UserInformation userInformation;
@@ -24,6 +23,7 @@ class _UserPageState extends State<UserPage> {
 
   @override
   Widget build(BuildContext context) {
+    double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       body: Column(
         children: [
@@ -33,27 +33,27 @@ class _UserPageState extends State<UserPage> {
               child: Column(
                 children: [
                   TabBar(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    labelStyle: const TextStyle(
+                    padding: EdgeInsets.symmetric(horizontal: screenHeight * 0.01315),
+                    labelStyle: TextStyle(
                       fontFamily: 'Arvo',
-                      fontSize: Sizes.fontSizeSm,
+                      fontSize: screenHeight * 0.01578,
                     ),
                     isScrollable: false,
                     labelColor: Colors.white,
                     indicatorSize: TabBarIndicatorSize.tab,
                     indicatorColor: Colors.redAccent,
-                    indicatorPadding: const EdgeInsets.symmetric(
-                        horizontal: 15, vertical: 10),
+                    indicatorPadding: EdgeInsets.symmetric(
+                      horizontal: screenHeight * 0.01973,
+                      vertical: screenHeight * 0.013157
+                    ),
                     indicator: BoxDecoration(
                       color: Colors.blueAccent,
                       borderRadius: BorderRadius.circular(5),
                     ),
-                    tabs: const [
-                      Tab(text: 'Profile', icon: Icon(Icons.person, size: 25)),
-                      Tab(text: 'History', icon: Icon(Icons.history, size: 25)),
-                      Tab(
-                          text: 'Settings',
-                          icon: Icon(Icons.settings, size: 25)),
+                    tabs: [
+                      Tab(text: 'Profile', icon: Icon(Icons.person, size: screenHeight * 0.03289)),
+                      Tab(text: 'History', icon: Icon(Icons.history, size: screenHeight * 0.03289)),
+                      Tab(text: 'Settings', icon: Icon(Icons.settings, size: screenHeight * 0.03289)),
                     ],
                   ),
                   Expanded(

@@ -95,7 +95,7 @@ class _HomePageState extends State<HomePage> {
                               fontWeight: FontWeight.bold),
                         ),
                         Text(
-                          '${userInfo!.firstName} ($screenHeight)',
+                          userInfo!.firstName,
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: screenHeight * 0.02105,
