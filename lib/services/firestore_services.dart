@@ -73,6 +73,44 @@ class FirestoreServices {
     return null;
   }
 
+  Future<List<List<ExploreDestinations>>?> getPlacesForNearby(
+      List<String> collectionNames) async {
+    try {
+      for (var collectionName in collectionNames) {
+        CollectionReference collectionReference =
+            FirebaseFirestore.instance.collection(collectionName);
+
+        QuerySnapshot querySnapshot = await collectionReference.get();
+
+        List<ExploreDestinations> destinationList = [];
+
+        List<List<ExploreDestinations>> collectionList = [];
+
+        for (var doc in querySnapshot.docs) {
+          try {
+            DocumentSnapshot documentSnapshot =
+                await collectionReference.doc(doc.id).get();
+
+            var data = documentSnapshot.data() as Map<String, dynamic>;
+
+            if (data.isNotEmpty) {
+              destinationList.add(ExploreDestinations.fromSnapshot(data));
+            }
+          } catch (e) {
+            print("Error processing document ${doc.id}: $e");
+          }
+        }
+
+        collectionList.add(destinationList);
+        return collectionList.isNotEmpty ? collectionList : null;
+      }
+    } catch (e) {
+      print("Error fetching data from Firestore: $e");
+    }
+
+    return null;
+  }
+
   // Function to get the image download URL
   Future<String> getImageUrl(String imagePath) async {
     print("imagePath URL: $imagePath");
@@ -81,5 +119,28 @@ class FirestoreServices {
 
     print("Download URL: $downloadURL");
     return downloadURL;
+  }
+
+  Future<List<Map<String, dynamic>>> getCommuteGuideCollection(
+      String baranggay, String destination) async {
+    try {
+      CollectionReference collection =
+          FirebaseFirestore.instance.collection("commute guide");
+
+      QuerySnapshot querySnapshot = await collection
+          .where("destination", isEqualTo: destination)
+          .where("baranggays", arrayContains: baranggay)
+          .get();
+
+      List<Map<String, dynamic>> data = querySnapshot.docs.map((doc) {
+        return doc.data() as Map<String, dynamic>;
+      }).toList();
+
+      print("Collection captured: $data");
+      return data;
+    } catch (e) {
+      print("Error: $e"); // Log errors for debugging
+      return [];
+    }
   }
 }

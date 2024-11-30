@@ -38,18 +38,18 @@ class _LoginPageState extends State<LoginPage> {
                 Expanded(
                   child: Column(
                     children: [
-                      SizedBox(height: screenHeight / 20),
+                      SizedBox(height: screenHeight / 50),
                       Image.asset(
-                        "lib/assets/logo/app_logo/city_of_taguig_logo.png",
+                        "lib/assets/logo/app_logo/GoTaguig_Logo.png",
                         fit: BoxFit.fill,
-                        height: 150,
-                        width: 150,
+                        height: 250,
+                        width: 250,
                       ),
-                      SizedBox(height: screenHeight / 20),
+                      SizedBox(height: screenHeight / 50),
 
                       // Welcome to tourism app
                       const Text(
-                        'Welcome to Taguig On-The-Go App!',
+                        'Welcome to GoTaguig App!',
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 18,
@@ -72,8 +72,7 @@ class _LoginPageState extends State<LoginPage> {
                       Padding(
                           padding: EdgeInsets.symmetric(
                               horizontal: screenWidth / 15),
-                          child: GenerateWidget().generateTextField(
-                              context,
+                          child: GenerateWidget().generateTextField(context,
                               'Password', Icons.lock, passwordController,
                               obscureText: true)),
                       SizedBox(height: screenHeight / 50),

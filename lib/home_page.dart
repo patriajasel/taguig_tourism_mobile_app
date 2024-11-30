@@ -2,7 +2,10 @@
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:taguig_tourism_mobile_app/categories_page.dart';
+import 'package:taguig_tourism_mobile_app/services/explore_info.dart';
+import 'package:taguig_tourism_mobile_app/services/firestore_services.dart';
 import 'package:taguig_tourism_mobile_app/services/user_info.dart';
 
 class HomePage extends StatefulWidget {
@@ -36,20 +39,45 @@ class _HomePageState extends State<HomePage> {
     'Market Market',
   ];
 
+  final List<String> collectionList = ["churches", "police", "hospitals"];
+
   int currentSlide = 0;
 
-  UserInformation?
-      userInfo; // Storing the user's details here from the database
+  UserInformation? userInfo;
+
+  List<List<ExploreDestinations>> nearbyCollection = [];
+  List<LatLng> placesLatLng = [];
 
   @override
   void initState() {
     userInfo = widget.userInformation;
+    getNearbyCollection();
     super.initState();
+  }
+
+  Future<void> getNearbyCollection() async {
+    List<List<ExploreDestinations>>? collection =
+        await FirestoreServices().getPlacesForNearby(collectionList);
+
+    nearbyCollection = collection!;
+
+    for (var col in collection) {
+      for (var c in col) {
+        setState(() {
+          placesLatLng.add(c.siteLatLng);
+        });
+      }
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
+
+    for (var latlng in placesLatLng) {
+      print(latlng);
+    }
+
     return PopScope(
       canPop: false,
       child: Scaffold(
