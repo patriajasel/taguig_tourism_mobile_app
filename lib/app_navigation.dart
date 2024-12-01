@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:taguig_tourism_mobile_app/customer_support_page.dart';
 import 'package:taguig_tourism_mobile_app/explore_page.dart';
 import 'package:taguig_tourism_mobile_app/home_page.dart';
-import 'package:taguig_tourism_mobile_app/nearby_destination_page.dart';
 import 'package:taguig_tourism_mobile_app/services/firestore_services.dart';
 import 'package:taguig_tourism_mobile_app/services/user_info.dart';
 import 'package:taguig_tourism_mobile_app/commute_page.dart';

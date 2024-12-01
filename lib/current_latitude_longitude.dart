@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:geolocator/geolocator.dart';
-import 'news_page_single_page.dart';
 
 class NearbyDestinationPage extends StatefulWidget {
   const NearbyDestinationPage({super.key});
@@ -25,25 +24,6 @@ class _NearbyDestinationPageState extends State<NearbyDestinationPage> {
   Future<void> _checkLocationPermission() async {
     PermissionStatus permission = await Permission.locationWhenInUse.status;
 
-    // if (permission.isGranted) {
-    //   _getCurrentLocation();
-    // } else {
-    //   // Request location permission
-    //   permission = await Permission.locationWhenInUse.request();
-
-    //   if (permission.isGranted) {
-    //     _getCurrentLocation();
-    //   } else if (permission.isDenied) {
-    //     setState(() {
-    //       _locationMessage = "Location permission denied";
-    //     });
-    //   } else if (permission.isPermanentlyDenied) {
-    //     setState(() {
-    //       _locationMessage = "Permission permanently denied. Open settings to enable.";
-    //     });
-    //     await openAppSettings();
-    //   }
-    // }
     if (permission.isDenied) {
       permission = await Permission.locationWhenInUse.request();
     } else if (permission.isGranted) {
@@ -132,69 +112,6 @@ class _NearbyDestinationPageState extends State<NearbyDestinationPage> {
               style: const TextStyle(fontSize: 18),
             ),
             const SizedBox(height: 20),
-            
-            ListView.builder(
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              itemCount: 10,
-              itemBuilder: (context, index) {
-                return Card(
-                  margin: EdgeInsets.symmetric(
-                    vertical: screenHeight * 0.01,
-                    horizontal: screenHeight * 0.0125
-                  ),
-                  elevation: 1,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(screenHeight * 0.0125),
-                  ),
-                  child: Container(
-                    padding: EdgeInsets.all(screenHeight * 0.0125),
-                    child: Row(
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(15.0),
-                          child: Image.asset(
-                            'lib/assets/images/taguig_image1.png',
-                            width: screenHeight * 0.125,
-                            height: screenHeight * 0.125,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-      
-                        SizedBox(width: screenHeight * 0.0125),
-      
-                        Expanded(
-                          child: ListTile(
-                            title: Text(
-                              "Your Text Here That Might Be Too Long",
-                              style: TextStyle(
-                                fontSize: screenHeight * 0.0175,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            subtitle: Padding(
-                              padding: EdgeInsets.symmetric(vertical: screenHeight * 0.0125),
-                              child: Text(
-                                "May 28, 2022",
-                                style: TextStyle(fontSize: screenHeight * 0.015),
-                              ),
-                            ),
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (builder) => SingleNewsPage(),
-                                ),
-                              );
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                );
-              },
-            ),
           ],
         ),
       ),
