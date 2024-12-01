@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:taguig_tourism_mobile_app/categories_page.dart';
 import 'package:taguig_tourism_mobile_app/models/events.dart';
 import 'package:taguig_tourism_mobile_app/news_page_single_page.dart';
+import 'package:taguig_tourism_mobile_app/services/explore_info.dart';
 import 'package:taguig_tourism_mobile_app/services/firestore_services.dart';
 import 'package:taguig_tourism_mobile_app/services/user_info.dart';
 
@@ -39,6 +40,11 @@ class _HomePageState extends State<HomePage> {
     'Market Market',
   ];
 
+  final List<String> newcollectionList = [
+    "tourist spots",
+    "malls",
+  ];
+
   int currentSlide = 0;
 
   UserInformation? userInfo;
@@ -50,6 +56,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     userInfo = widget.userInformation;
     getAllEvents();
+    getPopularPlaceCollection();
     super.initState();
   }
 
@@ -76,6 +83,20 @@ class _HomePageState extends State<HomePage> {
         eventList = events;
         imageDirectory = imageUrls; // Populate imageDirectory
       });
+    }
+  }
+
+  Future<void> getPopularPlaceCollection() async {
+    // Fetch from the new touristMallsList (tourist spots and malls)
+    for (var collectionName in newcollectionList) {
+      List<ExploreDestinations>? popularPlaces =
+          await FirestoreServices().getPopularPlaces(collectionName);
+      print("pst pogi sige na$popularPlaces");
+      if (popularPlaces != null) {
+        for (var popular in popularPlaces) {
+          print('Popular Places for $popular');
+        }
+      }
     }
   }
 
@@ -429,7 +450,9 @@ class _HomePageState extends State<HomePage> {
                                             context,
                                             MaterialPageRoute(
                                               builder: (builder) =>
-                                                  SingleEventPage(event: eventList[index],),
+                                                  SingleEventPage(
+                                                event: eventList[index],
+                                              ),
                                             ),
                                           );
                                         },

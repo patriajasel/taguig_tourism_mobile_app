@@ -75,46 +75,45 @@ class FirestoreServices {
   }
 
   Future<List<List<ExploreDestinations>>?> getPlacesForNearby(
-    List<String> collectionNames) async {
-  try {
-    List<List<ExploreDestinations>> collectionList = [];
+      List<String> collectionNames) async {
+    try {
+      List<List<ExploreDestinations>> collectionList = [];
 
-    for (var collectionName in collectionNames) {
-      CollectionReference collectionReference =
-          FirebaseFirestore.instance.collection(collectionName);
+      for (var collectionName in collectionNames) {
+        CollectionReference collectionReference =
+            FirebaseFirestore.instance.collection(collectionName);
 
-      QuerySnapshot querySnapshot = await collectionReference.get();
+        QuerySnapshot querySnapshot = await collectionReference.get();
 
-      List<ExploreDestinations> destinationList = [];
+        List<ExploreDestinations> destinationList = [];
 
-      for (var doc in querySnapshot.docs) {
-        try {
-          DocumentSnapshot documentSnapshot =
-              await collectionReference.doc(doc.id).get();
+        for (var doc in querySnapshot.docs) {
+          try {
+            DocumentSnapshot documentSnapshot =
+                await collectionReference.doc(doc.id).get();
 
-          var data = documentSnapshot.data() as Map<String, dynamic>;
+            var data = documentSnapshot.data() as Map<String, dynamic>;
 
-          if (data.isNotEmpty) {
-            destinationList.add(ExploreDestinations.fromSnapshot(data));
+            if (data.isNotEmpty) {
+              destinationList.add(ExploreDestinations.fromSnapshot(data));
+            }
+          } catch (e) {
+            print("Error processing document ${doc.id}: $e");
           }
-        } catch (e) {
-          print("Error processing document ${doc.id}: $e");
+        }
+
+        // Add each collection's destination list to the collectionList
+        if (destinationList.isNotEmpty) {
+          collectionList.add(destinationList);
         }
       }
 
-      // Add each collection's destination list to the collectionList
-      if (destinationList.isNotEmpty) {
-        collectionList.add(destinationList);
-      }
+      return collectionList.isNotEmpty ? collectionList : null;
+    } catch (e) {
+      print("Error fetching data from Firestore: $e");
+      return null;
     }
-
-    return collectionList.isNotEmpty ? collectionList : null;
-  } catch (e) {
-    print("Error fetching data from Firestore: $e");
-    return null;
   }
-}
-
 
   // Function to get the image download URL
   Future<String> getImageUrl(String imagePath) async {
@@ -177,5 +176,39 @@ class FirestoreServices {
       print("Error fetching data from Firestore: $e");
     }
     return null;
+  }
+
+  Future<List<ExploreDestinations>?> getPopularPlaces(
+      String collectionName) async {
+    try {
+      CollectionReference collection =
+          FirebaseFirestore.instance.collection(collectionName);
+      QuerySnapshot querySnapshot =
+          await collection.where("site_popular", isEqualTo: true).get();
+      print("collection: $collection");
+      print("collection: $querySnapshot");
+
+      List<ExploreDestinations> datalist = [];
+
+      for (var doc in querySnapshot.docs) {
+        try {
+          DocumentSnapshot documentSnapshot =
+              await collection.doc(doc.id).get();
+
+          var data = documentSnapshot.data() as Map<String, dynamic>;
+
+          if (data.isNotEmpty) {
+            datalist.add(ExploreDestinations.fromSnapshot(data));
+          }
+        } catch (e) {
+          print("Error processing document ${doc.id}: $e");
+        }
+      }
+      print("collection: $datalist");
+      return datalist.isNotEmpty ? datalist : null;
+    } catch (e) {
+      print("Error: $e"); // Log errors for debugging
+      return [];
+    }
   }
 }
