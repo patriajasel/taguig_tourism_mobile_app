@@ -8,7 +8,7 @@ import 'package:taguig_tourism_mobile_app/home_page.dart';
 import 'package:taguig_tourism_mobile_app/nearby_destination_page.dart';
 import 'package:taguig_tourism_mobile_app/services/firestore_services.dart';
 import 'package:taguig_tourism_mobile_app/services/user_info.dart';
-import 'package:taguig_tourism_mobile_app/news_page.dart';
+import 'package:taguig_tourism_mobile_app/commute_page.dart';
 import 'package:taguig_tourism_mobile_app/user_page.dart';
 import 'package:taguig_tourism_mobile_app/weather_page.dart';
 
@@ -30,7 +30,7 @@ class _AppNavigationState extends State<AppNavigation> {
   void initState() {
     _fetchUserData();
     super.initState();
-    NewsPage();
+    CommutePage();
   }
 
   void _fetchUserData() async {
@@ -68,7 +68,7 @@ class _AppNavigationState extends State<AppNavigation> {
       HomePage(
         userInformation: userInfo!,
       ),
-      const NearbyDestinationPage(),
+      const CommutePage(),
       const ExplorePage(),
       const WeatherPage(),
       UserPage(
@@ -93,7 +93,7 @@ class _AppNavigationState extends State<AppNavigation> {
         leading: Padding(
           padding: EdgeInsets.all(screenHeight * 0.01),
           child: Image.asset(
-            "lib/assets/logo/app_logo/city_of_taguig_logo.png",
+            "lib/assets/logo/app_logo/GoTaguig_Logo.png",
             fit: BoxFit.fill,
             height: screenHeight * 0.0625,
             width: screenHeight * 0.0625,
@@ -153,7 +153,7 @@ class _AppNavigationState extends State<AppNavigation> {
           },
           destinations: const [
             NavigationDestination(icon: Icon(Icons.home), label: "Home"),
-            NavigationDestination(icon: Icon(Icons.navigation), label: "Navigation"),
+            NavigationDestination(icon: Icon(Icons.newspaper), label: "News"),
             NavigationDestination(icon: Icon(Icons.explore), label: "Explore"),
             NavigationDestination(icon: Icon(Icons.cloud), label: "Weather"),
             NavigationDestination(icon: Icon(Icons.person), label: "User"),
