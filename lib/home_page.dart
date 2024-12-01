@@ -3,6 +3,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:taguig_tourism_mobile_app/categories_page.dart';
+import 'package:taguig_tourism_mobile_app/individual_place_page.dart';
 import 'package:taguig_tourism_mobile_app/models/events.dart';
 import 'package:taguig_tourism_mobile_app/news_page_single_page.dart';
 import 'package:taguig_tourism_mobile_app/services/explore_info.dart';
@@ -45,6 +46,9 @@ class _HomePageState extends State<HomePage> {
     "malls",
   ];
 
+  List<ExploreDestinations> popularDestinations = [];
+  List<String> popularURL = [];
+
   int currentSlide = 0;
 
   UserInformation? userInfo;
@@ -57,6 +61,7 @@ class _HomePageState extends State<HomePage> {
     userInfo = widget.userInformation;
     getAllEvents();
     getPopularPlaceCollection();
+
     super.initState();
   }
 
@@ -91,10 +96,15 @@ class _HomePageState extends State<HomePage> {
     for (var collectionName in newcollectionList) {
       List<ExploreDestinations>? popularPlaces =
           await FirestoreServices().getPopularPlaces(collectionName);
-      print("pst pogi sige na$popularPlaces");
       if (popularPlaces != null) {
         for (var popular in popularPlaces) {
-          print('Popular Places for $popular');
+          String imageURL =
+              await FirestoreServices().getImageUrl(popular.siteBanner);
+
+          setState(() {
+            popularDestinations.add(popular);
+            popularURL.add(imageURL);
+          });
         }
       }
     }
@@ -188,10 +198,49 @@ class _HomePageState extends State<HomePage> {
                         Padding(
                           padding: EdgeInsets.all(screenHeight * 0.01053),
                           child: CarouselSlider(
-                            items: imgList
-                                .map((e) => Image.asset(
-                                      e,
-                                      fit: BoxFit.fill,
+                            items: popularURL
+                                .map((e) => GestureDetector(
+                                      onTap: () {
+                                        int index = popularURL.indexOf(e);
+                                        if (index >= 0 &&
+                                            index <
+                                                popularDestinations.length) {
+                                          
+
+                                          Navigator.push(context,
+                                              MaterialPageRoute(
+                                            builder: (context) {
+                                              return IndividualPlacePage(
+                                                  banner: popularURL[index],
+                                                  name: popularDestinations[
+                                                          index]
+                                                      .siteName,
+                                                  address: popularDestinations[
+                                                          index]
+                                                      .siteAddress,
+                                                  info:
+                                                      popularDestinations[index]
+                                                          .siteInfo,
+                                                  contact:
+                                                      popularDestinations[index]
+                                                          .siteContact,
+                                                  links:
+                                                      popularDestinations[index]
+                                                          .siteLinks,
+                                                  latitude:
+                                                      popularDestinations[index]
+                                                          .siteLatitude,
+                                                  longitude:
+                                                      popularDestinations[index]
+                                                          .siteLongitude);
+                                            },
+                                          ));
+                                        }
+                                      },
+                                      child: Image.network(
+                                        e,
+                                        fit: BoxFit.fill,
+                                      ),
                                     ))
                                 .toList(),
                             options: CarouselOptions(

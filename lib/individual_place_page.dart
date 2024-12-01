@@ -46,7 +46,6 @@ class _IndividualPlacePageState extends State<IndividualPlacePage> {
 
   @override
   Widget build(BuildContext context) {
-    print("Links: ${widget.links}");
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
