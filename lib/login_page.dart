@@ -12,6 +12,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
+  final ValueNotifier<bool> obscureNotifier = ValueNotifier<bool>(true);
 
   @override
   Widget build(BuildContext context) {
@@ -73,9 +74,13 @@ class _LoginPageState extends State<LoginPage> {
                           padding: EdgeInsets.symmetric(
                               horizontal: screenWidth / 15),
                           child: GenerateWidget().generateTextField(
-                              context,
-                              'Password', Icons.lock, passwordController,
-                              obscureText: true)),
+                          context,
+                          'Password',
+                          Icons.lock,
+                          passwordController,
+                          isPassword: true,
+                          obscureTextNotifier: obscureNotifier,
+                        )),
                       SizedBox(height: screenHeight / 50),
 
                       // Forgot password

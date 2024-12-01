@@ -22,7 +22,6 @@ class _NewsPageState extends State<NewsPage> {
 
   @override
   Widget build(BuildContext context) {
-    final double screenWidth = MediaQuery.of(context).size.width;
     final double screenHeight = MediaQuery.of(context).size.height;
 
     return SingleChildScrollView(
@@ -115,87 +114,76 @@ class _NewsPageState extends State<NewsPage> {
             ),
           ),
           carouselIndicator(),
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Text(
-              "Recommendations",
-              style: TextStyle(
-                  fontFamily: "Arvo",
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold),
-            ),
+          
+          // Recommendations Section
+      Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Text(
+          "Recommendations",
+          style: TextStyle(
+            fontFamily: "Arvo",
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
           ),
-          // The ListView should have a fixed height or be inside an Expanded widget
-          SizedBox(
-            height: screenHeight * 0.4, // Adjust based on your layout
-            child: ListView.builder(
-              itemCount:
-                  10, // Set this to the length of your recommendation list
-              itemBuilder: (context, index) {
-                return Card(
-                  margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 10.0),
-                  elevation: 1,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  child: Container(
-                    height: screenHeight * 0.15, // Increase height of the card
-                    padding: EdgeInsets.all(10.0), // Padding inside the card
-                    child: Row(
-                      children: [
-                        // Image
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(15.0),
-                          child: Image.asset(
-                            'lib/assets/images/taguig_image1.png', // Path to your image
-                            width: 100, // Set the width of the image
-                            height: 100, // Set the height of the image
-                            fit: BoxFit
-                                .cover, // Ensure the image fits well inside the space
-                          ),
-                        ),
-                        SizedBox(
-                            width: 10), // Space between the image and ListTile
-                        // Expanded ListTile to take up remaining space
-                        Expanded(
-                          child: ListTile(
-                            contentPadding: EdgeInsets.symmetric(
-                                horizontal: 15.0,
-                                vertical:
-                                    10.0), // Adjust padding inside the tile
-                            title: Text(
-                              "Your Text Here That Might Be Too Long",
-                              style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight
-                                      .bold), // Optional: Increase text size
-                            ),
-                            subtitle: Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(vertical: 10.0),
-                              child: Text(
-                                "May 28, 2022",
-                                style: TextStyle(
-                                    fontSize:
-                                        14), // Optional: Increase subtitle text size
-                              ),
-                            ),
-                            onTap: () {
-                              // Handle tap on the item
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (builder) => SingleNewsPage()));
-                            },
-                          ),
-                        ),
-                      ],
+        ),
+      ),
+      ListView.builder(
+        shrinkWrap: true,
+        physics: NeverScrollableScrollPhysics(),
+        itemCount: 10,
+        itemBuilder: (context, index) {
+          return Card(
+            margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 10.0),
+            elevation: 1,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10.0),
+            ),
+            child: Container(
+              padding: EdgeInsets.all(10.0),
+              child: Row(
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(15.0),
+                    child: Image.asset(
+                      'lib/assets/images/taguig_image1.png',
+                      width: 100,
+                      height: 100,
+                      fit: BoxFit.cover,
                     ),
                   ),
-                );
-              },
+                  SizedBox(width: 10),
+                  Expanded(
+                    child: ListTile(
+                      title: Text(
+                        "Your Text Here That Might Be Too Long",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      subtitle: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 10.0),
+                        child: Text(
+                          "May 28, 2022",
+                          style: TextStyle(fontSize: 14),
+                        ),
+                      ),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (builder) => SingleNewsPage(),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
+          );
+        },
+      ),
         ],
       ),
     );

@@ -9,6 +9,8 @@ class IndividualPlacePage extends StatefulWidget {
   final String info;
   final String contact;
   final String links;
+  final String latitude;
+  final String longitude;
 
   const IndividualPlacePage({
     super.key,
@@ -18,6 +20,8 @@ class IndividualPlacePage extends StatefulWidget {
     required this.info,
     required this.contact,
     required this.links,
+    required this.latitude,
+    required this.longitude,
   });
 
   @override

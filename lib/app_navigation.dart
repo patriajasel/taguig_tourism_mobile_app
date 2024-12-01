@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:taguig_tourism_mobile_app/customer_support_page.dart';
 import 'package:taguig_tourism_mobile_app/explore_page.dart';
 import 'package:taguig_tourism_mobile_app/home_page.dart';
+import 'package:taguig_tourism_mobile_app/nearby_destination_page.dart';
 import 'package:taguig_tourism_mobile_app/services/firestore_services.dart';
 import 'package:taguig_tourism_mobile_app/services/user_info.dart';
 import 'package:taguig_tourism_mobile_app/news_page.dart';
@@ -29,6 +30,7 @@ class _AppNavigationState extends State<AppNavigation> {
   void initState() {
     _fetchUserData();
     super.initState();
+    NewsPage();
   }
 
   void _fetchUserData() async {
@@ -66,7 +68,7 @@ class _AppNavigationState extends State<AppNavigation> {
       HomePage(
         userInformation: userInfo!,
       ),
-      const NewsPage(),
+      const NearbyDestinationPage(),
       const ExplorePage(),
       const WeatherPage(),
       UserPage(
@@ -151,7 +153,7 @@ class _AppNavigationState extends State<AppNavigation> {
           },
           destinations: const [
             NavigationDestination(icon: Icon(Icons.home), label: "Home"),
-            NavigationDestination(icon: Icon(Icons.newspaper), label: "News"),
+            NavigationDestination(icon: Icon(Icons.navigation), label: "Navigation"),
             NavigationDestination(icon: Icon(Icons.explore), label: "Explore"),
             NavigationDestination(icon: Icon(Icons.cloud), label: "Weather"),
             NavigationDestination(icon: Icon(Icons.person), label: "User"),

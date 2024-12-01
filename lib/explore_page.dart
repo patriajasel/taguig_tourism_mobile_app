@@ -63,6 +63,8 @@ class _ExplorePageState extends State<ExplorePage> {
 
   @override
   Widget build(BuildContext context) {
+    final double screenHeight = MediaQuery.of(context).size.height;
+    
     return Scaffold(
       body: Stack(
         children: [
@@ -83,13 +85,13 @@ class _ExplorePageState extends State<ExplorePage> {
           ),
           CustomInfoWindow(
             controller: customInfoWindowController,
-            height: 200,
-            width: 160,
-            offset: 50,
+            height: screenHeight * 0.25,
+            width: screenHeight * 0.2,
+            offset: screenHeight * 0.0625,
           ),
           Positioned(
-              right: 10,
-              top: 10,
+              right: screenHeight * 0.0125,
+              top: screenHeight * 0.0125,
               child: Container(
                   decoration: BoxDecoration(
                       boxShadow: [
@@ -103,18 +105,18 @@ class _ExplorePageState extends State<ExplorePage> {
                       border: Border.all(
                         width: 1.5,
                       ),
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(screenHeight * 0.0125),
                       color: Colors.white),
-                  height: 55,
-                  width: 175,
+                  height: screenHeight * 0.06875,
+                  width: screenHeight * 0.21875,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(left: 15.0),
+                        padding: EdgeInsets.only(left: screenHeight * 0.01875),
                         child: Text(
                           selectedFilter,
-                          style: TextStyle(fontSize: 16, letterSpacing: 2),
+                          style: TextStyle(fontSize: screenHeight * 0.02, letterSpacing: 2),
                         ),
                       ),
                       FocusScope(
@@ -141,9 +143,9 @@ class _ExplorePageState extends State<ExplorePage> {
                   ))),
           if (isNavigating) ...[
             Positioned(
-                bottom: 10,
-                left: 50,
-                right: 50,
+                bottom: screenHeight * 0.0125,
+                left: screenHeight * 0.0625,
+                right: screenHeight * 0.0625,
                 child: ElevatedButton(
                     style: ButtonStyle(
                         backgroundColor:
@@ -268,7 +270,9 @@ class _ExplorePageState extends State<ExplorePage> {
                                     address: destinations![i].siteAddress,
                                     info: destinations![i].siteInfo,
                                     contact: destinations![i].siteContact,
-                                    links: destinations![i].siteLinks)));
+                                    links: destinations![i].siteLinks,
+                                    latitude: destinations![i].siteLatitude,
+                                    longitude: destinations![i].siteLongitude,)));
                           },
                           child: Text(
                             textAlign: TextAlign.center,

@@ -3,6 +3,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:taguig_tourism_mobile_app/categories_page.dart';
+import 'package:taguig_tourism_mobile_app/news_page_single_page.dart';
 import 'package:taguig_tourism_mobile_app/services/user_info.dart';
 
 class HomePage extends StatefulWidget {
@@ -237,6 +238,7 @@ class _HomePageState extends State<HomePage> {
                       ],
                     ),
                   ),
+                 
                   Padding(
                     padding: EdgeInsets.symmetric(
                         horizontal: screenHeight * 0.02632),
@@ -313,6 +315,94 @@ class _HomePageState extends State<HomePage> {
                             },
                           ),
                         )
+                      ],
+                    ),
+                  ),
+
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: screenHeight * 0.02632),
+                    child: Divider(),
+                  ),
+                  
+                  Container(
+                    margin: EdgeInsets.symmetric(horizontal: screenHeight * 0.03948),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [ 
+                         Padding(
+                          padding: EdgeInsets.all(screenHeight * 0.01053),
+                          child: Text(
+                            "News",
+                            style: TextStyle(
+                              fontSize: screenHeight * 0.02369,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            textAlign: TextAlign.left,
+                          ),
+                        ),
+                        ListView.builder(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          itemCount: 10,
+                          itemBuilder: (context, index) {
+                            return Card(
+                              margin: EdgeInsets.symmetric(
+                                vertical: screenHeight * 0.01,
+                                horizontal: screenHeight * 0.0125
+                              ),
+                              elevation: 1,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(screenHeight * 0.0125),
+                              ),
+                              child: Container(
+                                padding: EdgeInsets.all(screenHeight * 0.0125),
+                                child: Row(
+                                  children: [
+                                    ClipRRect(
+                                      borderRadius: BorderRadius.circular(15.0),
+                                      child: Image.asset(
+                                        'lib/assets/images/taguig_image1.png',
+                                        width: screenHeight * 0.125,
+                                        height: screenHeight * 0.125,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+
+                                    SizedBox(width: screenHeight * 0.0125),
+
+                                    Expanded(
+                                      child: ListTile(
+                                        title: Text(
+                                          "Your Text Here That Might Be Too Long",
+                                          style: TextStyle(
+                                            fontSize: screenHeight * 0.0175,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        subtitle: Padding(
+                                          padding: EdgeInsets.symmetric(vertical: screenHeight * 0.0125),
+                                          child: Text(
+                                            "May 28, 2022",
+                                            style: TextStyle(fontSize: screenHeight * 0.015),
+                                          ),
+                                        ),
+                                        onTap: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (builder) => SingleNewsPage(),
+                                            ),
+                                          );
+                                        },
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
+                        ),
                       ],
                     ),
                   ),

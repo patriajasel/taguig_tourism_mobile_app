@@ -36,6 +36,8 @@ class _ChatSupportPageState extends State<ChatSupportPage> {
 
   @override
   Widget build(BuildContext context) {
+    final double screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Chat Support'),
@@ -44,7 +46,7 @@ class _ChatSupportPageState extends State<ChatSupportPage> {
         children: [
           Expanded(
               child: GroupedListView<Message, DateTime>(
-            padding: const EdgeInsets.all(10.0),
+            padding: EdgeInsets.all(screenHeight * 0.0125),
             reverse: true,
             order: GroupedListOrder.DESC,
             useStickyGroupSeparators: true,
@@ -53,12 +55,12 @@ class _ChatSupportPageState extends State<ChatSupportPage> {
             groupBy: (messages) => DateTime(
                 messages.date.year, messages.date.month, messages.date.day),
             groupHeaderBuilder: (Message message) => SizedBox(
-              height: 50,
+              height: screenHeight * 0.0625,
               child: Center(
                 child: Card(
                   color: Theme.of(context).primaryColor,
                   child: Padding(
-                    padding: const EdgeInsets.all(10.0),
+                    padding: EdgeInsets.all(screenHeight * 0.0125),
                     child: Text(
                       DateFormat.yMMMd().format(message.date),
                       style: const TextStyle(color: Colors.white),
@@ -72,9 +74,9 @@ class _ChatSupportPageState extends State<ChatSupportPage> {
                   ? Alignment.centerRight
                   : Alignment.centerLeft,
               child: Card(
-                elevation: 8,
+                elevation: screenHeight * 0.01,
                 child: Padding(
-                  padding: const EdgeInsets.all(12.0),
+                  padding: EdgeInsets.all(screenHeight * 0.015),
                   child: Text(message.text),
                 ),
               ),
@@ -83,8 +85,8 @@ class _ChatSupportPageState extends State<ChatSupportPage> {
           Container(
             color: Colors.grey.shade300,
             child: TextField(
-              decoration: const InputDecoration(
-                contentPadding: EdgeInsets.all(12),
+              decoration: InputDecoration(
+                contentPadding: EdgeInsets.all(screenHeight * 0.015),
                 hintText: 'Type your question here...',
               ),
               onSubmitted: (text) {

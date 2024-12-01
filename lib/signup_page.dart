@@ -18,6 +18,8 @@ class _SignUpPageState extends State<SignUpPage> {
 
   // Gender List Variable
   final genderList = ["Male", "Female", "Rather not to say"];
+  final ValueNotifier<bool> obscureNotifier = ValueNotifier<bool>(true);
+  final ValueNotifier<bool> obscureNotifier2 = ValueNotifier<bool>(true);
   String? genderSelectedVal = "";
 
   // * TextEditingController Lists
@@ -107,7 +109,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         // Password
                         GenerateWidget().generateTextField(
                             context, "Password", Icons.lock_outline, password,
-                            obscureText: true),
+                            isPassword: true, obscureTextNotifier: obscureNotifier),
 
                         // Height between Password and Confirm Password
                         SizedBox(height: screenHeight * 0.02105),
@@ -115,7 +117,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         // Confirm Password
                         GenerateWidget().generateTextField(
                             context, "Confirm Password", Icons.lock, confirmPassword,
-                            obscureText: true),
+                            isPassword: true, obscureTextNotifier: obscureNotifier2),
 
                         // Height between Email and Age form
                         SizedBox(height: screenHeight * 0.02105),

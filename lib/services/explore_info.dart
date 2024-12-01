@@ -9,6 +9,8 @@ class ExploreDestinations {
   final String siteContact;
   final String siteLinks;
   final LatLng siteLatLng;
+  final String siteLatitude;
+  final String siteLongitude;
   final String siteBanner;
   final String siteMarker;
 
@@ -19,6 +21,8 @@ class ExploreDestinations {
     required this.siteContact,
     required this.siteLinks,
     required this.siteLatLng,
+    required this.siteLatitude,
+    required this.siteLongitude,
     required this.siteBanner,
     required this.siteMarker,
   });
@@ -41,6 +45,8 @@ class ExploreDestinations {
         siteContact: snapshot['site_contact'] ?? '',
         siteLinks: snapshot['site_link'] ?? '',
         siteLatLng: LatLng(latitude, longitude),
+        siteLatitude: snapshot['site_latitude'] ?? '',
+        siteLongitude: snapshot['site_longitude'] ?? '',
         siteBanner: snapshot['site_banner'] ?? '',
         siteMarker: snapshot['site_marker'] ?? '',
       );

@@ -44,6 +44,8 @@ class CategoriesPageState extends State<CategoriesPage> {
 
   @override
   Widget build(BuildContext context) {
+    final double screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -74,56 +76,76 @@ class CategoriesPageState extends State<CategoriesPage> {
         itemCount: categoryTitle!.length,
         itemBuilder: (container, index) {
           return Container(
-            height: 160,
-            margin: EdgeInsets.all(8), // Add margin for spacing
+            height: screenHeight * 0.214,
+            margin: EdgeInsets.symmetric(horizontal: screenHeight * 0.01, vertical: screenHeight * 0.003), // Add margin for spacing
             child: Card(
               elevation: 10,
               child: Stack(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: EdgeInsets.all(screenHeight * 0.015),
                     child: Row(
                       children: [
                         ClipRRect(
                           borderRadius: BorderRadius.circular(8.0),
                           child: Image.network(
                             destinationImage[index],
-                            height: 100,
-                            width: 100, // Provide explicit width and height
+                            height: screenHeight * 0.125,
+                            width: screenHeight * 0.125, // Provide explicit width and height
                             fit: BoxFit.cover,
                           ),
                         ),
                         SizedBox(
-                            width: 8), // Add spacing between the image and text
+                            width: screenHeight * 0.01), // Add spacing between the image and text
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              SizedBox(height: 13),
-                              Text(
-                                categoryTitle![index].siteName,
-                                maxLines: 2,
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                              SizedBox(height: screenHeight * 0.01),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      categoryTitle![index].siteName,
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                        fontSize: screenHeight * 0.02,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                  IconButton(
+                                    icon: Icon(
+                                      likedItems[index] ? Icons.favorite : Icons.favorite_border,
+                                      color: likedItems[index] ? Colors.red : Colors.grey,
+                                      size: screenHeight * 0.023,
+                                    ),
+                                    onPressed: () {
+                                      setState(() {
+                                        likedItems[index] = !likedItems[index];
+                                      });
+                                    },
+                                  ),
+                                ],
                               ),
-                              const SizedBox(height: 4),
+
                               Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Icon(
                                     Icons.pin_drop,
                                     color: Colors.blue,
-                                    size: 14, // Icon size
+                                    size: screenHeight * 0.0175, // Icon size
                                   ),
                                   SizedBox(
-                                      width: 4), // Space between icon and text
+                                      width: screenHeight * 0.005), // Space between icon and text
                                   Expanded(
                                     child: Text(
                                       categoryTitle![index].siteAddress,
-                                      style: TextStyle(fontSize: 11.5),
+                                      style: TextStyle(fontSize: screenHeight * 0.015),
                                       overflow: TextOverflow
                                           .ellipsis, // Prevents overflow
                                       maxLines:
@@ -131,100 +153,83 @@ class CategoriesPageState extends State<CategoriesPage> {
                                     ),
                                   ),
                                 ],
-                              ),
-                              SizedBox(
-                                  height:
-                                      5), // Spacing between text and buttons
+                              ), // Spacing between text and buttons
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  ElevatedButton.icon(
-                                    onPressed: () {
-                                      // Navigate to IndividualPlacePage
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              IndividualPlacePage(
-                                            address: categoryTitle![index]
-                                                .siteAddress,
-                                            name:
-                                                categoryTitle![index].siteName,
-                                            banner: destinationImage[index],
-                                            info:
-                                                categoryTitle![index].siteInfo,
-                                            contact: categoryTitle![index]
-                                                .siteContact,
-                                            links:
-                                                categoryTitle![index].siteLinks,
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10.0)),
-                                      backgroundColor: Colors
-                                          .blueAccent.shade700, // Button color
-                                      foregroundColor:
-                                          Colors.white, // Text color
-                                    ),
-                                    icon:
-                                        Icon(Icons.info, size: 10), // Info icon
-                                    label: Text(
-                                      'View Info',
-                                      style: TextStyle(
-                                        fontSize: 8,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(width: 10), // Space between buttons
-                                  ElevatedButton.icon(
-                                    onPressed: () {},
-                                    style: ElevatedButton.styleFrom(
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10.0)),
-                                      backgroundColor: Colors
-                                          .blueAccent.shade700, // Button color
-                                      foregroundColor:
-                                          Colors.white, // Text color
-                                    ),
-                                    icon: Icon(Icons.map, size: 10), // Map icon
-                                    label: Text(
-                                      'See on Maps',
-                                      style: TextStyle(
-                                        fontSize: 8,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
+  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  children: [
+    ElevatedButton.icon(
+      onPressed: () {
+        // Navigate to IndividualPlacePage
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => IndividualPlacePage(
+              address: categoryTitle![index].siteAddress,
+              name: categoryTitle![index].siteName,
+              banner: destinationImage[index],
+              info: categoryTitle![index].siteInfo,
+              contact: categoryTitle![index].siteContact,
+              links: categoryTitle![index].siteLinks,
+              latitude: categoryTitle![index].siteLatitude,
+              longitude: categoryTitle![index].siteLongitude,
+            ),
+          ),
+        );
+      },
+      style: ElevatedButton.styleFrom(
+        minimumSize: Size(0, screenHeight * 0.04), // Reduced button height
+        padding: EdgeInsets.symmetric(horizontal: screenHeight * 0.02),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8.0),
+        ),
+        backgroundColor: Colors.blueAccent.shade700, // Button color
+        foregroundColor: Colors.white, // Text color
+      ),
+      icon: Icon(
+        Icons.info,
+        size: screenHeight * 0.015, // Adjusted icon size for smaller button
+      ),
+      label: Text(
+        'View Info',
+        style: TextStyle(
+          fontSize: screenHeight * 0.0125, // Smaller font size
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+    ),
+    SizedBox(width: screenHeight * 0.0125), // Space between buttons
+    ElevatedButton.icon(
+      onPressed: () {
+        // Handle "See on Maps" action
+      },
+      style: ElevatedButton.styleFrom(
+        minimumSize: Size(0, screenHeight * 0.04), // Reduced button height
+        padding: EdgeInsets.symmetric(horizontal: screenHeight * 0.02),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8.0),
+        ),
+        backgroundColor: Colors.blueAccent.shade700, // Button color
+        foregroundColor: Colors.white, // Text color
+      ),
+      icon: Icon(
+        Icons.map,
+        size: screenHeight * 0.015, // Adjusted icon size for smaller button
+      ),
+      label: Text(
+        'See on Maps',
+        style: TextStyle(
+          fontSize: screenHeight * 0.0125, // Smaller font size
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+    ),
+  ],
+),
+
                             ],
                           ),
                         ),
                       ],
-                    ),
-                  ),
-                  Positioned(
-                    right: 5,
-                    top: 5,
-                    child: IconButton(
-                      icon: Icon(
-                        likedItems[index]
-                            ? Icons.favorite
-                            : Icons.favorite_border,
-                        color: likedItems[index] ? Colors.red : Colors.grey,
-                        size: 20,
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          likedItems[index] = !likedItems[index];
-                        });
-                      },
                     ),
                   ),
                 ],
