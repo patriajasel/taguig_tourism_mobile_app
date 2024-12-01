@@ -2,6 +2,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:taguig_tourism_mobile_app/models/events.dart';
 import 'package:taguig_tourism_mobile_app/services/explore_info.dart';
 import 'package:taguig_tourism_mobile_app/services/user_info.dart';
 
@@ -146,5 +147,35 @@ class FirestoreServices {
       print("Error: $e"); // Log errors for debugging
       return [];
     }
+  }
+
+  Future<List<Events>?> getAllEvents() async {
+    try {
+      CollectionReference collection =
+          FirebaseFirestore.instance.collection("events");
+
+      QuerySnapshot querySnapshot = await collection.get();
+
+      List<Events> events = [];
+
+      for (var doc in querySnapshot.docs) {
+        try {
+          DocumentSnapshot documentSnapshot =
+              await collection.doc(doc.id).get();
+          var data = documentSnapshot.data() as Map<String, dynamic>;
+
+          if (data.isNotEmpty) {
+            events.add(Events.fromSnapshot(data));
+          }
+        } catch (e) {
+          print("Error processing document ${doc.id}: $e");
+        }
+      }
+
+      return events.isNotEmpty ? events : null;
+    } catch (e) {
+      print("Error fetching data from Firestore: $e");
+    }
+    return null;
   }
 }

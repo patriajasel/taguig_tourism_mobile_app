@@ -13,23 +13,23 @@ class ChatSupportPage extends StatefulWidget {
 class _ChatSupportPageState extends State<ChatSupportPage> {
   List<Message> messages = [
     Message(
-        text: 'Yeah Sure!',
+        text: 'Hello',
         date: DateTime.now().subtract(Duration(minutes: 1)),
         isSentByMe: false),
     Message(
-        text: 'No Sure!',
+        text: 'Hello',
         date: DateTime.now().subtract(Duration(minutes: 1)),
         isSentByMe: true),
     Message(
-        text: 'Shut up Sure!',
+        text: 'Hello',
         date: DateTime.now().subtract(Duration(minutes: 1)),
         isSentByMe: false),
     Message(
-        text: 'bullshit Sure!',
+        text: 'Hello',
         date: DateTime.now().subtract(Duration(minutes: 1)),
         isSentByMe: true),
     Message(
-        text: 'aHHHHH Sure!',
+        text: 'Hello',
         date: DateTime.now().subtract(Duration(minutes: 1)),
         isSentByMe: false),
   ];

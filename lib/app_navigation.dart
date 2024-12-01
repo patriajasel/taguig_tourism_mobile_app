@@ -136,7 +136,9 @@ class _AppNavigationState extends State<AppNavigation> {
             indicatorColor: Colors.redAccent.shade100,
             labelTextStyle: WidgetStateProperty.all(
               TextStyle(
-                  color: Colors.white, fontFamily: "Arvo", fontSize: screenHeight * 0.015),
+                  color: Colors.white,
+                  fontFamily: "Arvo",
+                  fontSize: screenHeight * 0.015),
             ),
             iconTheme: WidgetStateProperty.all(
               const IconThemeData(color: Colors.white),
@@ -152,7 +154,7 @@ class _AppNavigationState extends State<AppNavigation> {
           },
           destinations: const [
             NavigationDestination(icon: Icon(Icons.home), label: "Home"),
-            NavigationDestination(icon: Icon(Icons.newspaper), label: "News"),
+            NavigationDestination(icon: Icon(Icons.commute), label: "Commute"),
             NavigationDestination(icon: Icon(Icons.explore), label: "Explore"),
             NavigationDestination(icon: Icon(Icons.cloud), label: "Weather"),
             NavigationDestination(icon: Icon(Icons.person), label: "User"),

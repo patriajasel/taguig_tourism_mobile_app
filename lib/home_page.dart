@@ -3,7 +3,9 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:taguig_tourism_mobile_app/categories_page.dart';
+import 'package:taguig_tourism_mobile_app/models/events.dart';
 import 'package:taguig_tourism_mobile_app/news_page_single_page.dart';
+import 'package:taguig_tourism_mobile_app/services/firestore_services.dart';
 import 'package:taguig_tourism_mobile_app/services/user_info.dart';
 
 class HomePage extends StatefulWidget {
@@ -40,18 +42,46 @@ class _HomePageState extends State<HomePage> {
   int currentSlide = 0;
 
   UserInformation? userInfo;
-  
+
+  List<Events> eventList = [];
+  List<String> imageDirectory = [];
+
   @override
   void initState() {
     userInfo = widget.userInformation;
+    getAllEvents();
     super.initState();
   }
 
+  void getAllEvents() async {
+    List<Events>? events = await FirestoreServices().getAllEvents();
+
+    if (events != null) {
+      List<String> imageUrls = [];
+
+      // Fetch image URLs for each event
+      for (var event in events) {
+        String imageUrl =
+            await FirestoreServices().getImageUrl(event.imageDirectory);
+        if (imageUrl.isNotEmpty) {
+          imageUrls.add(imageUrl);
+        } else {
+          imageUrls.add(
+              ""); // Add empty string or a default value for missing images
+        }
+      }
+
+      // Now that we have both event list and image URLs, update the state
+      setState(() {
+        eventList = events;
+        imageDirectory = imageUrls; // Populate imageDirectory
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
-
 
     return PopScope(
       canPop: false,
@@ -240,7 +270,7 @@ class _HomePageState extends State<HomePage> {
                       ],
                     ),
                   ),
-                 
+
                   Padding(
                     padding: EdgeInsets.symmetric(
                         horizontal: screenHeight * 0.02632),
@@ -323,19 +353,20 @@ class _HomePageState extends State<HomePage> {
 
                   Padding(
                     padding: EdgeInsets.symmetric(
-                      horizontal: screenHeight * 0.02632),
+                        horizontal: screenHeight * 0.02632),
                     child: Divider(),
                   ),
-                  
+
                   Container(
-                    margin: EdgeInsets.symmetric(horizontal: screenHeight * 0.03948),
+                    margin: EdgeInsets.symmetric(
+                        horizontal: screenHeight * 0.03948),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [ 
-                         Padding(
+                      children: [
+                        Padding(
                           padding: EdgeInsets.all(screenHeight * 0.01053),
                           child: Text(
-                            "News",
+                            "Events",
                             style: TextStyle(
                               fontSize: screenHeight * 0.02369,
                               fontWeight: FontWeight.bold,
@@ -346,16 +377,15 @@ class _HomePageState extends State<HomePage> {
                         ListView.builder(
                           shrinkWrap: true,
                           physics: NeverScrollableScrollPhysics(),
-                          itemCount: 10,
+                          itemCount: eventList.length,
                           itemBuilder: (context, index) {
                             return Card(
                               margin: EdgeInsets.symmetric(
-                                vertical: screenHeight * 0.01,
-                                horizontal: screenHeight * 0.0125
-                              ),
+                                  vertical: screenHeight * 0.01),
                               elevation: 1,
                               shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(screenHeight * 0.0125),
+                                borderRadius: BorderRadius.circular(
+                                    screenHeight * 0.0125),
                               ),
                               child: Container(
                                 padding: EdgeInsets.all(screenHeight * 0.0125),
@@ -363,37 +393,43 @@ class _HomePageState extends State<HomePage> {
                                   children: [
                                     ClipRRect(
                                       borderRadius: BorderRadius.circular(15.0),
-                                      child: Image.asset(
-                                        'lib/assets/images/taguig_image1.png',
+                                      child: Image.network(
+                                        imageDirectory[index],
                                         width: screenHeight * 0.125,
                                         height: screenHeight * 0.125,
                                         fit: BoxFit.cover,
                                       ),
                                     ),
-
                                     SizedBox(width: screenHeight * 0.0125),
-
                                     Expanded(
                                       child: ListTile(
                                         title: Text(
-                                          "Your Text Here That Might Be Too Long",
+                                          eventList[index].eventName,
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
                                           style: TextStyle(
                                             fontSize: screenHeight * 0.0175,
                                             fontWeight: FontWeight.bold,
                                           ),
                                         ),
                                         subtitle: Padding(
-                                          padding: EdgeInsets.symmetric(vertical: screenHeight * 0.0125),
+                                          padding: EdgeInsets.symmetric(
+                                              vertical: screenHeight * 0.0125),
                                           child: Text(
-                                            "May 28, 2022",
-                                            style: TextStyle(fontSize: screenHeight * 0.015),
+                                            eventList[index]
+                                                .eventDate
+                                                .toDate()
+                                                .toString(),
+                                            style: TextStyle(
+                                                fontSize: screenHeight * 0.015),
                                           ),
                                         ),
                                         onTap: () {
                                           Navigator.push(
                                             context,
                                             MaterialPageRoute(
-                                              builder: (builder) => SingleNewsPage(),
+                                              builder: (builder) =>
+                                                  SingleEventPage(event: eventList[index],),
                                             ),
                                           );
                                         },
