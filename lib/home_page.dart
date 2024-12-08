@@ -308,7 +308,6 @@ class _HomePageState extends State<HomePage> {
                     ),
 
                     // Main Content starts here!
-
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -320,24 +319,29 @@ class _HomePageState extends State<HomePage> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               ListTile(
-                                  title: Text(
-                                    "Popular Destinations",
-                                    style: TextStyle(
-                                      fontSize: screenHeight * 0.02369,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                    textAlign: TextAlign.left,
+                                title: Text(
+                                  "Popular Destinations",
+                                  style: TextStyle(
+                                    fontSize: screenHeight * 0.02369,
+                                    fontWeight: FontWeight.bold,
                                   ),
-                                  trailing: IconButton(
-                                      onPressed: () {},
-                                      icon: const Icon(Icons.menu))),
+                                  textAlign: TextAlign.left,
+                                ),
+                                trailing: IconButton(
+                                  onPressed: () {},
+                                  icon: const Icon(Icons.menu),
+                                ),
+                              ),
                               Padding(
                                 padding: EdgeInsets.all(screenHeight * 0.01053),
                                 child: CarouselSlider(
                                   items: popularURL
-                                      .map((e) => GestureDetector(
+                                      .asMap()
+                                      .map((index, e) {
+                                        return MapEntry(
+                                          index,
+                                          GestureDetector(
                                             onTap: () {
-                                              int index = popularURL.indexOf(e);
                                               if (index >= 0 &&
                                                   index <
                                                       popularDestinations
@@ -346,58 +350,80 @@ class _HomePageState extends State<HomePage> {
                                                     MaterialPageRoute(
                                                   builder: (context) {
                                                     return IndividualPlacePage(
-                                                        banner: popularURL[
-                                                            index],
-                                                        name: popularDestinations[
-                                                                index]
-                                                            .siteName,
-                                                        address:
-                                                            popularDestinations[
-                                                                    index]
-                                                                .siteAddress,
-                                                        info:
-                                                            popularDestinations[
-                                                                    index]
-                                                                .siteInfo,
-                                                        contact:
-                                                            popularDestinations[
-                                                                    index]
-                                                                .siteContact,
-                                                        links:
-                                                            popularDestinations[
-                                                                    index]
-                                                                .siteLinks,
-                                                        latitude:
-                                                            popularDestinations[
-                                                                    index]
-                                                                .siteLatitude,
-                                                        longitude:
-                                                            popularDestinations[
-                                                                    index]
-                                                                .siteLongitude);
+                                                      banner: popularURL[index],
+                                                      name: popularDestinations[
+                                                              index]
+                                                          .siteName,
+                                                      address:
+                                                          popularDestinations[
+                                                                  index]
+                                                              .siteAddress,
+                                                      info: popularDestinations[
+                                                              index]
+                                                          .siteInfo,
+                                                      contact:
+                                                          popularDestinations[
+                                                                  index]
+                                                              .siteContact,
+                                                      links:
+                                                          popularDestinations[
+                                                                  index]
+                                                              .siteLinks,
+                                                      latitude:
+                                                          popularDestinations[
+                                                                  index]
+                                                              .siteLatitude,
+                                                      longitude:
+                                                          popularDestinations[
+                                                                  index]
+                                                              .siteLongitude,
+                                                    );
                                                   },
                                                 ));
                                               }
                                             },
-                                            child: Image.network(
-                                              e,
-                                              fit: BoxFit.fill,
+                                            child: Column(
+                                              children: [
+                                                // Name above the image
+                                                Text(
+                                                  popularDestinations[index]
+                                                      .siteName,
+                                                  style: TextStyle(
+                                                    fontSize:
+                                                        screenHeight * 0.015,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                  textAlign: TextAlign.center,
+                                                ),
+                                                SizedBox(
+                                                    height: screenHeight *
+                                                        0.01), // Space between text and image
+                                                // Image below the name
+                                                Image.network(
+                                                  e,
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ],
                                             ),
-                                          ))
+                                          ),
+                                        );
+                                      })
+                                      .values
                                       .toList(),
                                   options: CarouselOptions(
-                                      initialPage: 0,
-                                      autoPlay: true,
-                                      enlargeCenterPage: true,
-                                      enlargeFactor: 0.3,
-                                      onPageChanged: (value, _) {
-                                        setState(() {
-                                          currentSlide = value;
-                                        });
-                                      }),
+                                    initialPage: 0,
+                                    autoPlay: true,
+                                    enlargeCenterPage: true,
+                                    enlargeFactor: 0.3,
+                                    onPageChanged: (value, _) {
+                                      setState(() {
+                                        currentSlide = value;
+                                      });
+                                    },
+                                  ),
                                 ),
                               ),
-                              carouselIndicator()
+                              carouselIndicator(),
                             ],
                           ),
                         ),
