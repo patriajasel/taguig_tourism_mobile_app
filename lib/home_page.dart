@@ -121,20 +121,7 @@ class _HomePageState extends State<HomePage> {
       Position position = await Geolocator.getCurrentPosition(
           desiredAccuracy: LocationAccuracy.high);
 
-      Position samplePosition = Position(
-          longitude: 14.531381668702426,
-          latitude: 121.04958499375412,
-          timestamp: DateTime.now(),
-          accuracy: 0.0,
-          altitude: 0.0,
-          altitudeAccuracy: 0.0,
-          heading: 0.0,
-          headingAccuracy: 0.0,
-          speed: 0.0,
-          speedAccuracy: 0.0);
-      setState(() {
-        userPosition = samplePosition;
-      });
+      setState(() {});
 
       // Update the location message
     } catch (e) {
@@ -573,8 +560,8 @@ class _HomePageState extends State<HomePage> {
                                           MaterialPageRoute(
                                             builder: (context) =>
                                                 AllNearbyPlacesPage(
-                                              nearbyPlaces: popularDestinations,
-                                              imageLinks: popularURL,
+                                              nearbyPlaces: nearbyPlaces,
+                                              imageLinks: nearbyImageURL,
                                             ),
                                           ),
                                         );
