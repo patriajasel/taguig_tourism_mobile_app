@@ -93,7 +93,7 @@ class _LoginPageState extends State<LoginPage> {
                             GenerateWidget().generateTextLink(
                               context,
                               "Forgot Password?",
-                              '/signup_page',
+                              '/forgot_password',
                               Colors.white,
                             )
                           ],
@@ -113,7 +113,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
 
-                      SizedBox(height: screenHeight / 25),
+                      SizedBox(height: screenHeight * 0.03),
 
                       // Or continue with
                       Padding(
@@ -145,7 +145,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                       // Google or Apple sign in buttons
-                      SizedBox(height: screenHeight / 25),
+                      SizedBox(height: screenHeight * 0.03),
 
                       Padding(
                         padding:
@@ -162,7 +162,7 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                             ),
                             onPressed: () {
-                              // You can leave this empty or add functionality later.
+                              AuthenticationServices().signInWithGoogle(context);
                             },
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
