@@ -4,6 +4,8 @@ class UserInformation {
   final String email;
   final int age;
   final String gender;
+  final String userID;
+  final String touristType;
 
   UserInformation({
     required this.firstName,
@@ -11,6 +13,8 @@ class UserInformation {
     required this.email,
     required this.age,
     required this.gender,
+    required this.userID,
+    required this.touristType,
   });
 
   factory UserInformation.fromMap(Map<String, dynamic> map) {
@@ -20,6 +24,8 @@ class UserInformation {
       email: map['email'] ?? 'Unknown',
       age: map['age'] ?? '',
       gender: map['gender'] ?? 'Unknown',
+      userID: map['user_id'] ?? '',
+      touristType: map['tourist_type'] ?? ''
     );
   }
 }

@@ -119,28 +119,46 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> _getCurrentLocation() async {
-    try {
-      // Check if location services are enabled
-      bool isLocationServiceEnabled =
-          await Geolocator.isLocationServiceEnabled();
-      if (!isLocationServiceEnabled) {
-        setState(() {
-          print("Location services are disabled. Please enable them.");
-        });
+  try {
+    // Ensure location services are enabled
+    bool isLocationServiceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!isLocationServiceEnabled) {
+      print("Location services are disabled. Please enable them.");
+      return;
+    }
+
+    // Check and request location permission
+    LocationPermission permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied ||
+        permission == LocationPermission.deniedForever) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied ||
+          permission == LocationPermission.deniedForever) {
+        print("Location permissions are denied.");
         return;
       }
-      // Get the device's current position
-      Position position = await Geolocator.getCurrentPosition(
-          desiredAccuracy: LocationAccuracy.high);
-      setState(() {
-        userPosition = position;
-      });
-
-      // Update the location message
-    } catch (e) {
-      print(e);
     }
+
+    // Fetch the current position
+    Position position = await Geolocator.getCurrentPosition(
+      desiredAccuracy: LocationAccuracy.high,
+    );
+
+    // Update state with the current position
+    setState(() {
+      userPosition = position;
+    });
+
+    print("User position: $position");
+
+    // Cleanup: No additional streams or listeners need to be stopped as
+    // `getCurrentPosition` fetches the location once.
+  } catch (e) {
+    print("Error fetching location: $e");
   }
+}
+
+
 
   void getAllEvents() async {
     List<Events>? events = await FirestoreServices().getAllEvents();

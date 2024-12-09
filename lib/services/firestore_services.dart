@@ -13,7 +13,7 @@ class FirestoreServices {
 
   //  This function is for creating new users
   Future<void> addUsers(String uid, String firstName, String lastName,
-      String email, int age, String gender) {
+      String email, int age, String gender, String touristType) {
     return users.doc(uid).set({
       'user_id': uid,
       'first_name': firstName,
@@ -21,6 +21,7 @@ class FirestoreServices {
       'email': email,
       'age': age,
       'gender': gender,
+      'tourist_type': touristType,
     });
   }
 
