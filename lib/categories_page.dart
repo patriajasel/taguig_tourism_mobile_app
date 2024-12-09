@@ -77,7 +77,9 @@ class CategoriesPageState extends State<CategoriesPage> {
         itemBuilder: (container, index) {
           return Container(
             height: screenHeight * 0.214,
-            margin: EdgeInsets.symmetric(horizontal: screenHeight * 0.01, vertical: screenHeight * 0.003), // Add margin for spacing
+            margin: EdgeInsets.symmetric(
+                horizontal: screenHeight * 0.01,
+                vertical: screenHeight * 0.003), // Add margin for spacing
             child: Card(
               elevation: 10,
               child: Stack(
@@ -91,12 +93,14 @@ class CategoriesPageState extends State<CategoriesPage> {
                           child: Image.network(
                             destinationImage[index],
                             height: screenHeight * 0.125,
-                            width: screenHeight * 0.125, // Provide explicit width and height
+                            width: screenHeight *
+                                0.125, // Provide explicit width and height
                             fit: BoxFit.cover,
                           ),
                         ),
                         SizedBox(
-                            width: screenHeight * 0.01), // Add spacing between the image and text
+                            width: screenHeight *
+                                0.01), // Add spacing between the image and text
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -104,7 +108,8 @@ class CategoriesPageState extends State<CategoriesPage> {
                             children: [
                               SizedBox(height: screenHeight * 0.01),
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Expanded(
                                     child: Text(
@@ -119,8 +124,12 @@ class CategoriesPageState extends State<CategoriesPage> {
                                   ),
                                   IconButton(
                                     icon: Icon(
-                                      likedItems[index] ? Icons.favorite : Icons.favorite_border,
-                                      color: likedItems[index] ? Colors.red : Colors.grey,
+                                      likedItems[index]
+                                          ? Icons.favorite
+                                          : Icons.favorite_border,
+                                      color: likedItems[index]
+                                          ? Colors.red
+                                          : Colors.grey,
                                       size: screenHeight * 0.023,
                                     ),
                                     onPressed: () {
@@ -141,11 +150,13 @@ class CategoriesPageState extends State<CategoriesPage> {
                                     size: screenHeight * 0.0175, // Icon size
                                   ),
                                   SizedBox(
-                                      width: screenHeight * 0.005), // Space between icon and text
+                                      width: screenHeight *
+                                          0.005), // Space between icon and text
                                   Expanded(
                                     child: Text(
                                       categoryTitle![index].siteAddress,
-                                      style: TextStyle(fontSize: screenHeight * 0.015),
+                                      style: TextStyle(
+                                          fontSize: screenHeight * 0.015),
                                       overflow: TextOverflow
                                           .ellipsis, // Prevents overflow
                                       maxLines:
@@ -155,77 +166,105 @@ class CategoriesPageState extends State<CategoriesPage> {
                                 ],
                               ), // Spacing between text and buttons
                               Row(
-  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-  children: [
-    ElevatedButton.icon(
-      onPressed: () {
-        // Navigate to IndividualPlacePage
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => IndividualPlacePage(
-              address: categoryTitle![index].siteAddress,
-              name: categoryTitle![index].siteName,
-              banner: destinationImage[index],
-              info: categoryTitle![index].siteInfo,
-              contact: categoryTitle![index].siteContact,
-              links: categoryTitle![index].siteLinks,
-              latitude: categoryTitle![index].siteLatitude,
-              longitude: categoryTitle![index].siteLongitude,
-            ),
-          ),
-        );
-      },
-      style: ElevatedButton.styleFrom(
-        minimumSize: Size(0, screenHeight * 0.04), // Reduced button height
-        padding: EdgeInsets.symmetric(horizontal: screenHeight * 0.02),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8.0),
-        ),
-        backgroundColor: Colors.blueAccent.shade700, // Button color
-        foregroundColor: Colors.white, // Text color
-      ),
-      icon: Icon(
-        Icons.info,
-        size: screenHeight * 0.015, // Adjusted icon size for smaller button
-      ),
-      label: Text(
-        'View Info',
-        style: TextStyle(
-          fontSize: screenHeight * 0.0125, // Smaller font size
-          fontWeight: FontWeight.bold,
-        ),
-      ),
-    ),
-    SizedBox(width: screenHeight * 0.0125), // Space between buttons
-    ElevatedButton.icon(
-      onPressed: () {
-        // Handle "See on Maps" action
-      },
-      style: ElevatedButton.styleFrom(
-        minimumSize: Size(0, screenHeight * 0.04), // Reduced button height
-        padding: EdgeInsets.symmetric(horizontal: screenHeight * 0.02),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8.0),
-        ),
-        backgroundColor: Colors.blueAccent.shade700, // Button color
-        foregroundColor: Colors.white, // Text color
-      ),
-      icon: Icon(
-        Icons.map,
-        size: screenHeight * 0.015, // Adjusted icon size for smaller button
-      ),
-      label: Text(
-        'See on Maps',
-        style: TextStyle(
-          fontSize: screenHeight * 0.0125, // Smaller font size
-          fontWeight: FontWeight.bold,
-        ),
-      ),
-    ),
-  ],
-),
-
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  ElevatedButton.icon(
+                                    onPressed: () {
+                                      // Navigate to IndividualPlacePage
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              IndividualPlacePage(
+                                            address: categoryTitle![index]
+                                                .siteAddress,
+                                            name:
+                                                categoryTitle![index].siteName,
+                                            banner: destinationImage[index],
+                                            info:
+                                                categoryTitle![index].siteInfo,
+                                            contact: categoryTitle![index]
+                                                .siteContact,
+                                            links:
+                                                categoryTitle![index].siteLinks,
+                                            latitude: categoryTitle![index]
+                                                .siteLatitude,
+                                            longitude: categoryTitle![index]
+                                                .siteLongitude,
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      minimumSize: Size(
+                                          0,
+                                          screenHeight *
+                                              0.04), // Reduced button height
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: screenHeight * 0.02),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
+                                      ),
+                                      backgroundColor: Colors
+                                          .blueAccent.shade700, // Button color
+                                      foregroundColor:
+                                          Colors.white, // Text color
+                                    ),
+                                    icon: Icon(
+                                      Icons.info,
+                                      size: screenHeight *
+                                          0.015, // Adjusted icon size for smaller button
+                                    ),
+                                    label: Text(
+                                      'View Info',
+                                      style: TextStyle(
+                                        fontSize: screenHeight *
+                                            0.0125, // Smaller font size
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                      width: screenHeight *
+                                          0.0125), // Space between buttons
+                                  ElevatedButton.icon(
+                                    onPressed: () {
+                                      // Handle "See on Maps" action
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      minimumSize: Size(
+                                          0,
+                                          screenHeight *
+                                              0.04), // Reduced button height
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: screenHeight * 0.02),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
+                                      ),
+                                      backgroundColor: Colors
+                                          .blueAccent.shade700, // Button color
+                                      foregroundColor:
+                                          Colors.white, // Text color
+                                    ),
+                                    icon: Icon(
+                                      Icons.map,
+                                      size: screenHeight *
+                                          0.015, // Adjusted icon size for smaller button
+                                    ),
+                                    label: Text(
+                                      'See on Maps',
+                                      style: TextStyle(
+                                        fontSize: screenHeight *
+                                            0.0125, // Smaller font size
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ],
                           ),
                         ),

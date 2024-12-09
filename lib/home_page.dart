@@ -6,6 +6,8 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:taguig_tourism_mobile_app/all_nearby_places_page.dart';
+import 'package:taguig_tourism_mobile_app/all_popular_destination_page.dart';
 import 'package:taguig_tourism_mobile_app/categories_page.dart';
 import 'package:taguig_tourism_mobile_app/individual_place_page.dart';
 import 'package:taguig_tourism_mobile_app/models/events.dart';
@@ -30,20 +32,6 @@ class _HomePageState extends State<HomePage> {
     'lib/assets/images/taguig_image3.png',
     'lib/assets/images/taguig_image4.png',
     'lib/assets/images/taguig_image5.png'
-  ];
-
-  final List<String> nearbyList = [
-    'lib/assets/images/taguig_nearby1.jpg',
-    'lib/assets/images/taguig_nearby2.jpg',
-    'lib/assets/images/taguig_nearby3.jpg',
-    'lib/assets/images/taguig_nearby4.jpg',
-  ];
-
-  final List<String> nearbyNames = [
-    'Heritage Park',
-    'Bonifacio High Tree',
-    'SM Aura',
-    'Market Market',
   ];
 
   final List<String> popular = [
@@ -132,8 +120,20 @@ class _HomePageState extends State<HomePage> {
       // Get the device's current position
       Position position = await Geolocator.getCurrentPosition(
           desiredAccuracy: LocationAccuracy.high);
+
+      Position samplePosition = Position(
+          longitude: 14.531381668702426,
+          latitude: 121.04958499375412,
+          timestamp: DateTime.now(),
+          accuracy: 0.0,
+          altitude: 0.0,
+          altitudeAccuracy: 0.0,
+          heading: 0.0,
+          headingAccuracy: 0.0,
+          speed: 0.0,
+          speedAccuracy: 0.0);
       setState(() {
-        userPosition = position;
+        userPosition = samplePosition;
       });
 
       // Update the location message
@@ -248,6 +248,10 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
 
+    if (nearbyPlaces.isNotEmpty) {
+      print("Nearby Places home: $nearbyPlaces");
+    }
+
     return isLoading
         ? Center(child: CircularProgressIndicator()) // Show loading indicator
         : PopScope(
@@ -318,19 +322,43 @@ class _HomePageState extends State<HomePage> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              ListTile(
-                                title: Text(
-                                  "Popular Destinations",
-                                  style: TextStyle(
-                                    fontSize: screenHeight * 0.02369,
-                                    fontWeight: FontWeight.bold,
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    "Popular Destinations",
+                                    style: TextStyle(
+                                      fontSize: screenHeight * 0.02289,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                    textAlign: TextAlign.left,
                                   ),
-                                  textAlign: TextAlign.left,
-                                ),
-                                trailing: IconButton(
-                                  onPressed: () {},
-                                  icon: const Icon(Icons.menu),
-                                ),
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                        right: screenHeight *
+                                            0.01053), // Adjust alignment
+                                    child: TextButton(
+                                      onPressed: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                AllPopularDestinationPage(),
+                                          ),
+                                        );
+                                      },
+                                      child: Text(
+                                        "See All",
+                                        style: TextStyle(
+                                          fontSize: screenHeight * 0.018,
+                                          color: Colors.blue,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                               Padding(
                                 padding: EdgeInsets.all(screenHeight * 0.01053),
@@ -396,8 +424,8 @@ class _HomePageState extends State<HomePage> {
                                                   textAlign: TextAlign.center,
                                                 ),
                                                 SizedBox(
-                                                    height: screenHeight *
-                                                        0.01), // Space between text and image
+                                                  height: screenHeight * 0.01,
+                                                ), // Space between text and image
                                                 // Image below the name
                                                 Image.network(
                                                   e,
@@ -526,13 +554,41 @@ class _HomePageState extends State<HomePage> {
                             children: [
                               Padding(
                                 padding: EdgeInsets.all(screenHeight * 0.01053),
-                                child: Text(
-                                  "Nearby Places",
-                                  style: TextStyle(
-                                    fontSize: screenHeight * 0.02369,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                  textAlign: TextAlign.left,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      "Nearby Places",
+                                      style: TextStyle(
+                                        fontSize: screenHeight * 0.02369,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                      textAlign: TextAlign.left,
+                                    ),
+                                    GestureDetector(
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                AllNearbyPlacesPage(
+                                              nearbyPlaces: popularDestinations,
+                                              imageLinks: popularURL,
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                      child: Text(
+                                        "See All",
+                                        style: TextStyle(
+                                          fontSize: screenHeight * 0.018,
+                                          color: Colors.blue,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                               Padding(
@@ -580,13 +636,13 @@ class _HomePageState extends State<HomePage> {
                                             padding: EdgeInsets.only(
                                                 top: screenHeight * 0.00658),
                                             child: Text(
+                                              nearbyPlaces[index].siteName,
                                               maxLines: 1,
                                               textAlign: TextAlign.center,
-                                              nearbyPlaces[index].siteName,
                                               style: const TextStyle(
                                                   fontWeight: FontWeight.bold),
                                             ),
-                                          )
+                                          ),
                                         ],
                                       ),
                                     );
