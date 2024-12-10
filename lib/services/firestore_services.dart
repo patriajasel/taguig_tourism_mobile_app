@@ -212,4 +212,27 @@ class FirestoreServices {
       return [];
     }
   }
+
+  Future<void> sendFeedback(String uid, String fullname, String email,
+      String contact, String feedback) async {
+    CollectionReference collection =
+        FirebaseFirestore.instance.collection("reviews & feedbacks");
+
+    return collection.doc().set({
+      'email': email,
+      'mobile_number': contact,
+      'name': fullname,
+      'user_id': uid,
+      'user_reviews': feedback,
+    });
+  }
+
+  Future<void> updateUserEmail(String userID, String email) {
+    CollectionReference collection =
+        FirebaseFirestore.instance.collection("users");
+
+    return collection.doc(userID).set({
+      'email': email,
+    });
+  }
 }

@@ -14,8 +14,10 @@ import 'package:taguig_tourism_mobile_app/weather_page.dart';
 
 class AppNavigation extends StatefulWidget {
   final String userID;
+  final String email;
   final int? index;
-  const AppNavigation({super.key, required this.userID, this.index});
+  const AppNavigation(
+      {super.key, required this.userID, this.index, required this.email});
 
   @override
   State<AppNavigation> createState() => _AppNavigationState();
@@ -38,6 +40,12 @@ class _AppNavigationState extends State<AppNavigation> {
     try {
       UserInformation? fetchedUser =
           await FirestoreServices().getUserData(widget.userID);
+
+      if (widget.email != fetchedUser!.email) {
+        FirestoreServices().updateUserEmail(widget.userID, widget.email);
+        _fetchUserData();
+        return;
+      }
       setState(() {
         userInfo = fetchedUser;
         isLoading = false;
@@ -78,10 +86,10 @@ class _AppNavigationState extends State<AppNavigation> {
     ];
 
     void changeScreen(int index) {
-    setState(() {
-      selectedNavIndex = index;
-    });
-  }
+      setState(() {
+        selectedNavIndex = index;
+      });
+    }
 
     return NavigationState(
       selectedIndex: selectedNavIndex,
@@ -165,8 +173,10 @@ class _AppNavigationState extends State<AppNavigation> {
             },
             destinations: const [
               NavigationDestination(icon: Icon(Icons.home), label: "Home"),
-              NavigationDestination(icon: Icon(Icons.commute), label: "Commute"),
-              NavigationDestination(icon: Icon(Icons.explore), label: "Explore"),
+              NavigationDestination(
+                  icon: Icon(Icons.commute), label: "Commute"),
+              NavigationDestination(
+                  icon: Icon(Icons.explore), label: "Explore"),
               NavigationDestination(icon: Icon(Icons.cloud), label: "Weather"),
               NavigationDestination(icon: Icon(Icons.person), label: "User"),
             ],

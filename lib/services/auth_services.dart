@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:taguig_tourism_mobile_app/app_navigation.dart';
-import 'package:taguig_tourism_mobile_app/login_page.dart';
 import 'package:taguig_tourism_mobile_app/services/firestore_services.dart';
 
 class AuthenticationServices {
@@ -89,6 +88,7 @@ class AuthenticationServices {
 
       //  Storing user ID
       String uid = FirebaseAuth.instance.currentUser!.uid;
+      String userEmail = FirebaseAuth.instance.currentUser!.email!;
 
       //  Variable for storing if the user's email is verified or not.
       bool isVerified = FirebaseAuth.instance.currentUser!.emailVerified;
@@ -109,7 +109,10 @@ class AuthenticationServices {
 
         //  Redirecting to home page
         Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => AppNavigation(userID: uid)));
+            builder: (context) => AppNavigation(
+                  userID: uid,
+                  email: userEmail,
+                )));
       } else {
         //  If user's email is not verified, a popup will appear to remind the user to check their email.
 
@@ -207,23 +210,24 @@ class AuthenticationServices {
 
   // For Google sign in
   final FirebaseAuth auth = FirebaseAuth.instance;
-  
-  getCurrentUser () async{
-    return await auth.currentUser;
+
+  getCurrentUser() async {
+    return auth.currentUser;
   }
 
-  signInWithGoogle (BuildContext context) async {
+  signInWithGoogle(BuildContext context) async {
     final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
     final GoogleSignIn googleSignIn = GoogleSignIn();
-    
-    final GoogleSignInAccount? googleSignInAccount = await googleSignIn.signIn();
 
-    final GoogleSignInAuthentication? googleSignInAuthentication = await googleSignInAccount?.authentication;
-  
+    final GoogleSignInAccount? googleSignInAccount =
+        await googleSignIn.signIn();
+
+    final GoogleSignInAuthentication? googleSignInAuthentication =
+        await googleSignInAccount?.authentication;
+
     final AuthCredential credential = GoogleAuthProvider.credential(
-      idToken: googleSignInAuthentication?.idToken,
-      accessToken: googleSignInAuthentication?.accessToken
-    );
+        idToken: googleSignInAuthentication?.idToken,
+        accessToken: googleSignInAuthentication?.accessToken);
     print('idToken: ${googleSignInAuthentication?.idToken}');
     print('accessToken: ${googleSignInAuthentication?.accessToken}');
 
@@ -231,15 +235,17 @@ class AuthenticationServices {
 
     User? userDetails = result.user;
 
-    if (result!=null) {
-      Map<String, dynamic> userInfoMap = {
-        "email": userDetails!.email,
-        "name": userDetails.displayName,
-        "imgUrl": userDetails.photoURL,
-        "user_id": userDetails.uid,
-      };
-      await FirestoreServices().addUsers(userDetails.uid, "", "", userDetails.email.toString(), 0, '', "").then((value) => {
-      Navigator.push(context, MaterialPageRoute(builder: (context) => AppNavigation(userID: userDetails.uid,))) });
-    }
+    await FirestoreServices()
+        .addUsers(
+            userDetails!.uid, "", "", userDetails.email.toString(), 0, '', "")
+        .then((value) => {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => AppNavigation(
+                            userID: userDetails.uid,
+                            email: userDetails.email.toString(),
+                          )))
+            });
   }
 }

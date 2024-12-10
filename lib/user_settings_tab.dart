@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:taguig_tourism_mobile_app/about_us.dart';
 import 'package:taguig_tourism_mobile_app/feedback_page.dart';
+import 'package:taguig_tourism_mobile_app/services/auth_services.dart';
+import 'package:taguig_tourism_mobile_app/services/user_info.dart';
 import 'package:taguig_tourism_mobile_app/widgets/widget_generator.dart';
 
 class UserSettingsTab extends StatefulWidget {
-  const UserSettingsTab({super.key});
+  final UserInformation userInfo;
+  const UserSettingsTab({super.key, required this.userInfo});
 
   @override
   State<UserSettingsTab> createState() => _UserSettingsTabState();
@@ -19,24 +22,6 @@ class _UserSettingsTabState extends State<UserSettingsTab> {
         child: Column(
           children: [
             const SizedBox(height: 65),
-            Container(
-              child: GenerateWidget().generateElevatedButton(
-                  context,
-                  'Notification', // Text of the button
-                  Colors.blueAccent.shade700, // Background Color
-                  Colors.white,
-                  notifButton),
-            ),
-            const SizedBox(height: 35),
-            Container(
-              child: GenerateWidget().generateElevatedButton(
-                  context,
-                  'Language', // Text of the button
-                  Colors.blueAccent.shade700, // Background Color
-                  Colors.white, // Text Color
-                  languageButton),
-            ),
-            const SizedBox(height: 35),
             Container(
               child: GenerateWidget().generateElevatedButton(
                   context,
@@ -59,7 +44,7 @@ class _UserSettingsTabState extends State<UserSettingsTab> {
             Container(
               child: GenerateWidget().generateElevatedButton(
                   context,
-                  'Log out', // Text of the button
+                  'Sign out', // Text of the button
                   Colors.blueAccent.shade700, // Background Color
                   Colors.white, // Text Color
                   logOutButton),
@@ -69,10 +54,6 @@ class _UserSettingsTabState extends State<UserSettingsTab> {
       ),
     );
   }
-
-  void notifButton() {}
-
-  void languageButton() {}
 
   void helpSuppButton() {
     // Navigate to the Help & Support page when this button is pressed
@@ -85,9 +66,12 @@ class _UserSettingsTabState extends State<UserSettingsTab> {
   void sendFeedbackButton() {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => const FeedbackPage()),
+      MaterialPageRoute(
+          builder: (context) => FeedbackPage(uid: widget.userInfo.userID)),
     );
   }
 
-  void logOutButton() {}
+  void logOutButton() {
+    AuthenticationServices().signOut(context: context);
+  }
 }

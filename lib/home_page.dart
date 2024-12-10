@@ -328,6 +328,191 @@ class _HomePageState extends State<HomePage> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        Container(
+                          margin: EdgeInsets.symmetric(
+                              horizontal: screenHeight * 0.03948),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.all(screenHeight * 0.01053),
+                                child: Text(
+                                  "Events",
+                                  style: TextStyle(
+                                    fontSize: screenHeight * 0.02369,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  textAlign: TextAlign.left,
+                                ),
+                              ),
+                              ListView.builder(
+                                shrinkWrap: true,
+                                physics: NeverScrollableScrollPhysics(),
+                                itemCount: eventList.length,
+                                itemBuilder: (context, index) {
+                                  return Card(
+                                    margin: EdgeInsets.symmetric(
+                                        vertical: screenHeight * 0.01),
+                                    elevation: 1,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(
+                                          screenHeight * 0.0125),
+                                    ),
+                                    child: Container(
+                                      padding:
+                                          EdgeInsets.all(screenHeight * 0.0125),
+                                      child: Row(
+                                        children: [
+                                          ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(15.0),
+                                            child: Image.network(
+                                              imageDirectory[index],
+                                              width: screenHeight * 0.125,
+                                              height: screenHeight * 0.125,
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                          SizedBox(
+                                              width: screenHeight * 0.0125),
+                                          Expanded(
+                                            child: ListTile(
+                                              title: Text(
+                                                eventList[index].eventName,
+                                                maxLines: 2,
+                                                overflow: TextOverflow.ellipsis,
+                                                style: TextStyle(
+                                                  fontSize:
+                                                      screenHeight * 0.0175,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              subtitle: Padding(
+                                                padding: EdgeInsets.symmetric(
+                                                    vertical:
+                                                        screenHeight * 0.0125),
+                                                child: Text(
+                                                  DateFormat('MMMM dd, yyyy')
+                                                      .format(eventList[index]
+                                                          .eventDate
+                                                          .toDate()),
+                                                  style: TextStyle(
+                                                      fontSize:
+                                                          screenHeight * 0.015),
+                                                ),
+                                              ),
+                                              onTap: () {
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (builder) =>
+                                                        SingleEventPage(
+                                                      event: eventList[index],
+                                                    ),
+                                                  ),
+                                                );
+                                              },
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
+
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: screenHeight * 0.02632),
+                          child: Divider(),
+                        ),
+
+                        // This is where the categories is displayed
+                        Container(
+                          margin: EdgeInsets.symmetric(
+                              horizontal: screenHeight * 0.03948),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.all(screenHeight * 0.01053),
+                                child: Text(
+                                  "Categories",
+                                  style: TextStyle(
+                                    fontSize: screenHeight * 0.02369,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  textAlign: TextAlign.left,
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.all(screenHeight * 0.00658),
+                                child: GridView.builder(
+                                  shrinkWrap: true,
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  itemCount: 11,
+                                  gridDelegate:
+                                      const SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 4,
+                                    childAspectRatio: 0.8,
+                                  ),
+                                  itemBuilder: (context, index) {
+                                    return Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        ClipOval(
+                                          child: Material(
+                                            elevation: 10,
+                                            color: Colors.blueAccent.shade700,
+                                            child: IconButton(
+                                              onPressed: () {
+                                                Navigator.of(context).push(
+                                                    MaterialPageRoute(
+                                                        builder: (builder) =>
+                                                            CategoriesPage(
+                                                                headline:
+                                                                    getTextForIndex(
+                                                                        index))));
+                                              },
+                                              icon: Icon(
+                                                getIconForIndex(index),
+                                                color: Colors.white,
+                                                size: screenHeight *
+                                                    0.03948, // Icon size
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: screenHeight * 0.01316,
+                                        ),
+                                        Text(
+                                          textAlign: TextAlign.center,
+                                          maxLines: 2,
+                                          getTextForIndex(index),
+                                          style: TextStyle(
+                                              fontSize: screenHeight * 0.01579),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: screenHeight * 0.02632),
+                          child: Divider(),
+                        ),
+
                         // This is where the popular destination carousel is displayed
                         Container(
                           margin: EdgeInsets.fromLTRB(screenHeight * 0.03948, 0,
@@ -468,88 +653,6 @@ class _HomePageState extends State<HomePage> {
                             ],
                           ),
                         ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: screenHeight * 0.02632),
-                          child: Divider(),
-                        ),
-
-                        // This is where the categories is displayed
-                        Container(
-                          margin: EdgeInsets.symmetric(
-                              horizontal: screenHeight * 0.03948),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: EdgeInsets.all(screenHeight * 0.01053),
-                                child: Text(
-                                  "Categories",
-                                  style: TextStyle(
-                                    fontSize: screenHeight * 0.02369,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                  textAlign: TextAlign.left,
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.all(screenHeight * 0.00658),
-                                child: GridView.builder(
-                                  shrinkWrap: true,
-                                  physics: const NeverScrollableScrollPhysics(),
-                                  itemCount: 11,
-                                  gridDelegate:
-                                      const SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 4,
-                                    childAspectRatio: 0.8,
-                                  ),
-                                  itemBuilder: (context, index) {
-                                    return Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        ClipOval(
-                                          child: Material(
-                                            elevation: 10,
-                                            color: Colors.blueAccent.shade700,
-                                            child: IconButton(
-                                              onPressed: () {
-                                                Navigator.of(context).push(
-                                                    MaterialPageRoute(
-                                                        builder: (builder) =>
-                                                            CategoriesPage(
-                                                                headline:
-                                                                    getTextForIndex(
-                                                                        index))));
-                                              },
-                                              icon: Icon(
-                                                getIconForIndex(index),
-                                                color: Colors.white,
-                                                size: screenHeight *
-                                                    0.03948, // Icon size
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: screenHeight * 0.01316,
-                                        ),
-                                        Text(
-                                          textAlign: TextAlign.center,
-                                          maxLines: 2,
-                                          getTextForIndex(index),
-                                          style: TextStyle(
-                                              fontSize: screenHeight * 0.01579),
-                                        ),
-                                      ],
-                                    );
-                                  },
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
 
                         Padding(
                           padding: EdgeInsets.symmetric(
@@ -661,108 +764,6 @@ class _HomePageState extends State<HomePage> {
                                   },
                                 ),
                               )
-                            ],
-                          ),
-                        ),
-
-                        Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: screenHeight * 0.02632),
-                          child: Divider(),
-                        ),
-
-                        Container(
-                          margin: EdgeInsets.symmetric(
-                              horizontal: screenHeight * 0.03948),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: EdgeInsets.all(screenHeight * 0.01053),
-                                child: Text(
-                                  "Events",
-                                  style: TextStyle(
-                                    fontSize: screenHeight * 0.02369,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                  textAlign: TextAlign.left,
-                                ),
-                              ),
-                              ListView.builder(
-                                shrinkWrap: true,
-                                physics: NeverScrollableScrollPhysics(),
-                                itemCount: eventList.length,
-                                itemBuilder: (context, index) {
-                                  return Card(
-                                    margin: EdgeInsets.symmetric(
-                                        vertical: screenHeight * 0.01),
-                                    elevation: 1,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(
-                                          screenHeight * 0.0125),
-                                    ),
-                                    child: Container(
-                                      padding:
-                                          EdgeInsets.all(screenHeight * 0.0125),
-                                      child: Row(
-                                        children: [
-                                          ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(15.0),
-                                            child: Image.network(
-                                              imageDirectory[index],
-                                              width: screenHeight * 0.125,
-                                              height: screenHeight * 0.125,
-                                              fit: BoxFit.cover,
-                                            ),
-                                          ),
-                                          SizedBox(
-                                              width: screenHeight * 0.0125),
-                                          Expanded(
-                                            child: ListTile(
-                                              title: Text(
-                                                eventList[index].eventName,
-                                                maxLines: 2,
-                                                overflow: TextOverflow.ellipsis,
-                                                style: TextStyle(
-                                                  fontSize:
-                                                      screenHeight * 0.0175,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
-                                              subtitle: Padding(
-                                                padding: EdgeInsets.symmetric(
-                                                    vertical:
-                                                        screenHeight * 0.0125),
-                                                child: Text(
-                                                  DateFormat('MMMM dd, yyyy')
-                                                      .format(eventList[index]
-                                                          .eventDate
-                                                          .toDate()),
-                                                  style: TextStyle(
-                                                      fontSize:
-                                                          screenHeight * 0.015),
-                                                ),
-                                              ),
-                                              onTap: () {
-                                                Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                    builder: (builder) =>
-                                                        SingleEventPage(
-                                                      event: eventList[index],
-                                                    ),
-                                                  ),
-                                                );
-                                              },
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  );
-                                },
-                              ),
                             ],
                           ),
                         ),

@@ -33,7 +33,8 @@ class _UserPageState extends State<UserPage> {
               child: Column(
                 children: [
                   TabBar(
-                    padding: EdgeInsets.symmetric(horizontal: screenHeight * 0.01315),
+                    padding: EdgeInsets.symmetric(
+                        horizontal: screenHeight * 0.01315),
                     labelStyle: TextStyle(
                       fontFamily: 'Arvo',
                       fontSize: screenHeight * 0.01578,
@@ -43,25 +44,33 @@ class _UserPageState extends State<UserPage> {
                     indicatorSize: TabBarIndicatorSize.tab,
                     indicatorColor: Colors.redAccent,
                     indicatorPadding: EdgeInsets.symmetric(
-                      horizontal: screenHeight * 0.01973,
-                      vertical: screenHeight * 0.013157
-                    ),
+                        horizontal: screenHeight * 0.01973,
+                        vertical: screenHeight * 0.013157),
                     indicator: BoxDecoration(
                       color: Colors.blueAccent,
                       borderRadius: BorderRadius.circular(5),
                     ),
                     tabs: [
-                      Tab(text: 'Profile', icon: Icon(Icons.person, size: screenHeight * 0.03289)),
-                      Tab(text: 'History', icon: Icon(Icons.history, size: screenHeight * 0.03289)),
-                      Tab(text: 'Settings', icon: Icon(Icons.settings, size: screenHeight * 0.03289)),
+                      Tab(
+                          text: 'Profile',
+                          icon:
+                              Icon(Icons.person, size: screenHeight * 0.03289)),
+                      Tab(
+                          text: 'History',
+                          icon: Icon(Icons.history,
+                              size: screenHeight * 0.03289)),
+                      Tab(
+                          text: 'Settings',
+                          icon: Icon(Icons.settings,
+                              size: screenHeight * 0.03289)),
                     ],
                   ),
                   Expanded(
                     child: TabBarView(
                       children: [
-                        UserProfileTab(userInformation: userInfo!,),
+                        UserProfileTab(userInformation: userInfo!),
                         UserHistoryTab(),
-                        UserSettingsTab(),
+                        UserSettingsTab(userInfo: userInfo!),
                       ],
                     ),
                   ),

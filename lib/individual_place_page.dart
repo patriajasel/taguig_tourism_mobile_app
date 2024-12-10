@@ -1,4 +1,3 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -190,82 +189,39 @@ class _IndividualPlacePageState extends State<IndividualPlacePage> {
                                 SizedBox(
                                     height:
                                         20), // Add space after the hyperlink
-                                Text(
-                                  'Street View',
-                                  textAlign: TextAlign.left,
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                // Centered Carousel
-                                Center(
-                                  child: SizedBox(
-                                    width:
-                                        MediaQuery.of(context).size.width * 0.7,
-                                    child: CarouselSlider(
-                                      options: CarouselOptions(
-                                        initialPage: 0,
-                                        autoPlay: true,
-                                        enlargeCenterPage: true,
-                                        enlargeFactor: 0.3,
-                                        height: 150,
-                                        onPageChanged: (value, _) {},
-                                      ),
-                                      items: imgList.map((item) {
-                                        return Container(
-                                          margin: const EdgeInsets.all(8),
-                                          width: 400,
-                                          child: ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            child: Image.asset(
-                                              item,
-                                              fit: BoxFit.cover,
-                                            ),
-                                          ),
-                                        );
-                                      }).toList(),
-                                    ),
-                                  ),
-                                ),
                               ],
                             ),
                           ),
                         ),
                       ],
                     ),
+                    Spacer(),
                     // Button positioned at the bottom
-                    Positioned(
-                      bottom: 0,
-                      right: 30,
-                      left: 30,
-                      child: ElevatedButton(
-                        onPressed: () {},
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors
-                              .blue, // Set button background color to blue
-                          padding:
-                              EdgeInsets.symmetric(horizontal: 18, vertical: 6),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
+                    ElevatedButton(
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor:
+                            Colors.blue, // Set button background color to blue
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 18, vertical: 6),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
                         ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(Icons.map,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(Icons.map,
+                              color: Colors.white), // Icon color remains white
+                          SizedBox(width: 12),
+                          Text(
+                            'View location on map',
+                            style: TextStyle(
+                                fontSize: 16,
                                 color:
-                                    Colors.white), // Icon color remains white
-                            SizedBox(width: 12),
-                            Text(
-                              'View location on map',
-                              style: TextStyle(
-                                  fontSize: 16,
-                                  color:
-                                      Colors.white), // Text color remains white
-                            ),
-                          ],
-                        ),
+                                    Colors.white), // Text color remains white
+                          ),
+                        ],
                       ),
                     ),
                   ],
