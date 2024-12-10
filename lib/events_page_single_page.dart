@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:taguig_tourism_mobile_app/models/events.dart';
 import 'package:taguig_tourism_mobile_app/services/firestore_services.dart';
 
@@ -33,6 +34,7 @@ class _SingleEventPageState extends State<SingleEventPage> {
 
   @override
   Widget build(BuildContext context) {
+    print(widget.event.eventDate);
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -97,7 +99,8 @@ class _SingleEventPageState extends State<SingleEventPage> {
                           SizedBox(width: 12),
                           Expanded(
                             child: Text(
-                              widget.event.eventDate.toDate().toString(),
+                              DateFormat('MMMM dd, yyyy')
+                                  .format(widget.event.eventDate.toDate()),
                               style: TextStyle(
                                 fontSize: 12,
                                 color: Colors.grey[700],

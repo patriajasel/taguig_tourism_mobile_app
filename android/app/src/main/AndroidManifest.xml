@@ -40,7 +40,7 @@
 
         <meta-data 
             android:name="com.google.android.geo.API_KEY"
-            android:value=""/>
+            android:value="AIzaSyAkBVMm6ilWp3S68owibXEAShzq4SLY6Dc"/>
     </application>
     <!-- Required to query activities that can process text, see:
          https://developer.android.com/training/package-visibility and

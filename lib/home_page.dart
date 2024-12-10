@@ -6,10 +6,12 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:intl/intl.dart';
 import 'package:taguig_tourism_mobile_app/categories_page.dart';
 import 'package:taguig_tourism_mobile_app/individual_place_page.dart';
 import 'package:taguig_tourism_mobile_app/models/events.dart';
-import 'package:taguig_tourism_mobile_app/news_page_single_page.dart';
+import 'package:taguig_tourism_mobile_app/events_page_single_page.dart';
+import 'package:taguig_tourism_mobile_app/navigation_state.dart';
 import 'package:taguig_tourism_mobile_app/services/explore_info.dart';
 import 'package:taguig_tourism_mobile_app/services/firestore_services.dart';
 import 'package:taguig_tourism_mobile_app/services/permission_handler.dart';
@@ -247,6 +249,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
+    final navigationState = NavigationState.of(context);
 
     return isLoading
         ? Center(child: CircularProgressIndicator()) // Show loading indicator
@@ -275,11 +278,16 @@ class _HomePageState extends State<HomePage> {
                         children: [
                           Padding(
                             padding: EdgeInsets.all(screenHeight * 0.02632),
-                            child: CircleAvatar(
-                              // ! This widget will be changed to ImageAsset once there is a function for uploading pictures
-                              child: Icon(
-                                Icons.person,
-                                size: screenHeight * 0.03948,
+                            child: GestureDetector(
+                              onTap: () {
+                                navigationState?.onChangeScreen(4);
+                              },
+                              child: CircleAvatar(
+                                // ! This widget will be changed to ImageAsset once there is a function for uploading pictures
+                                child: Icon(
+                                  Icons.person,
+                                  size: screenHeight * 0.03948,
+                                ),
                               ),
                             ),
                           ),
@@ -430,53 +438,52 @@ class _HomePageState extends State<HomePage> {
                                 child: GridView.builder(
                                   shrinkWrap: true,
                                   physics: const NeverScrollableScrollPhysics(),
-                                  itemCount: 10,
+                                  itemCount: 11,
                                   gridDelegate:
                                       const SliverGridDelegateWithFixedCrossAxisCount(
                                     crossAxisCount: 4,
                                     childAspectRatio: 0.8,
                                   ),
                                   itemBuilder: (context, index) {
-                                    return Padding(
-                                      padding: EdgeInsets.all(
-                                          screenHeight * 0.00658),
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          ClipOval(
-                                            child: Material(
-                                              elevation: 10,
-                                              color: Colors.blueAccent.shade700,
-                                              child: IconButton(
-                                                onPressed: () {
-                                                  Navigator.of(context).push(
-                                                      MaterialPageRoute(
-                                                          builder: (builder) =>
-                                                              CategoriesPage(
-                                                                  headline:
-                                                                      getTextForIndex(
-                                                                          index))));
-                                                },
-                                                icon: Icon(
-                                                  getIconForIndex(index),
-                                                  color: Colors.white,
-                                                  size: screenHeight *
-                                                      0.03948, // Icon size
-                                                ),
+                                    return Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        ClipOval(
+                                          child: Material(
+                                            elevation: 10,
+                                            color: Colors.blueAccent.shade700,
+                                            child: IconButton(
+                                              onPressed: () {
+                                                Navigator.of(context).push(
+                                                    MaterialPageRoute(
+                                                        builder: (builder) =>
+                                                            CategoriesPage(
+                                                                headline:
+                                                                    getTextForIndex(
+                                                                        index))));
+                                              },
+                                              icon: Icon(
+                                                getIconForIndex(index),
+                                                color: Colors.white,
+                                                size: screenHeight *
+                                                    0.03948, // Icon size
                                               ),
                                             ),
                                           ),
-                                          SizedBox(
-                                            height: screenHeight * 0.01316,
-                                          ),
-                                          Text(
-                                            getTextForIndex(index),
-                                            style: TextStyle(
-                                                fontSize:
-                                                    screenHeight * 0.01579),
-                                          ),
-                                        ],
-                                      ),
+                                        ),
+                                        SizedBox(
+                                          height: screenHeight * 0.01316,
+                                        ),
+                                        Text(
+                                          textAlign: TextAlign.center,
+                                          maxLines: 2,
+                                          getTextForIndex(index),
+                                          style: TextStyle(
+                                              fontSize: screenHeight * 0.01579),
+                                        ),
+                                      ],
                                     );
                                   },
                                 ),
@@ -641,10 +648,10 @@ class _HomePageState extends State<HomePage> {
                                                     vertical:
                                                         screenHeight * 0.0125),
                                                 child: Text(
-                                                  eventList[index]
-                                                      .eventDate
-                                                      .toDate()
-                                                      .toString(),
+                                                  DateFormat('MMMM dd, yyyy')
+                                                      .format(eventList[index]
+                                                          .eventDate
+                                                          .toDate()),
                                                   style: TextStyle(
                                                       fontSize:
                                                           screenHeight * 0.015),
@@ -705,25 +712,28 @@ class _HomePageState extends State<HomePage> {
   IconData getIconForIndex(int index) {
     switch (index) {
       case 0:
-        return Icons.local_cafe;
+        return Icons.flag;
       case 1:
-        return Icons.local_mall;
+        return Icons.local_cafe;
       case 2:
-        return Icons.hotel;
+        return Icons.local_mall;
       case 3:
-        return Icons.store;
+        return Icons.hotel;
       case 4:
-        return Icons.account_balance;
+        return Icons.store;
       case 5:
-        return Icons.local_taxi;
+        return Icons.account_balance;
       case 6:
-        return Icons.local_hospital;
+        return Icons.local_taxi;
       case 7:
-        return Icons.church;
+        return Icons.local_hospital;
       case 8:
-        return Icons.local_police;
+        return Icons.church;
       case 9:
+        return Icons.local_police;
+      case 10:
         return Icons.location_city;
+
       default:
         return Icons.help_outline;
     }
@@ -733,25 +743,28 @@ class _HomePageState extends State<HomePage> {
   String getTextForIndex(int index) {
     switch (index) {
       case 0:
-        return "XDiners";
+        return "Tourist Spots";
       case 1:
-        return "Malls";
+        return "Diners";
       case 2:
-        return "Hotels";
+        return "Malls";
       case 3:
-        return "XStores";
+        return "Hotels";
       case 4:
-        return "Banks";
+        return "Convenience Stores";
       case 5:
-        return "XTerminals";
+        return "Banks";
       case 6:
-        return "Hospitals";
+        return "Terminals";
       case 7:
-        return "Churches";
+        return "Hospitals";
       case 8:
-        return "Police";
+        return "Churches";
       case 9:
+        return "Police";
+      case 10:
         return "LGU";
+
       default:
         return "Unknown";
     }

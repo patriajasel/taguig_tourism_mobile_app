@@ -1,0 +1,807 @@
+{
+    "intents": [
+        {
+            "tag": "greeting",
+            "patterns": [
+                "Hello",
+                "Hi",
+                "Hey",
+                "What's up?",
+                "Hello, I need help",
+                "Hi, can you help me?",
+                "Hey, I need help"
+            ],
+            "responses": [
+                "Hello! I am a customer chat support. How can I help you?",
+                "Hi there!, I am a chat bot, I'm here to help. What can I do to help?",
+                "Hey, I'm here to assist you. What can I do for you?",
+                "Welcome to GoTaguig App, I am here to help you. What can I do for you?",
+                "Good Day!, I am here to help you. What can I do for you?",
+                "Thank you for reaching out to me, I am here to help you. What can I do for you"
+            ]
+        },
+        {
+            "tag": "Location",
+            "patterns": [
+                "Where is Taguig located",
+                "Where is Taguig?",
+                "What is the location of Taguig?"
+            ],
+            "responses": [
+                "Taguig is located in the southeastern part of Metro Manila, Philippines.",
+                "Taguig is a city in the Philippines, located in the National Capital Region (NCR). It lies in the southeastern part of Metro Manila. Taguig is known for its rapid urban development, particularly the Bonifacio Global City (BGC) area, a major business district featuring skyscrapers, upscale shopping centers, and vibrant nightlife"
+            ]
+        },
+        {
+            "tag": "Landmarks",
+            "patterns": [
+                "What are the key landmarks in Taguig",
+                "What can I see in Taguig",
+                "What are the popular destinations in Taguig",
+                "What are the top tourist spots in Taguig?"
+            ],
+            "responses": [
+                "Key landmarks of Taguig includes Bonifacio Global City (BGC), Market! Market!, Venice Grand Canal Mall, The Fort Strip, Philippine Army Museum and The Mind Museum",
+                "Top tourist spots include Bonifacio Global City (BGC), Venice Grand Canal Mall, The Mind Museum, and Heroes Cemetery (Libingan ng mga Bayani)."
+            ]
+        },
+        {
+            "tag": "Roads",
+            "patterns": [
+                "What are the major roads in Taguig?",
+                "What are roads leading to Taguig?",
+                "What are the popular roads in Taguig?"
+            ],
+            "responses": [
+                "The major roads in Taguig City includes C-5 Road, Lawton Avenue, McKinley Parkway, and Levi Mariano Avenue."
+            ]
+        },
+        {
+            "tag": "Commutes",
+            "patterns": [
+                "How can I get to Bonifacio Global City?",
+                "What’s the fastest way to BGC?",
+                "Can you help me find a route to BGC?",
+                "What commute options do I have for BGC?",
+                "How do I commute to Bonifacio Global City?",
+                "What’s the easiest way to Bonifacio Global City?",
+                "Which bus or jeepney goes to BGC?",
+                "Is there a direct bus to BGC?"
+
+            ],
+            "responses": [
+                "You can take a bus or jeepney via C-5 or EDSA, or use ride-hailing apps for convenience. You can also view our commute section in the app.",
+                "You can check the commute section or explore section of our app to see if there is an available commute guidelines you can follow to reach your destination",
+                "The easiest way is to use a ride-hailing app. If you prefer public transport, check for buses or jeepneys heading to Market Market.",
+                "There are multiple options: buses, jeepneys, or ride-hailing apps. Visit the explore and commute section in our app for more details.",
+                "If you’re near an MRT station, consider transferring to a BGC bus or shuttle service."
+
+            ]
+        },
+
+        {
+            "tag": "Train",
+            "patterns": [
+                "Is there a train station in Taguig?",
+                "Does Taguig have a train station?",
+                "How do I get to the train station in Taguig?",
+                "Where is the train station in Taguig?",
+                "Is the PNR station near Taguig?",
+                "Can I travel to Taguig via train?"
+
+            ],
+            "responses": [
+                "Yes, Taguig is accessible via the Philippine National Railways (PNR) FTI Station.",
+                "The PNR FTI Train Station is located on the southern edge of Taguig, in the Food Terminal Inc. (FTI) area. It serves passengers traveling on the PNR Metro Commuter Line, connecting to cities like Manila and Calamba.",
+                "You can use the PNR FTI Station to travel to Taguig, conveniently located in the FTI area.",
+                "The train station in Taguig is the PNR FTI Station, providing access to the Metro Commuter Line."
+
+            ]
+        },
+        {
+            "tag": "Terminals",
+            "patterns": [
+                "Where can I find public transportation terminals in Taguig?",
+                "Where can I find public transportation terminals in Taguig?",
+                "Are there terminals for buses or jeepneys in Taguig?",
+                "What are the main transport terminals in Taguig?",
+                "Can you guide me to a public terminal in Taguig?",
+                "Which areas in Taguig have transport terminals?"
+
+            ],
+            "responses": [
+                "Major terminals are located near Market! Market! and the FTI area",
+                "You can view the explore section of the GoTaguig App and set the filter to Terminals to see which terminal are near you",
+                "For transport terminals, check the Market! Market! area or the FTI complex.",
+                "Public transportation terminals in Taguig are commonly found near busy hubs like Market! Market! and the FTI area."
+
+            ]
+        },
+        {
+            "tag": "Parks",
+            "patterns": [
+                "What parks can I visit in Taguig?",
+                "Are there public parks in Taguig?",
+                "Where can I relax in Taguig?",
+                "What green spaces are in Taguig?",
+                "Are there family-friendly parks in Taguig?"
+
+            ],
+            "responses": [
+                "Popular parks include Track 30th, Terra 28th, and Lakeshore Hall Park. You can view the explore section of the GoTaguig App to see which popular places are near you.",
+                "Taguig offers great parks like Track 30th and Terra 28th in Bonifacio Global City (BGC).",
+                "Lakeshore Hall Park and Track 30th are fantastic spots for relaxation and exercise in Taguig.",
+                "You can enjoy open green spaces like Terra 28th or Track 30th for outdoor activities in Taguig."
+
+            ]
+        },
+        {
+            "tag": "Malls",
+            "patterns": [
+                "What shopping malls are located in Taguig?",
+                "Where can I shop in Taguig?",
+                "What are the popular malls in Taguig?",
+                "Where is the nearest mall in Taguig?",
+                "Can you list malls in Taguig?"
+
+            ],
+            "responses": [
+                "Popular malls include SM Aura, Market! Market!, and Vista Mall Taguig. You can view the categories section of the GoTaguig App and select malls to see the malls around Taguig City.",
+                "For shopping, visit SM Aura or Market! Market! in Bonifacio Global City.",
+                "Malls like SM Aura and Vista Mall Taguig are great places to shop and dine in Taguig.",
+                "Taguig offers top-notch malls, including Market! Market! and SM Aura for your shopping needs."
+
+            ]
+        },
+        {
+            "tag": "Hospitals",
+            "patterns": [
+                "Where are hospitals in Taguig?",
+                "Can you list hospitals in Taguig?",
+                "What hospitals are in Taguig City?",
+                "Are there medical centers in Taguig?",
+                "What are the major hospitals in Taguig?",
+                "Where can I find healthcare in Taguig?"
+
+            ],
+            "responses": [
+                "Notable hospitals in Taguig include St. Luke’s Medical Center (BGC), Taguig Pateros District Hospital, and Medical Center Taguig.",
+                "You can find top-tier healthcare at St. Luke's Medical Center in Bonifacio Global City (BGC), and affordable services at Taguig Pateros District Hospital.",
+                "St. Luke’s Medical Center is a premier hospital in BGC, while Taguig Pateros District Hospital offers community healthcare services.",
+                "For hospitals in Taguig, check out St. Luke’s in BGC and Medical Center Taguig."
+
+            ]
+        },
+        {
+            "tag": "Schools",
+            "patterns": [
+                "Are there schools in Taguig?",
+                "What universities are in Taguig?",
+                "Where are international schools in Taguig?",
+                "Can I find good schools in Taguig?",
+                "Are there educational institutions in Taguig?",
+                "What are the top schools in Taguig?"
+
+            ],
+            "responses": [
+                "Yes, Taguig has renowned institutions such as the British School Manila, International School Manila, and Taguig City University.",
+                "International education options in Taguig include the British School Manila and International School Manila, both located in BGC.",
+                "Taguig offers a variety of schools, from local institutions like Taguig City University to international schools like British School Manila.",
+                "You can find excellent schools in Taguig, including the prestigious International School Manila in BGC."
+
+            ]
+        },
+        {
+            "tag": "Police Stations",
+            "patterns": [
+                "Where are the police stations in Taguig?",
+                "Is there a police station in Taguig?",
+                "How can I contact the police in Taguig?",
+                "Are there police stations near BGC?",
+                "Where is the main police station in Taguig?",
+                "Can I get the contact details for Taguig police?"
+
+            ],
+            "responses": [
+                "The main police station in Taguig is located along C-5, with additional sub-stations spread across various barangays.",
+                "For emergencies, contact the Taguig Police Hotline or visit the main station on C-5 Road.",
+                "Taguig’s main police station is on C-5 Road, with smaller stations across the city.",
+                "You can reach out to the Taguig Police through their hotline or visit a sub-station near your barangay."
+
+            ]
+        },
+        {
+            "tag": "Emergency Procedures",
+            "patterns": [
+                "What should I do in case of an emergency in Taguig?",
+                "How do I get help in an emergency in Taguig?",
+                "Who do I call for emergencies in Taguig?",
+                "What is the Taguig emergency hotline?",
+                "Can you guide me on what to do during an emergency?",
+                "Is there an emergency number specific to Taguig?"
+
+            ],
+            "responses": [
+                "Call the Taguig Emergency Hotline at 8789-3200 or 911 for immediate assistance.",
+                "In emergencies, dial 8789-3200 for the Taguig Emergency Hotline, or 911 for nationwide emergency services.",
+                "For emergencies in Taguig, contact the emergency hotline at 8789-3200 or use 911 for urgent nationwide support.",
+                "Always remember to dial 8789-3200 for local emergencies in Taguig, or 911 for broader assistance."
+                ]
+        },
+        {
+            "tag": "Evacuation Centers",
+            "patterns": [
+                "Are there evacuation centers in Taguig?",
+                "Where can I go during a disaster in Taguig?",
+                "What are the evacuation sites in Taguig?",
+                "Can you tell me about evacuation shelters in Taguig?",
+                "Where should I go during floods in Taguig?",
+                "Are there disaster evacuation points in Taguig?"
+
+            ],
+            "responses": [
+                "Schools and barangay halls in Taguig often serve as evacuation centers during emergencies.",
+                "Your nearest barangay hall or school will usually act as an evacuation center during natural disasters.",
+                "Check with your barangay office for the nearest evacuation site during emergencies.",
+                "Common evacuation centers in Taguig include public schools and barangay halls. Stay tuned to local announcements for updates."
+
+            ]
+        },
+        {
+            "tag": "Festivals",
+            "patterns": [
+                "Are there any festivals in Taguig?",
+                "What festivals are celebrated in Taguig?",
+                "When is the Taguig City Festival?",
+                "What cultural events happen in Taguig?",
+                "Does Taguig have annual festivals?",
+                "Can you tell me about Taguig City’s main celebrations?"
+
+            ],
+            "responses": [
+                "Yes, the Taguig City Festival is celebrated annually to showcase the city's rich culture and history.",
+                "The Taguig City Festival highlights the city's cultural heritage through various performances and events each year.",
+                "Taguig celebrates its city festival annually with cultural shows, parades, and community activities.",
+                "Experience Taguig's vibrant cultural heritage during the annual Taguig City Festival."
+
+            ]
+        },
+        {
+            "tag": "Food",
+            "patterns": [
+                "What food is Taguig known for?",
+                "What local dishes can I try in Taguig?",
+                "Are there famous local foods in Taguig?",
+                "What are Taguig’s signature dishes?",
+                "Can you recommend Taguig’s local specialties?",
+                "What traditional foods can I find in Taguig?"
+
+            ],
+            "responses": [
+                "Taguig is famous for its 'kakanin' (rice cakes) like sapin-sapin and bibingka.",
+                "Don't miss out on Taguig's delicious rice cakes such as sapin-sapin, which reflect the local culinary tradition.",
+                "Try Taguig's traditional 'kakanin,' including sapin-sapin and bibingka, for an authentic taste of its culture.",
+                "Taguig’s culinary pride lies in its flavorful rice cakes like sapin-sapin and other traditional treats."
+
+            ]
+        },
+        {
+            "tag": "Barangays",
+            "patterns": [
+                "How many barangays are in Taguig?",
+                "What are the barangays in Taguig?",
+                "List the barangays in Taguig.",
+                "Can you name the barangays in Taguig?",
+                "What are the local divisions in Taguig?",
+                "Which barangays make up Taguig City?"
+
+            ],
+            "responses": [
+                "Taguig is composed of 28 barangays, each with its own local government and services.",
+                "There are 28 barangays in Taguig, including Fort Bonifacio, Ususan, and Tuktukan.",
+                "Taguig's 28 barangays include areas such as Fort Bonifacio, Western Bicutan, and Signal Village.",
+                "Some of the 28 barangays in Taguig include Bagumbayan, Tuktukan, and Ususan. Visit the city website for a full list."
+
+            ]
+        },
+        {
+            "tag": "Recreational Areas",
+            "patterns": [
+                "Where can I find recreational areas in Taguig?",
+                "What parks are in Taguig?",
+                "Are there open spaces for recreation in Taguig?",
+                "Where can I relax outdoors in Taguig?",
+                "What are the top recreational spots in Taguig?",
+                "Are there fitness parks in Taguig?"
+
+            ],
+            "responses": [
+                "Popular recreational spots in Taguig include Track 30th and Terra 28th, both located in Bonifacio Global City.",
+                "Visit Track 30th or Terra 28th in BGC for open green spaces perfect for relaxation and fitness activities.",
+                "Taguig’s recreational areas include Track 30th, Terra 28th, and Lakeshore Hall Park for outdoor enjoyment.",
+                "Enjoy fitness and relaxation at Track 30th or Terra 28th, two well-loved parks in Taguig's BGC area."
+
+            ]
+        },
+        {
+            "tag": "Nightlife",
+            "patterns": [
+                "Where are the nightlife spots in Taguig?",
+                "What are some nightlife destinations in Taguig?",
+                "Is there nightlife in BGC?",
+                "Where can I enjoy nightlife in Taguig?",
+                "Are there bars in Taguig?",
+                "What’s the nightlife scene like in Taguig?"
+
+            ],
+            "responses": [
+                "Popular nightlife spots in Taguig include Bonifacio High Street, The Fort Strip, and Uptown Parade in BGC.",
+                "BGC offers vibrant nightlife with clubs, bars, and entertainment venues at The Fort Strip and Uptown Parade.",
+                "For nightlife in Taguig, check out popular areas like Bonifacio High Street and Uptown Parade in BGC.",
+                "Taguig’s nightlife is centered in BGC, featuring The Fort Strip and various upscale bars and clubs."
+
+            ]
+        },
+        {
+            "tag": "Luxury Hotels",
+            "patterns": [
+                "Are there luxury hotels in Taguig?",
+                "What are the best luxury hotels in Taguig?",
+                "Where can I stay in a luxury hotel in Taguig?"
+            ],
+            "responses": [
+                "Yes, Taguig features several luxury hotels such as Shangri-La at the Fort, Grand Hyatt Manila, and Ascott Bonifacio Global City.",
+                "For a luxurious experience, you can stay at top-tier hotels like Grand Hyatt Manila or Shangri-La at the Fort, both offering premium amenities in BGC."
+            ]
+        },
+        {
+            "tag": "Budget Hotels",
+            "patterns": [
+                "Are there budget-friendly hotels in Taguig?",
+                "What are some affordable hotels in Taguig?",
+                "Where can I find cheap hotels in Taguig?"
+            ],
+            "responses": [
+                "Yes, budget-friendly options include Red Planet Hotel and MySpace Hotel @ BGC, both offering comfortable stays at affordable rates.",
+                "If you're on a budget, consider staying at MySpace Hotel or Red Planet Hotel, both conveniently located near key attractions."
+            ]
+        },
+        {
+            "tag": "Hotel Locations",
+            "patterns": [
+                "Where are most hotels located in Taguig?",
+                "What areas have the most hotels in Taguig?",
+                "Which district in Taguig has many hotels?"
+            ],
+            "responses": [
+                "Most hotels are concentrated in Bonifacio Global City (BGC) and McKinley Hill, where you'll find a range of accommodations from luxury to budget-friendly.",
+                "The majority of hotels are in BGC and McKinley Hill, offering easy access to shopping centers and corporate offices."
+            ]
+        },
+        {
+            "tag": "Shangri La",
+            "patterns": [
+                "What facilities does Shangri-La at the Fort offer?",
+                "Does Shangri-La at the Fort have a pool?",
+                "What amenities are available at Shangri-La Taguig?"
+            ],
+            "responses": [
+                "Shangri-La at the Fort offers luxury rooms, multiple restaurants, a fitness center, a swimming pool, and spa services.",
+                "Guests at Shangri-La at the Fort can enjoy premium amenities such as fine dining, a wellness spa, and world-class fitness facilities."
+            ]
+        },
+        {
+            "tag": "Grand Hyatt",
+            "patterns": [
+                "Where is the Grand Hyatt Manila located?",
+                "How do I get to Grand Hyatt Manila?",
+                "Is Grand Hyatt in BGC?"
+            ],
+            "responses": [
+                "The Grand Hyatt Manila is located on 8th Avenue in Bonifacio Global City, Taguig.",
+                "You can find Grand Hyatt Manila at the heart of BGC, easily accessible from major roads and near corporate offices."
+            ]
+        },
+        {
+            "tag": "Ascott BGC",
+            "patterns": [
+                "What makes Ascott Bonifacio Global City unique?",
+                "Why choose Ascott BGC?",
+                "Does Ascott BGC offer serviced apartments?"
+            ],
+            "responses": [
+                "Ascott BGC offers serviced residences with full kitchens, making it ideal for extended stays and business travelers.",
+                "Ascott Bonifacio Global City stands out for its spacious serviced apartments, perfect for both short and long-term stays."
+            ]
+        },
+        {
+            "tag": "Mid Range Hotels",
+            "patterns": [
+                "What are the best mid-range hotels in Taguig?",
+                "Can you recommend mid-range hotels in Taguig?",
+                "Is Seda BGC a mid-range hotel?"
+            ],
+            "responses": [
+                "Top mid-range hotels in Taguig include F1 Hotel Manila, Seda BGC, and Avant Apartments at The Fort.",
+                "For a comfortable stay without breaking the bank, try Seda BGC or F1 Hotel Manila, both offering excellent amenities."
+            ]
+        },
+        {
+            "tag": "Hotel Pools",
+            "patterns": [
+                "Are there hotels with pools in Taguig?",
+                "Which hotels in Taguig have swimming pools?",
+                "Can I swim at a hotel pool in BGC?"
+            ],
+            "responses": [
+                "Yes, luxury hotels like Shangri-La at the Fort, Seda BGC, and Grand Hyatt Manila have swimming pools for guests.",
+                "If you love swimming, consider staying at hotels like Grand Hyatt or Shangri-La, which offer well-maintained pools."
+            ]
+        },
+        {
+            "tag": "Hotel near Market Market",
+            "patterns": [
+                "Which hotels are close to Market! Market!?",
+                "Where can I stay near Market! Market! in Taguig?",
+                "What are the closest hotels to Market! Market!?"
+            ],
+            "responses": [
+                "Hotels like F1 Hotel Manila and Seda BGC are close to Market! Market!, offering easy access to shopping and dining options.",
+                "For a convenient stay near Market! Market!, consider F1 Hotel Manila or Seda BGC."
+            ]
+        },
+        {
+            "tag": "Hotel Dining",
+            "patterns": [
+                "Are there fine dining restaurants in Taguig hotels?",
+                "Do Taguig hotels have good restaurants?",
+                "What dining options are available in Taguig hotels?"
+            ],
+            "responses": [
+                "Yes, hotels in Taguig offer fine dining experiences. For instance, Raging Bull Chophouse at Shangri-La and The Peak at Grand Hyatt provide top-tier cuisine.",
+                "Taguig's luxury hotels feature exceptional dining, with renowned spots like The Peak rooftop bar at Grand Hyatt."
+            ]
+        },
+        {
+            "tag": "Tourist Attractions",
+            "patterns": [
+                "Is Taguig a good destination for tourists?",
+                "What makes Taguig attractive to tourists?",
+                "Should I visit Taguig as a tourist?",
+                "What are the top attractions in Taguig?",
+                "Why should tourists visit Taguig?",
+                "What can I see in Taguig as a visitor?"
+            ],
+            "responses": [
+                "Yes, Taguig is a great tourist destination with modern attractions, shopping malls, historical landmarks, and vibrant dining and nightlife options.",
+                "Taguig offers a blend of culture, entertainment, and history, making it a must-visit for tourists.",
+                "Tourists love Taguig for its iconic Bonifacio Global City (BGC) with its contemporary vibe, cultural attractions, and recreational activities.",
+                "Explore Taguig's unique attractions, from interactive museums to high-end shopping and dining in BGC."
+            ]
+        },
+        {
+            "tag": "Nature Parks",
+            "patterns": [
+                "Where can I find nature parks in Taguig?",
+                "Are there parks in Taguig?",
+                "Which are the best parks to visit in Taguig?",
+                "Are there green spaces in Taguig?",
+                "What are the top nature parks in Taguig?",
+                "Where can I enjoy nature in Taguig?"
+            ],
+            "responses": [
+                "Popular parks in Taguig include Track 30th, Terra 28th, and Lakeshore Park, offering green spaces for relaxation and recreation.",
+                "For a peaceful nature experience, visit Track 30th or Terra 28th in BGC.",
+                "Taguig’s nature parks like Terra 28th and Lakeshore Park are perfect for outdoor activities and relaxation.",
+                "Enjoy the serene atmosphere of Taguig's nature parks such as Track 30th and the sprawling green spaces of BGC."
+            ]
+        },
+        {
+            "tag": "Heroes Cemetery or Libingan ng mga bayani",
+            "patterns": [
+                "What is Libingan ng mga Bayani?",
+                "Where is the Heroes Cemetery?",
+                "Tell me about Libingan ng mga Bayani."
+            ],
+            "responses": [
+                "Libingan ng mga Bayani (Heroes Cemetery) is a national shrine and military cemetery honoring Filipino soldiers and heroes.",
+                "Libingan ng mga Bayani in Taguig is a significant site, paying tribute to the country's military and national heroes."
+            ]
+        },
+        {
+            "tag": "Museum",
+            "patterns": [
+                "Are there museums in Taguig?",
+                "What museums can I visit in Taguig?",
+                "Is The Mind Museum in Taguig?",
+                "Where can I find educational places in Taguig?",
+                "Are there science museums in Taguig?",
+                "Can you tell me about museums in Taguig?"
+            ],
+            "responses": [
+                "Yes, Taguig has The Mind Museum in BGC, an interactive science museum perfect for visitors of all ages.",
+                "The Mind Museum in BGC offers a fascinating journey through science and is a great educational spot for families and tourists.",
+                "Visit The Mind Museum in Bonifacio Global City for a unique science exploration experience.",
+                "The Mind Museum, a popular attraction in Taguig, provides hands-on exhibits and immersive displays for curious minds."
+            ]
+        },
+        {
+            "tag": "Shopping",
+            "patterns": [
+                "Where can I shop in Taguig?",
+                "What are the best shopping malls in Taguig?",
+                "Are there shopping centers in Taguig?",
+                "Where can I find luxury shopping in Taguig?",
+                "What are the must-visit malls in Taguig?",
+                "Can you recommend places to shop in Taguig?"
+            ],
+            "responses": [
+                "Popular shopping destinations in Taguig include SM Aura Premier, Market! Market!, and Uptown Mall in BGC.",
+                "For a complete shopping experience, visit SM Aura or Uptown Mall, offering local and international brands.",
+                "Taguig is home to high-end malls like SM Aura and Uptown Mall, as well as the more casual Market! Market! for bargain finds.",
+                "Explore the vibrant shopping scene in Taguig at malls like Bonifacio High Street, SM Aura, and Market! Market!"
+            ]
+        },
+        {
+            "tag": "Venice Grand Canal Mall",
+            "patterns": [
+                "What is special about the Venice Grand Canal Mall?",
+                "Can I ride a gondola in Taguig?",
+                "Where is the Venice Grand Canal Mall?"
+            ],
+            "responses": [
+                "The Venice Grand Canal Mall in McKinley Hill features a replica of Venice's famous canals, complete with gondola rides and Italian-inspired architecture.",
+                "Experience Venice in Taguig at the Venice Grand Canal Mall, where you can enjoy gondola rides and picturesque scenery."
+            ]
+        },
+        {
+            "tag": "Family Activty",
+            "patterns": [
+                "Where can I take my kids in Taguig?",
+                "Are there family-friendly places in Taguig?",
+                "What can families do in Taguig?"
+            ],
+            "responses": [
+                "The Mind Museum and KidZania in BGC are perfect for family-friendly activities, offering interactive exhibits and fun for kids.",
+                "Families can enjoy educational and entertaining activities at The Mind Museum or KidZania in BGC."
+            ]
+        },
+        {
+            "tag": "Dining",
+            "patterns": [
+                "What are the best dining spots in Taguig?",
+                "Where can I eat in Taguig?",
+                "Are there good restaurants in BGC?"
+            ],
+            "responses": [
+                "Top dining spots in Taguig include Bonifacio High Street, Serendra, and Uptown Mall, offering a wide range of cuisines.",
+                "Explore diverse dining options at Serendra and Uptown Mall, featuring everything from local Filipino dishes to international cuisine."
+            ]
+        },
+        {
+            "tag": "Art Galleries",
+            "patterns": [
+                "Are there art galleries in Taguig?",
+                "Where can I see art in BGC?",
+                "Is there a place to see contemporary art in Taguig?"
+            ],
+            "responses": [
+                "Yes, BGC Arts Center showcases contemporary art and performances, making it a cultural hotspot in Taguig.",
+                "Visit the BGC Arts Center for a dose of contemporary art and live performances in Taguig."
+            ]
+        },
+        {
+            "tag": "Events",
+            "patterns": [
+                "What events are held in Taguig?",
+                "Are there festivals in Taguig?",
+                "Where can I go for events in BGC?",
+                "What’s happening in Taguig this weekend?",
+                "Does Taguig host any cultural events?",
+                "Are there concerts or shows in Taguig?"
+            ],
+            "responses": [
+                "Taguig hosts various events such as BGC Passionfest, food festivals, outdoor movie nights, and marathons throughout the year.",
+                "Check out BGC's annual events like Passionfest or join one of the many food and music festivals happening in the area.",
+                "Taguig is known for its vibrant events calendar, featuring cultural showcases, sporting activities, and lifestyle fairs.",
+                "Visit the events section of the GoTaguig App to stay updated on the latest happenings in Taguig."
+            ]
+        },
+        {
+            "tag": "Quiet Places",
+            "patterns": [
+                "Where can I go for a quiet spot in Taguig?",
+                "Are there peaceful places in Taguig?",
+                "Where can I relax in BGC?",
+                "Can you suggest quiet locations in Taguig?",
+                "Where can I escape the crowd in Taguig?",
+                "Are there calm and serene places in Taguig?"
+            ],
+            "responses": [
+                "For a quiet and peaceful experience, visit parks like Track 30th or the Taguig Lakeshore area.",
+                "Relax and unwind at Track 30th or Terra 28th, perfect for quiet walks and peaceful moments.",
+                "Escape the city buzz at serene locations like Lakeshore Park or quiet corners of BGC parks.",
+                "Looking for peace? Try the shaded trails of Terra 28th or the open lawns of Track 30th in BGC."
+            ]
+        },
+        {
+            "tag": "Romantic Places",
+            "patterns": [
+                "What are the top romantic places to visit in Taguig for couples?",
+                "Where can couples go for a romantic dinner in Taguig?",
+                "Are there any romantic parks or outdoor spaces in Taguig?",
+                "What are the best spots for a romantic stroll in Bonifacio Global City (BGC)?",
+                "Are there any rooftop restaurants or bars in Taguig ideal for couples?",
+                "Where can I celebrate an anniversary or special occasion in Taguig?",
+                "What are the best romantic staycation spots in Taguig?",
+                "What are unique date ideas for couples in Taguig?",
+                "Are there any hidden gems or lesser-known romantic spots in Taguig?",
+                "What are the best romantic places in Taguig during the holiday season?",
+                "Where can couples go in Taguig for Valentine’s Day?"
+            ],
+            "responses": [
+                "1. Bonifacio High Street\n\t•\tWhy it's romantic: Stroll along this open-air shopping and dining hub, surrounded by greenery and modern architecture. It’s perfect for a relaxed date with alfresco dining options.\n\t•\tThings to do:\n\t\t○\tEnjoy coffee or dessert at cozy cafés.\n\t\t○\tWatch a movie at a nearby cinema.\n2. Venice Grand Canal Mall\n\t•\tWhy it's romantic: A unique date idea, it offers an interactive and educational experience. Couples can bond over exploring the wonders of science.\n\t•\tThings to do:\n\t\t○\tTake a gondola ride for a memorable experience.\n\t\t○\tDine at Italian or international restaurants overlooking the canal.\n3. The Mind Museum\n\t•\tWhy it's romantic: A unique date idea, it offers an interactive and educational experience. Couples can bond over exploring the wonders of science.\n\t•\tThings to do:\n\t\t○\tParticipate in fun, hands-on exhibits.\n\t\t○\tEnjoy the adjacent parks for a peaceful walk afterward.\n4. Forbes Town Center\n\t•\tWhy it's romantic: Quiet, upscale, and filled with charming dining spots ideal for intimate meals.\n\t•\tThings to do:\n\t\t○\tTry specialty dishes at high-end restaurants.\n\t\t○\tUnwind with cocktails in stylish bars.\n5. Track 30th\n\t•\tWhy it's romantic: A serene green space in the middle of the city, perfect for active or nature-loving couples.\n\t•\tThings to do:\n\t\t○\tGo jogging or join a yoga session.\n\t\t○\tSit and relax on the grass while chatting.\n6. BGC Artwalk\n\t•\tWhy it's romantic: Explore outdoor art installations and murals that add a creative vibe to your date.\n\t•\tThings to do:\n\t\t○\tTake artsy couple photos.\n\t\t○\tAppreciate the vibrant and creative displays together.\n7. St. Luke’s Sky Garden\n\t•\tWhy it's romantic: A hidden gem with a peaceful garden and panoramic city views.\n\t•\tThings to do:\n\t\t○\tEnjoy a quiet moment surrounded by lush greenery.\n\t\t○\tWatch the sunset over the city skyline.\n8. Uptown Mall\n\t•\tWhy it's romantic: The upscale ambiance and diverse dining options make it a great spot for a romantic evening.\n\t•\tThings to do:\n\t\t○\tIndulge in a luxurious dinner.\n\t\t○\tCatch live music or performances at the mall."
+            ]
+        },
+        {
+            "tag": "Instagrammable Locations",
+            "patterns": [
+                "What are some must-visit Instagrammable locations in BGC Taguig?",
+                "What are the best spots for photography in BGC Taguig?",
+                "Which landmarks in BGC Taguig are perfect for Instagram photos?",
+                "Where can I find unique backdrops for photos in BGC Taguig?",
+                "What are some hidden gems to explore in BGC, Taguig?",
+                "Are there any iconic structures or public art in BGC worth visiting?",
+                "What are the best places in BGC for a photo walk?",
+                "Which cafes or restaurants in BGC have the most photogenic interiors?",
+                "Are there any Instagrammable events or festivals in BGC?",
+                "What are the most famous murals or street art pieces in BGC?",
+                "Which parks in BGC offer great photo opportunities?"
+            ],
+            "responses": [
+                "1. The Mind Museum Outdoor Spaces\n\t•\tWhy it's Instagrammable: Unique, interactive sculptures like the giant T-Rex and space-themed installations.\n\t•\tPro Tip: Visit during the golden hour for dramatic lighting.\n2. Venice Grand Canal Mall\n\t•\tWhy it's Instagrammable: The colorful Venetian-inspired architecture and picturesque canal make you feel like you're in Italy.\n\t•\tPro Tip: Capture a gondola ride or the view from the bridges.\n3. Bonifacio High Street\n\t•\tWhy it's Instagrammable: Open spaces with modern architecture, lush greenery, and artistic installations.\n\t•\tPro Tip: Check out seasonal decorations during holidays for unique shots.\n4. BGC Art Walk (Bonifacio High Street & Surroundings)\n\t•\tWhy it's Instagrammable: Vibrant street art and murals by local and international artists.\n\t•\tPro Tip: Look for hidden murals in alleyways for a unique backdrop.\n5. The Globe Tower\n\t•\tWhy it's Instagrammable: The sleek, futuristic design of the building is great for minimalist and urban aesthetics.\n\t•\tPro Tip: Capture it from a low angle for a dramatic perspective.\n6. Track 30th\n\t•\tWhy it's Instagrammable: A peaceful park with jogging paths, yoga areas, and art installations.\n\t•\tPro Tip: Use the towering buildings around the park as part of your framing for urban-meets-nature shots.\n7. Uptown Bonifacio (Uptown Mall)\n\t•\tWhy it's Instagrammable: Modern architecture, colorful LED displays, and luxurious interiors.\n\t•\tPro Tip: Head to the rooftop area for great views of the BGC skyline.\n8. One Bonifacio High Street\n\t•\tWhy it's Instagrammable: High-end stores, stylish fountains, and well-curated open spaces.\n\t•\tPro Tip: Shoot near the fountain with reflections at night for added drama.\n9. Kasalikasan Garden\n\t•\tWhy it's Instagrammable: A hidden pocket of greenery, perfect for nature-inspired shots.\n\t•\tPro Tip: Visit early in the morning for soft lighting and fewer people.\n10. Forbes Town Center\n\t•\tWhy it's Instagrammable: Cozy streets with charming restaurants, lined with modern yet warm aesthetics.\n\t•\tPro Tip: Capture the fairy lights at night for a magical feel.\n11. SM Aura Sky Park\n\t•\tWhy it's Instagrammable: Rooftop garden with lush landscaping and stunning views of the BGC skyline.\n\t•\tPro Tip: Come at sunset to catch the colorful skies.\n12. St. Luke’s Medical Center – Sky Garden\n\t•\tWhy it's Instagrammable: A peaceful green space with city views, perfect for minimalist nature shots.\n\t•\tPro Tip: Pair the vibrant green tones with chic outfits for a clean aesthetic.\n13. The Fort Strip\n\t•\tWhy it's Instagrammable: A mix of colorful lights, modern facades, and trendy hangout spots.\n\t•\tPro Tip: Snap some creative night photography with neon lights.\n14. The Tree by the Crossroads\n\t•\tWhy it's Instagrammable: A symbolic public art piece surrounded by greenery.\n\t•\tPro Tip: Play with symmetry and wide angles for a captivating shot.\n15. BGC Coffee Shops & Cafés\n\t•\tWhy it's Instagrammable: Stylish interiors and cozy vibes make these cafés the perfect backdrop for lifestyle shots.\n\t•\tPopular Spots: % Arabica, Single Origin, and Wildflour Café."
+            ]
+        },
+        {
+            "tag": "Hidden Gems",
+            "patterns": [
+                "What hidden gems in Taguig should tourists check out?",
+                "What are some underrated places to visit in Taguig?",
+                "Are there any non-touristy spots in Taguig worth exploring?",
+                "What unique activities can tourists experience in Taguig?",
+                "What are some lesser-known cultural sites in Taguig?",
+                "Are there any historical landmarks in Taguig that are often overlooked?",
+                "What hidden parks or nature spots are in Taguig?",
+                "Are there any secret shopping spots or markets in Taguig?",
+                "Which local restaurants in Taguig are off the beaten path?",
+                "Where can I find scenic views or quiet spaces in Taguig?"
+            ],
+            "responses": [
+                "1. Kasalikasan Garden\n\t•\tWhy it's a hidden gem: A serene and lush green garden tucked away in the middle of BGC, perfect for unwinding.\n\t•\tWhat to do: Relax, enjoy nature, or have a peaceful picnic.\n2. Flying Trapeze Philippines\n\t•\tWhy it's a hidden gem: A thrilling outdoor activity for adventure seekers, offering trapeze lessons in the heart of BGC.\n\t•\tWhat to do: Try flying through the air with expert guidance and challenge your fears.\n3. McKinley Hill's The Emperador Distillery\n\t•\tWhy it's a hidden gem: A specialty store for Emperador’s iconic liquor products, plus a glimpse into their craftsmanship.\n\t•\tWhat to do: Sample their high-quality spirits or purchase exclusive bottles as souvenirs.\n4. Manila American Cemetery and Memorial\n\t•\tWhy it's a hidden gem: Quiet, historic, and beautifully maintained, it offers a reflective and somber experience.\n\t•\tWhat to do: Explore the memorial, take in the symmetry of the grounds, and learn about World War II history.\n5. Museum of Contemporary Art and Design (MCAD)\n\t•\tWhy it's a hidden gem: A lesser-known art haven showcasing thought-provoking contemporary art exhibits.\n\t•\tWhat to do: Appreciate works from local and international artists in a minimalist, intimate space.\n6. Silk Road Thai Bistro\n\t•\tWhy it's a hidden gem: An off-the-radar spot for authentic Thai cuisine with a romantic and cozy vibe.\n\t•\tWhat to do: Indulge in dishes like Pad Thai and Tom Yum while soaking up the ambiance.\n7. Arkipelago Books\n\t•\tWhy it's a hidden gem: A cozy Filipino bookstore that carries rare and hard-to-find books about Philippine history and culture.\n\t•\tWhat to do: Browse or purchase unique reads and learn about local heritage.\n8. The Blue Leaf Pavilion\n\t•\tWhy it's a hidden gem: A picturesque venue surrounded by lush greenery, often used for intimate events.\n\t•\tWhat to do: Attend a local cultural event or explore the peaceful grounds.\n9. Crescent Park West\n\t•\tWhy it's a hidden gem: A quiet park in BGC with charming sculptures, perfect for a relaxing walk.\n\t•\tWhat to do: Stroll through the area and take photos with art installations.\n10. Pound by Todd English\n\t•\tWhy it's a hidden gem: A chic and affordable burger joint serving gourmet dishes in an elegant setting.\n\t•\tWhat to do: Enjoy an Instagrammable meal featuring their signature sliders and truffle fries.\n11. The Alley at Karrivin\n\t•\tWhy it's a hidden gem: A creative space featuring art galleries, unique dining spots, and boutique shops.\n\t•\tWhat to do: Discover art, enjoy coffee at a quaint café, or shop for artisan products.\n12. Hagonoy Floating Village\n\t•\tWhy it's a hidden gem: A unique cultural experience where you can visit local communities living along the water.\n\t•\tWhat to do: Take a boat ride, interact with locals, and learn about their way of life."
+            ]
+        },
+        {
+            "tag": "Night Out",
+            "patterns": [
+                "What are the best activities for a night out in BGC Taguig?",
+                "What are the top bars and clubs to visit in BGC, Taguig?",
+                "Where can I experience the best live music or performances in BGC at night?",
+                "Are there any themed nightlife venues in BGC worth checking out?",
+                "What are the best late-night restaurants or cafes in BGC, Taguig?",
+                "Where can I find unique food and drink experiences in BGC after dark?",
+                "What are the best places in BGC for group activities at night?",
+                "Are there any karaoke spots or game lounges in BGC?",
+                "What are the most romantic spots for a date night in BGC?",
+                "Are there any recurring night markets or festivals in BGC?",
+                "What are the best places in BGC to watch a movie or live theater at night?"
+            ],
+            "responses": [
+                "1. Bar-Hopping and Nightlife\n\t•\tSpots to visit:\n\t\t○\tThe Island: A tropical-themed, open-air nightclub with lively music and great cocktails.\n\t\t○\tXYLO at The Palace: One of the most popular nightclubs in Metro Manila for high-energy dancing and DJ performances.\n\t\t○\tBank Bar: A hidden, speakeasy-style bar offering craft cocktails and a sophisticated vibe.\n\t•\tWhy it's fun: BGC is the go-to destination for an upscale nightlife experience.\n2. Dinner at Fine Dining Restaurants\n\t•\tOptions:\n\t\t○\tSamba at Shangri-La at the Fort: Peruvian-inspired dishes in a romantic setting.\n\t\t○\tCafé Mary Grace (High Street): For a cozy and intimate dinner with Filipino comfort food.\n\t\t○\tRaging Bull Chophouse: Perfect for steak lovers.\n\t•\tWhy it's fun: Ideal for a romantic date or special celebration.\n3. Live Music and Entertainment\n\t•\tSpots to visit:\n\t\t○\tBGC Arts Center: Offers live music performances, plays, or cultural shows.\n\t\t○\tUptown Parade: Some bars like Yes Please often feature live DJs or acoustic sets.\n\t•\tWhy it's fun: A blend of entertainment and vibrant nightlife for music and arts lovers.\n4. Late-Night Food Crawls\n\t•\tSpots to visit:\n\t\t○\tMercato Centrale Night Market (near Turf BGC): A food haven with a variety of street food and drinks.\n\t\t○\tUptown Mall Dining: Try late-night restaurants like Tim Ho Wan or Shake Shack.\n\t•\tWhy it's fun: Perfect for adventurous foodies who want to explore unique dishes.\n5. Bowling and Games at Uptown Bonifacio\n\t•\tWhere:\n\t\t○\tUptown Mall's Bowling Center: A chic bowling alley where you can hang out with friends or family.\n\t\t○\tGame On Sports Bar: Play billiards or darts while enjoying a few drinks.\n\t•\tWhy it's fun: Combines friendly competition with a relaxed, fun atmosphere.\n6. Movie Night at Luxury Cinemas\n\t•\tWhere:\n\t\t○\tCentral Square Cinema: Features luxurious reclining seats and gourmet snacks.\n\t\t○\tUptown Mall VIP Cinemas: Offers a deluxe cinematic experience with plush seating and butler service.\n\t•\tWhy it's fun: A cozy way to enjoy blockbuster movies or indie films after dinner.\n7. Rooftop Drinks and City Views\n\t•\tWhere to go:\n\t\t○\tAntidote Rooftop Bar (at U Hotels): Known for their jellyfish tanks and cocktails.\n\t\t○\tVUE Bar at Uptown Ritz: Breathtaking views of the BGC skyline.\n\t•\tWhy it's fun: Relax with cocktails or wine while admiring the city lights.\n8. Night Strolls and Photo Walks\n\t•\tWhere to go:\n\t\t○\tBonifacio High Street: Ideal for walking, shopping, and snapping Instagram-worthy shots.\n\t\t○\tBGC Murals: Explore vibrant street art lit up at night.\n\t•\tWhy it's fun: A more laid-back way to enjoy BGC’s artistic and modern vibe.\n9. Karaoke with Friends\n\t•\tWhere:\n\t\t○\tRed Box Karaoke (Greenbelt but accessible from BGC): Private rooms with great sound systems and food.\n\t•\tWhy it's fun: Unleash your inner diva and sing your heart out with friends.\n10. Late-Night Workouts or Yoga\n\t•\tWhere to go:\n\t\t○\tTrack 30th: For late-night runs or yoga sessions.\n\t\t○\tFitness First or Anytime Fitness: Many branches are open 24/7.\n\t•\tWhy it's fun: A healthy and unconventional way to spend your evening."
+            ]
+        },
+        {
+            "tag": "Famous Attractions",
+            "patterns": [
+                "Which attractions are most famous in Taguig City?",
+                "What are the top must-visit landmarks in Taguig City?",
+                "Which places in Taguig are most frequently visited by tourists?",
+                "What are the most iconic attractions in Taguig?",
+                "What are the best museums to visit in Taguig City?",
+                "What are the most famous parks or recreational areas in Taguig?",
+                "What are the most well-known restaurants or food hubs in Taguig?",
+                "What seasonal activities draw tourists to Taguig?"
+            ],
+            "responses": [
+                "1. Venice Grand Canal Mall\n\t•\tWhy it’s famous: Known for its Venetian-inspired architecture, colorful facades, and gondola rides, this mall offers a romantic and picturesque experience.\n\t•\tMust-do: Take a gondola ride, dine by the canal, and snap Instagram-worthy photos on the bridges.\n2. Bonifacio High Street\n\t•\tWhy it’s famous: A vibrant shopping and dining hub with lush open spaces, modern architecture, and outdoor art installations.\n\t•\tMust-do: Shop at premium stores, relax in the gardens, or enjoy alfresco dining.\n3. The Mind Museum\n\t•\tWhy it’s famous: A world-class interactive science museum featuring over 250 exhibits on space, biology, technology, and more.\n\t•\tMust-do: Explore the planetarium, marvel at the T-Rex replica, and enjoy the outdoor Science-in-the-Park.\n4. Manila American Cemetery and Memorial\n\t•\tWhy it’s famous: This historic site is the resting place for thousands of World War II soldiers and features beautifully landscaped grounds and serene views.\n\t•\tMust-do: Take a reflective walk among the graves and learn about World War II history through the engraved walls.\n5. SM Aura Premier\n\t•\tWhy it’s famous: A high-end shopping mall with a stunning rooftop garden offering views of the city skyline.\n\t•\tMust-do: Visit the Skypark, dine at luxurious restaurants, and enjoy the mall's unique architecture.\n6. Uptown Bonifacio\n\t•\tWhy it’s famous: A trendy lifestyle and entertainment hub featuring upscale shops, gourmet dining, and luxury cinemas.\n\t•\tMust-do: Experience a VIP cinema, explore the nightlife at Uptown Parade, and try local and international cuisines.\n7. BGC Murals (Art BGC)\n\t•\tWhy it’s famous: Bonifacio Global City is home to vibrant, large-scale street art created by local and international artists.\n\t•\tMust-do: Go on a photo walk to admire these colorful murals and installations scattered throughout BGC.\n8. Track 30th\n\t•\tWhy it’s famous: A popular green space for fitness enthusiasts and nature lovers amidst BGC’s urban setting.\n\t•\tMust-do: Jog, join a yoga session, or relax on the grass surrounded by modern skyscrapers.\n9. McKinley Hill\n\t•\tWhy it’s famous: A European-inspired township featuring the Venice Grand Canal Mall, residential areas, and business hubs.\n\t•\tMust-do: Stroll through the picturesque streets and visit nearby attractions like the Enderun Colleges campus.\n10. Bonifacio Arts Center\n\t•\tWhy it’s famous: A cultural hub for art, theater, and music performances in BGC.\n\t•\tMust-do: Attend live shows, art exhibits, or workshops to experience the city’s vibrant creative scene.\n11. Philippine Army Museum and Library\n\t•\tWhy it’s famous: A historical museum showcasing the country’s military heritage and artifacts, located inside Fort Bonifacio.\n\t•\tMust-do: Learn about the history of the Philippine Army and see vintage military equipment.\n12. KidZania Manila (Temporarily Closed)\n\t•\tWhy it’s famous: A family favorite, this indoor play city offered interactive role-playing experiences for kids.\n\t•\tMust-do: Check for updates as it may reopen or be replaced by a similar attraction in the future."
+            ]
+        },
+        {
+            "tag": "BGC High Street Guide",
+            "patterns": [
+                "What are some recommended things to do when visiting BGC High Street?",
+                "What are the best attractions to check out at BGC High Street?",
+                "How can I make the most of a visit to BGC High Street?",
+                "Which stores are a must-visit at BGC High Street?",
+                "What are the top restaurants or cafes to try in BGC High Street?",
+                "Are there any fun activities or entertainment options at BGC High Street?",
+                "Are there any regular events or pop-ups at BGC High Street?",
+                "Are there any art installations or public displays to see at BGC High Street?",
+                "What are the best things to do at BGC High Street in the evening?",
+                "Are there any nightlife options near BGC High Street?"
+
+            ],
+            "responses": [
+                "1. Stroll Through the Open-Air Shopping Strip\n\t•\tWhy: Enjoy the modern architecture, landscaped spaces, and vibrant atmosphere.\n\t•\tTip: Walk from end to end to explore the full range of shops, cafes, and restaurants.\n2. Shop at High-End Stores\n\t•\tWhy: Bonifacio High Street features a mix of global brands like Uniqlo, Nike, and Zara, alongside boutique stores.\n\t•\tTip: Look out for seasonal sales or unique items you won’t find elsewhere.\n3. Dine at Trendy Restaurants\n\t•\tWhy: A diverse array of cuisines, from Filipino comfort food to international fine dining.\n\t•\tRecommended spots:\n\t\t○\tMamou: Famous for its steak and comfort dishes.\n\t\t○\tDin Tai Fung: Known for their xiao long bao (soup dumplings).\n\t\t○\tShake Shack: For casual yet iconic burgers.\n4. Enjoy Coffee and Dessert\n\t•\tWhy: Perfect for relaxing or people-watching.\n\t•\tRecommended cafés:\n\t\t○\t% Arabica: For premium coffee blends and minimalist vibes.\n\t\t○\tWildflour Café + Bakery: For delicious pastries and coffee.\n\t\t○\tScout’s Honor: Try their customizable cookies.\n5. Visit Art and Installations\n\t•\tWhy: High Street features eye-catching public art and creative installations.\n\t•\tTip: Don’t miss iconic sculptures like The Trees or seasonal displays that change throughout the year.\n6. Catch a Movie at Central Square Cinema\n\t•\tWhy: Offers a luxury movie experience with spacious reclining seats.\n\t•\tTip: Book a late-night show for a relaxing way to end your day.\n7. Bring Your Pets\n\t•\tWhy: BGC High Street is a pet-friendly area with open spaces for walking and pet shops like Bow & Wow.\n\t•\tTip: Check out events like pet meetups or adoption drives that often happen in the area.\n8. Attend Events and Activities\n\t•\tWhy: High Street regularly hosts free events like live music, fitness classes, and art exhibits.\n\t•\tTip: Check their social media pages or onsite posters for schedules.\n9. Explore Nearby Green Spaces\n\t•\tWhy: Relax and unwind in nearby parks like Track 30th or Terra 28th, which are a short walk away.\n\t•\tTip: Great for picnics, jogging, or simply enjoying a peaceful moment.\n10. Discover Bookstores and Specialty Shops\n\t•\tWhy: Find unique items or dive into a new book.\n\t•\tRecommended spots:\n\t\t○\tFully Booked: A multi-level bookstore with a cozy vibe.\n\t\t○\tThe Gourmand Market: A great spot (if scheduled) for artisanal goods and specialty food items.\n11. Snap Instagram-Worthy Photos\n\t•\tWhy: The mix of modern architecture, greenery, and public art make it a great backdrop for photos.\n\t•\tTip: The golden hour provides the best lighting for capturing the vibrant atmosphere.\n12. Try Night Activities\n\t•\tWhy: The area comes alive at night with well-lit paths, bars, and dining options.\n\t•\tTip: End your day with drinks at a nearby rooftop bar or dine al fresco under the lights."
+            ]
+        },
+        {
+            "tag": "Beautiful Tourism Spot",
+            "patterns": [
+                "Where is the very beautiful tourism spot in Taguig?",
+                "What are the popular Attraction place in Taguig?",
+                "What are the most scenic places to visit in Taguig?",
+                "Which areas in Taguig are known for their stunning views?",
+                "What are the top-rated tourist destinations in Taguig?"
+
+            ],
+            "responses": [
+                "A beautiful tourism spot in Taguig is Bonifacio Global City (BGC). BGC is known for its modern urban landscape, art installations, and vibrant atmosphere. Some key attractions within BGC include:\n\t1.  The Mind Museum: A world-class science museum with interactive exhibits.\n\t2.  Bonifacio High Street: A scenic outdoor shopping and dining area with parks, open spaces, and modern architecture.\n\t3.  Track 30th: A popular park ideal for jogging, exercising, or relaxing amidst greenery in the city.\n\t4.  Venice Grand Canal Mall: A picturesque mall designed to resemble Venice, Italy, with a canal where visitors can take gondola rides."
+            ]
+        },
+        {
+            "tag": "Ocassions",
+            "patterns": [
+                "What are the common occasions in Taguig?",
+                "Are there any annual cultural events unique to Taguig?",
+                "Are there any city-wide events in Taguig during specific months?",
+                "What religious occasions are widely celebrated in Taguig?",
+                "Are there any recurring sports events or marathons in Taguig?"
+
+            ],
+            "responses": [
+                "1.  Taguig City Day (December 8): A celebration marking the foundation of Taguig, featuring parades, cultural performances, and various city-sponsored events for residents and tourists.\n2.  Sta. Anang Banak Taguig River Festival (July):  A religious and cultural event held in honor of St. Anne, the patron saint of Taguig. It includes a river parade, fluvial procession, and local celebrations by the Taguig River.\n3.  Christmas and Holiday Celebrations:  Taguig, especially in Bonifacio Global City (BGC), hosts holiday events like Christmas light shows, holiday markets, and themed performances, making it a festive destination during the holiday season.\n4.  BGC Arts Festival:  A celebration of arts and culture in Bonifacio Global City, featuring local artists, exhibits, performances, and interactive art installations.\n5. Philippine Independence Day (June 12):  This national holiday is celebrated across the country, including Taguig, with flag-raising ceremonies, cultural events, and local programs that honor Philippine independence.\n6. Kite Flying Festival:  A local festival celebrated at Lakeshore Hall in Taguig, where families and visitors gather to fly kites and participate in various fun-filled activities.\n7. Earth Hour (March):  Taguig participates in this global environmental movement by turning off non-essential lights for an hour in areas like BGC, to raise awareness about climate change and energy conservation.\n8. Fiestas in Barangays:  Different barangays in Taguig celebrate their local barangay fiestas throughout the year. These festivities often feature street parades, local food, and community events."
+            ]
+        },
+        {
+            "tag": "Historical and Culture",
+            "patterns": [
+                "Where is the most historical and culture in Taguig?",
+                "What are the top historical and cultural landmarks to visit in Taguig?",
+                "Which historical landmarks in Taguig offer guided tours for tourists?",
+                "Which historical landmarks in Taguig have a significant story behind them?"
+
+            ],
+            "responses": [
+                "1. Sta. Ana Church:\n\t-\tBuilt in 1587, it is one of the oldest churches in Taguig and holds deep cultural and religious significance.\n\t-\tThe church is dedicated to St. Anne, the patron saint of Taguig, and is a key site during local religious events, including the Sta. Anang Banak Taguig River Festival.\n\t-\tIts architecture reflects the Spanish colonial period, making it a historical landmark in the city.\n2. The Heritage Park:\n\t-\tA memorial park that offers a space for reflection and remembrance. While it is more modern, it holds cultural value in terms of memorializing the past.\n3. American Cemetery and Memorial: \n\t-\tLocated in Fort Bonifacio, it is the largest American cemetery in the Pacific for World War II soldiers, symbolizing the historical connection between the Philippines and the U.S."
+            ]
+        },
+        {
+            "tag": "Best Hotels with a Great View",
+            "patterns": [
+                "Where is the best hotel with a great view in Taguig.",
+                "Which hotels in Taguig offer the best views?",
+                "What are the top hotels in Taguig with scenic views?",
+                "Where can I stay in Taguig to enjoy amazing views?",
+                "Where can I book a hotel in Taguig with a fantastic view of the city?",
+                "What are some hotels in Taguig known for their spectacular views?"
+
+            ],
+            "responses": [
+                "1. Shangri-La at the Fort:\n\t-\tThis luxury hotel in Bonifacio Global City provides stunning views of the Manila skyline and the nearby Fort Bonifacio area. The hotel features modern amenities, a rooftop pool, and several dining options.\n2. Grand Hyatt Manila:\n\t-\tLocated in BGC, this hotel offers breathtaking views of the city from its higher floors. The hotel has an infinity pool, a wellness center, and upscale dining options, including a rooftop bar with panoramic city views.\n3. F1 Hotel Manila:\n\t-\tThis hotel also located in BGC offers modern accommodations with great views of the cityscape. The rooftop pool and restaurant provide a scenic setting for relaxation and dining.\n4. The Mind Museum’s Nearby Hotels:\n\t-\tWhile The Mind Museum itself doesn’t offer accommodations, nearby hotels like The Fort Suites and Ascott Bonifacio Global City have rooms with views of the museum and the vibrant BGC area.\n5. SM Aura Premier:\n\t-\tAlthough primarily a shopping mall, the hotels within or nearby this area, like Azure Urban Resort Residences, offer great views and easy access to shopping and dining.\n6. DusitD2 Davao:\n\t-\tLocated in the upscale Bonifacio High Street area, this hotel offers modern amenities and beautiful views of the city."
+            ]
+        },
+        {
+            "tag": "Transportation Terminals",
+            "patterns": [
+                "Where are the terminals are located in Taguig?",
+                "Where can I find transport terminals in Taguig?",
+                "Where are the bus and jeepney terminals in Taguig?",
+                "Where are the main entry and exit points for public transportation in Taguig?",
+                "What are the main terminal locations in Taguig?"
+            ],
+            "responses": [
+                "1. South Bus Terminal:\n\t-\tLocated near the boundary of Taguig and Makati, this terminal serves buses traveling to and from the southern provinces of Luzon, such as Batangas, Laguna, and Quezon.\n2. Bonifacio Global City (BGC) Bus Terminal:\n\t-\tThis terminal is located at the BGC area and serves various bus routes, including the BGC to Ayala route and other destinations within Metro Manila. Buses in this terminal are operated by the BGC Bus service.\n3. Makati-Taguig Jeepney Terminal:\n\t-\tJeepneys serve as a popular mode of transportation within the city. Several jeepney routes operate from Taguig to neighboring areas like Makati and Pasig.\n4. The Fort Strip (BGC) Transport Hub:\n\t-\tLocated in Bonifacio Global City, this hub serves as a pick-up and drop-off point for various forms of public transportation, including buses, jeepneys, and tricycles.\n5. Tricycle Terminals:\n\t-\tTricycles are a common mode of transportation within Taguig. Tricycle terminals can be found in various barangays, especially in residential areas and near markets.\n6. Ride-Hailing Services:  \n\t-\tWhile not traditional terminals, popular ride-hailing services like Grab operate throughout Taguig, allowing for convenient pick-up and drop-off anywhere within the city."
+            ]
+        }
+    ]
+}

@@ -22,7 +22,7 @@ class ExplorePage extends StatefulWidget {
 }
 
 class _ExplorePageState extends State<ExplorePage> {
-  final String googleMapsAPIKey = "";
+  final String googleMapsAPIKey = "AIzaSyAkBVMm6ilWp3S68owibXEAShzq4SLY6Dc";
   static const taguigCity = LatLng(14.520445, 121.053886);
 
   bool isNavigating = false;
@@ -40,12 +40,13 @@ class _ExplorePageState extends State<ExplorePage> {
   Map<PolylineId, Polyline> polylines = {};
 
   List<String> filters = [
-    "XDiners",
+    "Tourist Spots",
+    "Diners",
     "Malls",
     "Hotels",
-    "XStores",
+    "Convenience Stores",
     "Banks",
-    "XTerminals",
+    "Terminals",
     "Hospitals",
     "Churches",
     "Police",
@@ -64,13 +65,15 @@ class _ExplorePageState extends State<ExplorePage> {
   @override
   Widget build(BuildContext context) {
     final double screenHeight = MediaQuery.of(context).size.height;
-    
+
     return Scaffold(
       body: Stack(
         children: [
           GoogleMap(
             initialCameraPosition: CameraPosition(target: taguigCity, zoom: 15),
             markers: marker,
+            myLocationButtonEnabled: true,
+            myLocationEnabled: true,
             polylines: Set<Polyline>.of(polylines.values),
             trafficEnabled: true,
             onMapCreated: (controller) {
@@ -90,7 +93,7 @@ class _ExplorePageState extends State<ExplorePage> {
             offset: screenHeight * 0.0625,
           ),
           Positioned(
-              right: screenHeight * 0.0125,
+              right: screenHeight * 0.075,
               top: screenHeight * 0.0125,
               child: Container(
                   decoration: BoxDecoration(
@@ -105,10 +108,11 @@ class _ExplorePageState extends State<ExplorePage> {
                       border: Border.all(
                         width: 1.5,
                       ),
-                      borderRadius: BorderRadius.circular(screenHeight * 0.0125),
+                      borderRadius:
+                          BorderRadius.circular(screenHeight * 0.0125),
                       color: Colors.white),
-                  height: screenHeight * 0.06875,
-                  width: screenHeight * 0.21875,
+                  height: screenHeight * 0.05,
+                  width: screenHeight * 0.375,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -116,7 +120,8 @@ class _ExplorePageState extends State<ExplorePage> {
                         padding: EdgeInsets.only(left: screenHeight * 0.01875),
                         child: Text(
                           selectedFilter,
-                          style: TextStyle(fontSize: screenHeight * 0.02, letterSpacing: 2),
+                          style: TextStyle(
+                              fontSize: screenHeight * 0.02, letterSpacing: 2),
                         ),
                       ),
                       FocusScope(
@@ -191,7 +196,7 @@ class _ExplorePageState extends State<ExplorePage> {
                         )
                       ],
                     )))
-          ]
+          ],
         ],
       ),
     );
@@ -265,14 +270,15 @@ class _ExplorePageState extends State<ExplorePage> {
                                 .getImageUrl(destinations![i].siteBanner);
                             Navigator.of(context).push(MaterialPageRoute(
                                 builder: (builder) => IndividualPlacePage(
-                                    banner: image,
-                                    name: destinations![i].siteName,
-                                    address: destinations![i].siteAddress,
-                                    info: destinations![i].siteInfo,
-                                    contact: destinations![i].siteContact,
-                                    links: destinations![i].siteLinks,
-                                    latitude: destinations![i].siteLatitude,
-                                    longitude: destinations![i].siteLongitude,)));
+                                      banner: image,
+                                      name: destinations![i].siteName,
+                                      address: destinations![i].siteAddress,
+                                      info: destinations![i].siteInfo,
+                                      contact: destinations![i].siteContact,
+                                      links: destinations![i].siteLinks,
+                                      latitude: destinations![i].siteLatitude,
+                                      longitude: destinations![i].siteLongitude,
+                                    )));
                           },
                           child: Text(
                             textAlign: TextAlign.center,

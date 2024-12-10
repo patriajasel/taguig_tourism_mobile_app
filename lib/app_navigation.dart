@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:taguig_tourism_mobile_app/customer_support_page.dart';
 import 'package:taguig_tourism_mobile_app/explore_page.dart';
 import 'package:taguig_tourism_mobile_app/home_page.dart';
+import 'package:taguig_tourism_mobile_app/navigation_state.dart';
 import 'package:taguig_tourism_mobile_app/services/firestore_services.dart';
 import 'package:taguig_tourism_mobile_app/services/user_info.dart';
 import 'package:taguig_tourism_mobile_app/commute_page.dart';
@@ -13,7 +14,8 @@ import 'package:taguig_tourism_mobile_app/weather_page.dart';
 
 class AppNavigation extends StatefulWidget {
   final String userID;
-  const AppNavigation({super.key, required this.userID});
+  final int? index;
+  const AppNavigation({super.key, required this.userID, this.index});
 
   @override
   State<AppNavigation> createState() => _AppNavigationState();
@@ -75,95 +77,105 @@ class _AppNavigationState extends State<AppNavigation> {
       )
     ];
 
-    return Scaffold(
-      appBar: AppBar(
-        flexibleSpace: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                Colors.blueAccent.shade700,
-                Colors.redAccent.shade700,
-              ], // Define your gradient colors
-              begin: Alignment.centerLeft,
-              end: Alignment.centerRight,
-            ),
-          ),
-        ),
-        leading: Padding(
-          padding: EdgeInsets.all(screenHeight * 0.01),
-          child: Image.asset(
-            "lib/assets/logo/app_logo/GoTaguig_Logo.png",
-            fit: BoxFit.fill,
-            height: screenHeight * 0.0625,
-            width: screenHeight * 0.0625,
-          ),
-        ),
-        title: CupertinoSearchTextField(
-          controller: searchController,
-          backgroundColor: Colors.white,
-          style: TextStyle(
-            fontFamily: "Arvo",
-            fontSize: screenHeight * 0.02,
-            letterSpacing: 1,
-          ),
-        ),
-        actions: [
-          Padding(
-            padding: EdgeInsets.all(screenHeight * 0.01),
-            child: CircleAvatar(
-              backgroundColor: Colors.white,
-              child: IconButton(
-                icon: Icon(
-                  Icons.support_agent,
-                  color: Colors.yellow.shade900,
-                ),
-                alignment: Alignment.center,
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (builder) => ChatSupportPage()));
-                },
+    void changeScreen(int index) {
+    setState(() {
+      selectedNavIndex = index;
+    });
+  }
+
+    return NavigationState(
+      selectedIndex: selectedNavIndex,
+      onChangeScreen: changeScreen,
+      child: Scaffold(
+        appBar: AppBar(
+          flexibleSpace: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  Colors.blueAccent.shade700,
+                  Colors.redAccent.shade700,
+                ], // Define your gradient colors
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
               ),
             ),
-          )
-        ],
-      ),
-      bottomNavigationBar: Theme(
-        data: ThemeData(
-          navigationBarTheme: NavigationBarThemeData(
-            backgroundColor: Colors.redAccent.shade700,
-            indicatorColor: Colors.redAccent.shade100,
-            labelTextStyle: WidgetStateProperty.all(
-              TextStyle(
-                  color: Colors.white,
-                  fontFamily: "Arvo",
-                  fontSize: screenHeight * 0.015),
-            ),
-            iconTheme: WidgetStateProperty.all(
-              const IconThemeData(color: Colors.white),
+          ),
+          leading: Padding(
+            padding: EdgeInsets.all(screenHeight * 0.01),
+            child: Image.asset(
+              "lib/assets/logo/app_logo/GoTaguig_Logo.png",
+              fit: BoxFit.fill,
+              height: screenHeight * 0.0625,
+              width: screenHeight * 0.0625,
             ),
           ),
-        ),
-        child: NavigationBar(
-          selectedIndex: selectedNavIndex,
-          onDestinationSelected: (index) {
-            setState(() {
-              selectedNavIndex = index;
-            });
-          },
-          destinations: const [
-            NavigationDestination(icon: Icon(Icons.home), label: "Home"),
-            NavigationDestination(icon: Icon(Icons.commute), label: "Commute"),
-            NavigationDestination(icon: Icon(Icons.explore), label: "Explore"),
-            NavigationDestination(icon: Icon(Icons.cloud), label: "Weather"),
-            NavigationDestination(icon: Icon(Icons.person), label: "User"),
+          title: CupertinoSearchTextField(
+            controller: searchController,
+            backgroundColor: Colors.white,
+            style: TextStyle(
+              fontFamily: "Arvo",
+              fontSize: screenHeight * 0.02,
+              letterSpacing: 1,
+            ),
+          ),
+          actions: [
+            Padding(
+              padding: EdgeInsets.all(screenHeight * 0.01),
+              child: CircleAvatar(
+                backgroundColor: Colors.white,
+                child: IconButton(
+                  icon: Icon(
+                    Icons.support_agent,
+                    color: Colors.yellow.shade900,
+                  ),
+                  alignment: Alignment.center,
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (builder) => ChatSupportPage()));
+                  },
+                ),
+              ),
+            )
           ],
         ),
-      ),
-      body: IndexedStack(
-        index: selectedNavIndex,
-        children: screens,
+        bottomNavigationBar: Theme(
+          data: ThemeData(
+            navigationBarTheme: NavigationBarThemeData(
+              backgroundColor: Colors.redAccent.shade700,
+              indicatorColor: Colors.redAccent.shade100,
+              labelTextStyle: WidgetStateProperty.all(
+                TextStyle(
+                    color: Colors.white,
+                    fontFamily: "Arvo",
+                    fontSize: screenHeight * 0.015),
+              ),
+              iconTheme: WidgetStateProperty.all(
+                const IconThemeData(color: Colors.white),
+              ),
+            ),
+          ),
+          child: NavigationBar(
+            selectedIndex: selectedNavIndex,
+            onDestinationSelected: (index) {
+              setState(() {
+                selectedNavIndex = index;
+              });
+            },
+            destinations: const [
+              NavigationDestination(icon: Icon(Icons.home), label: "Home"),
+              NavigationDestination(icon: Icon(Icons.commute), label: "Commute"),
+              NavigationDestination(icon: Icon(Icons.explore), label: "Explore"),
+              NavigationDestination(icon: Icon(Icons.cloud), label: "Weather"),
+              NavigationDestination(icon: Icon(Icons.person), label: "User"),
+            ],
+          ),
+        ),
+        body: IndexedStack(
+          index: selectedNavIndex,
+          children: screens,
+        ),
       ),
     );
   }
