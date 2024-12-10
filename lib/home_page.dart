@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:taguig_tourism_mobile_app/all_nearby_places_page.dart';
+import 'package:taguig_tourism_mobile_app/all_popular_destination_page.dart';
 import 'package:taguig_tourism_mobile_app/categories_page.dart';
 import 'package:taguig_tourism_mobile_app/individual_place_page.dart';
 import 'package:taguig_tourism_mobile_app/models/events.dart';
@@ -32,20 +34,6 @@ class _HomePageState extends State<HomePage> {
     'lib/assets/images/taguig_image3.png',
     'lib/assets/images/taguig_image4.png',
     'lib/assets/images/taguig_image5.png'
-  ];
-
-  final List<String> nearbyList = [
-    'lib/assets/images/taguig_nearby1.jpg',
-    'lib/assets/images/taguig_nearby2.jpg',
-    'lib/assets/images/taguig_nearby3.jpg',
-    'lib/assets/images/taguig_nearby4.jpg',
-  ];
-
-  final List<String> nearbyNames = [
-    'Heritage Park',
-    'Bonifacio High Tree',
-    'SM Aura',
-    'Market Market',
   ];
 
   final List<String> popular = [
@@ -122,25 +110,42 @@ class _HomePageState extends State<HomePage> {
 
   Future<void> _getCurrentLocation() async {
     try {
-      // Check if location services are enabled
+      // Ensure location services are enabled
       bool isLocationServiceEnabled =
           await Geolocator.isLocationServiceEnabled();
       if (!isLocationServiceEnabled) {
-        setState(() {
-          print("Location services are disabled. Please enable them.");
-        });
+        print("Location services are disabled. Please enable them.");
         return;
       }
-      // Get the device's current position
+
+      // Check and request location permission
+      LocationPermission permission = await Geolocator.checkPermission();
+      if (permission == LocationPermission.denied ||
+          permission == LocationPermission.deniedForever) {
+        permission = await Geolocator.requestPermission();
+        if (permission == LocationPermission.denied ||
+            permission == LocationPermission.deniedForever) {
+          print("Location permissions are denied.");
+          return;
+        }
+      }
+
+      // Fetch the current position
       Position position = await Geolocator.getCurrentPosition(
-          desiredAccuracy: LocationAccuracy.high);
+        desiredAccuracy: LocationAccuracy.high,
+      );
+
+      // Update state with the current position
       setState(() {
         userPosition = position;
       });
 
-      // Update the location message
+      print("User position: $position");
+
+      // Cleanup: No additional streams or listeners need to be stopped as
+      // `getCurrentPosition` fetches the location once.
     } catch (e) {
-      print(e);
+      print("Error fetching location: $e");
     }
   }
 
@@ -251,6 +256,10 @@ class _HomePageState extends State<HomePage> {
     double screenHeight = MediaQuery.of(context).size.height;
     final navigationState = NavigationState.of(context);
 
+    if (nearbyPlaces.isNotEmpty) {
+      print("Nearby Places home: $nearbyPlaces");
+    }
+
     return isLoading
         ? Center(child: CircularProgressIndicator()) // Show loading indicator
         : PopScope(
@@ -316,7 +325,6 @@ class _HomePageState extends State<HomePage> {
                     ),
 
                     // Main Content starts here!
-
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -327,25 +335,54 @@ class _HomePageState extends State<HomePage> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              ListTile(
-                                  title: Text(
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
                                     "Popular Destinations",
                                     style: TextStyle(
-                                      fontSize: screenHeight * 0.02369,
+                                      fontSize: screenHeight * 0.02289,
                                       fontWeight: FontWeight.bold,
                                     ),
                                     textAlign: TextAlign.left,
                                   ),
-                                  trailing: IconButton(
-                                      onPressed: () {},
-                                      icon: const Icon(Icons.menu))),
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                        right: screenHeight *
+                                            0.01053), // Adjust alignment
+                                    child: TextButton(
+                                      onPressed: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                AllPopularDestinationPage(),
+                                          ),
+                                        );
+                                      },
+                                      child: Text(
+                                        "See All",
+                                        style: TextStyle(
+                                          fontSize: screenHeight * 0.018,
+                                          color: Colors.blue,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
                               Padding(
                                 padding: EdgeInsets.all(screenHeight * 0.01053),
                                 child: CarouselSlider(
                                   items: popularURL
-                                      .map((e) => GestureDetector(
+                                      .asMap()
+                                      .map((index, e) {
+                                        return MapEntry(
+                                          index,
+                                          GestureDetector(
                                             onTap: () {
-                                              int index = popularURL.indexOf(e);
                                               if (index >= 0 &&
                                                   index <
                                                       popularDestinations
@@ -354,58 +391,80 @@ class _HomePageState extends State<HomePage> {
                                                     MaterialPageRoute(
                                                   builder: (context) {
                                                     return IndividualPlacePage(
-                                                        banner: popularURL[
-                                                            index],
-                                                        name: popularDestinations[
-                                                                index]
-                                                            .siteName,
-                                                        address:
-                                                            popularDestinations[
-                                                                    index]
-                                                                .siteAddress,
-                                                        info:
-                                                            popularDestinations[
-                                                                    index]
-                                                                .siteInfo,
-                                                        contact:
-                                                            popularDestinations[
-                                                                    index]
-                                                                .siteContact,
-                                                        links:
-                                                            popularDestinations[
-                                                                    index]
-                                                                .siteLinks,
-                                                        latitude:
-                                                            popularDestinations[
-                                                                    index]
-                                                                .siteLatitude,
-                                                        longitude:
-                                                            popularDestinations[
-                                                                    index]
-                                                                .siteLongitude);
+                                                      banner: popularURL[index],
+                                                      name: popularDestinations[
+                                                              index]
+                                                          .siteName,
+                                                      address:
+                                                          popularDestinations[
+                                                                  index]
+                                                              .siteAddress,
+                                                      info: popularDestinations[
+                                                              index]
+                                                          .siteInfo,
+                                                      contact:
+                                                          popularDestinations[
+                                                                  index]
+                                                              .siteContact,
+                                                      links:
+                                                          popularDestinations[
+                                                                  index]
+                                                              .siteLinks,
+                                                      latitude:
+                                                          popularDestinations[
+                                                                  index]
+                                                              .siteLatitude,
+                                                      longitude:
+                                                          popularDestinations[
+                                                                  index]
+                                                              .siteLongitude,
+                                                    );
                                                   },
                                                 ));
                                               }
                                             },
-                                            child: Image.network(
-                                              e,
-                                              fit: BoxFit.fill,
+                                            child: Column(
+                                              children: [
+                                                // Name above the image
+                                                Text(
+                                                  popularDestinations[index]
+                                                      .siteName,
+                                                  style: TextStyle(
+                                                    fontSize:
+                                                        screenHeight * 0.015,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                  textAlign: TextAlign.center,
+                                                ),
+                                                SizedBox(
+                                                  height: screenHeight * 0.01,
+                                                ), // Space between text and image
+                                                // Image below the name
+                                                Image.network(
+                                                  e,
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ],
                                             ),
-                                          ))
+                                          ),
+                                        );
+                                      })
+                                      .values
                                       .toList(),
                                   options: CarouselOptions(
-                                      initialPage: 0,
-                                      autoPlay: true,
-                                      enlargeCenterPage: true,
-                                      enlargeFactor: 0.3,
-                                      onPageChanged: (value, _) {
-                                        setState(() {
-                                          currentSlide = value;
-                                        });
-                                      }),
+                                    initialPage: 0,
+                                    autoPlay: true,
+                                    enlargeCenterPage: true,
+                                    enlargeFactor: 0.3,
+                                    onPageChanged: (value, _) {
+                                      setState(() {
+                                        currentSlide = value;
+                                      });
+                                    },
+                                  ),
                                 ),
                               ),
-                              carouselIndicator()
+                              carouselIndicator(),
                             ],
                           ),
                         ),
@@ -507,13 +566,41 @@ class _HomePageState extends State<HomePage> {
                             children: [
                               Padding(
                                 padding: EdgeInsets.all(screenHeight * 0.01053),
-                                child: Text(
-                                  "Nearby Places",
-                                  style: TextStyle(
-                                    fontSize: screenHeight * 0.02369,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                  textAlign: TextAlign.left,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      "Nearby Places",
+                                      style: TextStyle(
+                                        fontSize: screenHeight * 0.02369,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                      textAlign: TextAlign.left,
+                                    ),
+                                    GestureDetector(
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                AllNearbyPlacesPage(
+                                              nearbyPlaces: nearbyPlaces,
+                                              imageLinks: nearbyImageURL,
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                      child: Text(
+                                        "See All",
+                                        style: TextStyle(
+                                          fontSize: screenHeight * 0.018,
+                                          color: Colors.blue,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                               Padding(
@@ -561,13 +648,13 @@ class _HomePageState extends State<HomePage> {
                                             padding: EdgeInsets.only(
                                                 top: screenHeight * 0.00658),
                                             child: Text(
+                                              nearbyPlaces[index].siteName,
                                               maxLines: 1,
                                               textAlign: TextAlign.center,
-                                              nearbyPlaces[index].siteName,
                                               style: const TextStyle(
                                                   fontWeight: FontWeight.bold),
                                             ),
-                                          )
+                                          ),
                                         ],
                                       ),
                                     );

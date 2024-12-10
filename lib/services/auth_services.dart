@@ -3,7 +3,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:taguig_tourism_mobile_app/app_navigation.dart';
+import 'package:taguig_tourism_mobile_app/login_page.dart';
 import 'package:taguig_tourism_mobile_app/services/firestore_services.dart';
 
 class AuthenticationServices {
@@ -15,6 +17,7 @@ class AuthenticationServices {
       required String lastName,
       required int age,
       required String gender,
+      required String touristType,
       required BuildContext context}) async {
     try {
       // Creating user authentication with email and password
@@ -26,7 +29,7 @@ class AuthenticationServices {
 
       //  Adding user information to Firestore Database
       FirestoreServices()
-          .addUsers(uid, firstName, lastName, email, age, gender);
+          .addUsers(uid, firstName, lastName, email, age, gender, touristType);
 
       //  Sending Verification email to user after the account creation
       await FirebaseAuth.instance.currentUser?.sendEmailVerification();
@@ -200,5 +203,43 @@ class AuthenticationServices {
     //  Removing all widgets until the log in page.
     Navigator.pushNamedAndRemoveUntil(
         context, '/login_page', (Route<dynamic> route) => false);
+  }
+
+  // For Google sign in
+  final FirebaseAuth auth = FirebaseAuth.instance;
+  
+  getCurrentUser () async{
+    return await auth.currentUser;
+  }
+
+  signInWithGoogle (BuildContext context) async {
+    final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+    final GoogleSignIn googleSignIn = GoogleSignIn();
+    
+    final GoogleSignInAccount? googleSignInAccount = await googleSignIn.signIn();
+
+    final GoogleSignInAuthentication? googleSignInAuthentication = await googleSignInAccount?.authentication;
+  
+    final AuthCredential credential = GoogleAuthProvider.credential(
+      idToken: googleSignInAuthentication?.idToken,
+      accessToken: googleSignInAuthentication?.accessToken
+    );
+    print('idToken: ${googleSignInAuthentication?.idToken}');
+    print('accessToken: ${googleSignInAuthentication?.accessToken}');
+
+    UserCredential result = await firebaseAuth.signInWithCredential(credential);
+
+    User? userDetails = result.user;
+
+    if (result!=null) {
+      Map<String, dynamic> userInfoMap = {
+        "email": userDetails!.email,
+        "name": userDetails.displayName,
+        "imgUrl": userDetails.photoURL,
+        "user_id": userDetails.uid,
+      };
+      await FirestoreServices().addUsers(userDetails.uid, "", "", userDetails.email.toString(), 0, '', "").then((value) => {
+      Navigator.push(context, MaterialPageRoute(builder: (context) => AppNavigation(userID: userDetails.uid,))) });
+    }
   }
 }

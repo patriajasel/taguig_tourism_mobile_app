@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "258109280748-06i4005l98jqibmmk6o8l7mn4ejbcte1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.taguig_tourism_mobile_app",
+            "certificate_hash": "f057457606e1c5ec7fd9540cc92e82d952cc6cda"
+          }
+        },
+        {
           "client_id": "258109280748-fd019a4n1ueunsiiosith14jb3m4hb9h.apps.googleusercontent.com",
           "client_type": 3
         }

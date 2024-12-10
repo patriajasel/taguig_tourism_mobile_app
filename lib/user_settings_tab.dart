@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:taguig_tourism_mobile_app/about_us.dart';
+import 'package:taguig_tourism_mobile_app/feedback_page.dart';
 import 'package:taguig_tourism_mobile_app/widgets/widget_generator.dart';
 
 class UserSettingsTab extends StatefulWidget {
@@ -72,9 +74,20 @@ class _UserSettingsTabState extends State<UserSettingsTab> {
 
   void languageButton() {}
 
-  void helpSuppButton() {}
+  void helpSuppButton() {
+    // Navigate to the Help & Support page when this button is pressed
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const HelpSupportPage()),
+    );
+  }
 
-  void sendFeedbackButton() {}
+  void sendFeedbackButton() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const FeedbackPage()),
+    );
+  }
 
   void logOutButton() {}
 }

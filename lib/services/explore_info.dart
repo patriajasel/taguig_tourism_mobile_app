@@ -55,4 +55,6 @@ class ExploreDestinations {
       throw e;
     }
   }
+
+  String? get siteDescription => null;
 }

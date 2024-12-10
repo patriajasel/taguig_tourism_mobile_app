@@ -14,13 +14,16 @@ class _SignUpPageState extends State<SignUpPage> {
   // Part ito nang gender list
   _SignUpPageState() {
     genderSelectedVal = genderList[0];
+    touristTypeSelectedVal = touristTypeList[0];
   }
 
   // Gender List Variable
   final genderList = ["Male", "Female", "Rather not to say"];
+  final touristTypeList = ["Local Visitor", "Foreign Visitor"];
   final ValueNotifier<bool> obscureNotifier = ValueNotifier<bool>(true);
   final ValueNotifier<bool> obscureNotifier2 = ValueNotifier<bool>(true);
   String? genderSelectedVal = "";
+  String? touristTypeSelectedVal = "";
 
   // * TextEditingController Lists
   final firstName = TextEditingController();
@@ -186,6 +189,65 @@ class _SignUpPageState extends State<SignUpPage> {
                           ),
                         ),
 
+                        // Height between Age form and Tourist Type
+                        SizedBox(height: screenHeight * 0.02369),
+
+                        DropdownButtonFormField(
+                          value: touristTypeSelectedVal,
+                          items: touristTypeList
+                              .map((e) => DropdownMenuItem(
+                                    value: e,
+                                    child: Text(e),
+                                  ))
+                              .toList(),
+                          onChanged: (val) {
+                            setState(() {
+                              touristTypeSelectedVal = val as String;
+                            });
+                          },
+                          icon: Icon(
+                            Icons.expand_circle_down_outlined,
+                            size: screenHeight * 0.03158,
+                            color: Colors.yellowAccent,
+                          ),
+
+                          style: TextStyle(
+                              color: Colors
+                                  .white, // White text for the selected item
+                              fontSize: screenHeight * 0.01945,
+                              fontFamily: "Arvo"),
+                          dropdownColor: Colors
+                              .black, // Background color for the dropdown options
+                          decoration: InputDecoration(
+                            labelText: "Tourist Type",
+                            prefixIcon: Icon(
+                              Icons.wc_outlined,
+                              size: screenHeight * 0.03158,
+                              color: Colors.yellowAccent,
+                            ),
+                            labelStyle: TextStyle(
+                                fontSize: screenHeight * 0.01579,
+                                color: Colors.white),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                  color: Colors
+                                      .white), // White border for enabled state
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                  color: Colors
+                                      .white), // White border for focused state
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            border: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                  color: Colors.white), // Default border color
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                          ),
+                        ),
+
                         // Height between Gender form and Create an Account button
                         SizedBox(height: screenHeight * 0.02369),
 
@@ -250,7 +312,7 @@ class _SignUpPageState extends State<SignUpPage> {
                               ),
                             ),
                             onPressed: () {
-                              // You can leave this empty or add functionality later.
+                              AuthenticationServices().signInWithGoogle(context);
                             },
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -312,6 +374,7 @@ class _SignUpPageState extends State<SignUpPage> {
       lastName: lastName.text,
       age: int.parse(age.text),
       gender: genderSelectedVal!,
+      touristType: touristTypeSelectedVal!,
       context: context,
     );
   }
