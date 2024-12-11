@@ -267,6 +267,41 @@ class _UserProfileTabState extends State<UserProfileTab> {
                           ),
                         ),
                       ),
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(
+                            screenHeight * 0.02631,
+                            screenHeight * 0.01315,
+                            screenHeight * 0.02631,
+                            screenHeight * 0.02631),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.white,
+                          ),
+                          height: screenHeight * 0.05263,
+                          width: double.infinity,
+                          padding: EdgeInsets.symmetric(
+                              horizontal: screenHeight * 0.01973),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                "Tourist Type",
+                                style:
+                                    TextStyle(fontSize: screenHeight * 0.01842),
+                              ),
+                              Text(
+                                userInfo!.touristType,
+                                style: TextStyle(
+                                  fontSize: screenHeight * 0.01578,
+                                  color: Colors.grey.shade700,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ),

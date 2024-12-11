@@ -1,6 +1,5 @@
 // ignore_for_file: avoid_print
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:taguig_tourism_mobile_app/customer_support_page.dart';
 import 'package:taguig_tourism_mobile_app/explore_page.dart';
@@ -33,7 +32,9 @@ class _AppNavigationState extends State<AppNavigation> {
   void initState() {
     _fetchUserData();
     super.initState();
-    CommutePage();
+    if (widget.index != null) {
+      selectedNavIndex = widget.index!;
+    }
   }
 
   void _fetchUserData() async {
@@ -70,8 +71,6 @@ class _AppNavigationState extends State<AppNavigation> {
     if (userInfo == null) {
       return Center(child: Text('User data not found.'));
     }
-
-    final searchController = TextEditingController();
 
     final List<Widget> screens = [
       HomePage(
@@ -117,14 +116,9 @@ class _AppNavigationState extends State<AppNavigation> {
               width: screenHeight * 0.0625,
             ),
           ),
-          title: CupertinoSearchTextField(
-            controller: searchController,
-            backgroundColor: Colors.white,
-            style: TextStyle(
-              fontFamily: "Arvo",
-              fontSize: screenHeight * 0.02,
-              letterSpacing: 1,
-            ),
+          title: Text(
+            "GoTaguig!",
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
           ),
           actions: [
             Padding(
@@ -169,6 +163,8 @@ class _AppNavigationState extends State<AppNavigation> {
             onDestinationSelected: (index) {
               setState(() {
                 selectedNavIndex = index;
+                initialLocation = null;
+                category = null;
               });
             },
             destinations: const [

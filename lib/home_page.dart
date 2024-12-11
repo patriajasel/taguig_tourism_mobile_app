@@ -10,6 +10,7 @@ import 'package:intl/intl.dart';
 import 'package:taguig_tourism_mobile_app/all_nearby_places_page.dart';
 import 'package:taguig_tourism_mobile_app/all_popular_destination_page.dart';
 import 'package:taguig_tourism_mobile_app/categories_page.dart';
+import 'package:taguig_tourism_mobile_app/explore_page.dart';
 import 'package:taguig_tourism_mobile_app/individual_place_page.dart';
 import 'package:taguig_tourism_mobile_app/models/events.dart';
 import 'package:taguig_tourism_mobile_app/events_page_single_page.dart';
@@ -28,14 +29,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final List<String> imgList = [
-    'lib/assets/images/taguig_image1.png',
-    'lib/assets/images/taguig_image2.png',
-    'lib/assets/images/taguig_image3.png',
-    'lib/assets/images/taguig_image4.png',
-    'lib/assets/images/taguig_image5.png'
-  ];
-
   final List<String> popular = [
     "tourist spots",
     "malls",
@@ -471,6 +464,8 @@ class _HomePageState extends State<HomePage> {
                                             color: Colors.blueAccent.shade700,
                                             child: IconButton(
                                               onPressed: () {
+                                                category =
+                                                    getTextForIndex(index);
                                                 Navigator.of(context).push(
                                                     MaterialPageRoute(
                                                         builder: (builder) =>
@@ -558,95 +553,94 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                 ],
                               ),
-                              Padding(
-                                padding: EdgeInsets.all(screenHeight * 0.01053),
-                                child: CarouselSlider(
-                                  items: popularURL
-                                      .asMap()
-                                      .map((index, e) {
-                                        return MapEntry(
-                                          index,
-                                          GestureDetector(
-                                            onTap: () {
-                                              if (index >= 0 &&
-                                                  index <
-                                                      popularDestinations
-                                                          .length) {
-                                                Navigator.push(context,
-                                                    MaterialPageRoute(
-                                                  builder: (context) {
-                                                    return IndividualPlacePage(
-                                                      banner: popularURL[index],
-                                                      name: popularDestinations[
-                                                              index]
-                                                          .siteName,
-                                                      address:
-                                                          popularDestinations[
-                                                                  index]
-                                                              .siteAddress,
-                                                      info: popularDestinations[
-                                                              index]
-                                                          .siteInfo,
-                                                      contact:
-                                                          popularDestinations[
-                                                                  index]
-                                                              .siteContact,
-                                                      links:
-                                                          popularDestinations[
-                                                                  index]
-                                                              .siteLinks,
-                                                      latitude:
-                                                          popularDestinations[
-                                                                  index]
-                                                              .siteLatitude,
-                                                      longitude:
-                                                          popularDestinations[
-                                                                  index]
-                                                              .siteLongitude,
-                                                    );
-                                                  },
-                                                ));
-                                              }
-                                            },
-                                            child: Column(
-                                              children: [
-                                                // Name above the image
-                                                Text(
-                                                  popularDestinations[index]
-                                                      .siteName,
-                                                  style: TextStyle(
-                                                    fontSize:
-                                                        screenHeight * 0.015,
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
-                                                  textAlign: TextAlign.center,
+                              CarouselSlider(
+                                items: popularURL
+                                    .asMap()
+                                    .map((index, e) {
+                                      return MapEntry(
+                                        index,
+                                        GestureDetector(
+                                          onTap: () {
+                                            if (index >= 0 &&
+                                                index <
+                                                    popularDestinations
+                                                        .length) {
+                                              Navigator.push(context,
+                                                  MaterialPageRoute(
+                                                builder: (context) {
+                                                  return IndividualPlacePage(
+                                                    banner: popularURL[index],
+                                                    name: popularDestinations[
+                                                            index]
+                                                        .siteName,
+                                                    address:
+                                                        popularDestinations[
+                                                                index]
+                                                            .siteAddress,
+                                                    info: popularDestinations[
+                                                            index]
+                                                        .siteInfo,
+                                                    contact:
+                                                        popularDestinations[
+                                                                index]
+                                                            .siteContact,
+                                                    links: popularDestinations[
+                                                            index]
+                                                        .siteLinks,
+                                                    latitude:
+                                                        popularDestinations[
+                                                                index]
+                                                            .siteLatitude,
+                                                    longitude:
+                                                        popularDestinations[
+                                                                index]
+                                                            .siteLongitude,
+                                                  );
+                                                },
+                                              ));
+                                            }
+                                          },
+                                          child: Column(
+                                            children: [
+                                              // Name above the image
+                                              Text(
+                                                popularDestinations[index]
+                                                    .siteName,
+                                                style: TextStyle(
+                                                  fontSize:
+                                                      screenHeight * 0.015,
+                                                  fontWeight: FontWeight.bold,
                                                 ),
-                                                SizedBox(
-                                                  height: screenHeight * 0.01,
-                                                ), // Space between text and image
-                                                // Image below the name
-                                                Image.network(
+                                                textAlign: TextAlign.center,
+                                              ),
+                                              SizedBox(
+                                                height: screenHeight * 0.01,
+                                              ), // Space between text and image
+                                              // Image below the name
+                                              Flexible(
+                                                child: Image.network(
                                                   e,
-                                                  fit: BoxFit.cover,
+                                                  fit: BoxFit
+                                                      .cover, // Ensures the image covers the container without stretching
                                                 ),
-                                              ],
-                                            ),
+                                              ),
+                                            ],
                                           ),
-                                        );
-                                      })
-                                      .values
-                                      .toList(),
-                                  options: CarouselOptions(
-                                    initialPage: 0,
-                                    autoPlay: true,
-                                    enlargeCenterPage: true,
-                                    enlargeFactor: 0.3,
-                                    onPageChanged: (value, _) {
-                                      setState(() {
-                                        currentSlide = value;
-                                      });
-                                    },
-                                  ),
+                                        ),
+                                      );
+                                    })
+                                    .values
+                                    .toList(),
+                                options: CarouselOptions(
+                                  initialPage: 0,
+                                  autoPlay: true,
+                                  enlargeCenterPage: false,
+                                  enlargeFactor: 0,
+                                  onPageChanged: (value, _) {
+                                    setState(() {
+                                      currentSlide = value;
+                                    });
+                                  },
                                 ),
                               ),
                               carouselIndicator(),
@@ -781,7 +775,7 @@ class _HomePageState extends State<HomePage> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        for (int i = 0; i < imgList.length; i++)
+        for (int i = 0; i < popularURL.length; i++)
           Container(
             margin: const EdgeInsets.all(5),
             height: i == currentSlide ? 7 : 5,

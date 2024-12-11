@@ -14,6 +14,10 @@ import 'package:taguig_tourism_mobile_app/individual_place_page.dart';
 import 'package:taguig_tourism_mobile_app/services/explore_info.dart';
 import 'package:taguig_tourism_mobile_app/services/firestore_services.dart';
 
+LatLng? initialLocation;
+double zoom = 17.0;
+String? category;
+
 class ExplorePage extends StatefulWidget {
   const ExplorePage({super.key});
 
@@ -26,6 +30,7 @@ class _ExplorePageState extends State<ExplorePage> {
   static const taguigCity = LatLng(14.520445, 121.053886);
 
   bool isNavigating = false;
+  bool isLoading = true;
 
   final CustomInfoWindowController customInfoWindowController =
       CustomInfoWindowController();
@@ -53,13 +58,22 @@ class _ExplorePageState extends State<ExplorePage> {
     "LGU"
   ];
 
-  String selectedFilter = "Diners";
+  String selectedFilter = "Tourist Spots";
 
   @override
   void initState() {
     WidgetsBinding.instance
         .addPostFrameCallback((_) async => _fetchLocationUpdate());
     super.initState();
+    if (category != null) {
+      selectedFilter = category!;
+    }
+
+    if (mounted) {
+      _getLocationsByFilter(selectedFilter);
+    }
+
+    print("Selected Filter: $selectedFilter");
   }
 
   @override
@@ -70,7 +84,9 @@ class _ExplorePageState extends State<ExplorePage> {
       body: Stack(
         children: [
           GoogleMap(
-            initialCameraPosition: CameraPosition(target: taguigCity, zoom: 15),
+            initialCameraPosition: CameraPosition(
+                target: initialLocation ?? taguigCity,
+                zoom: initialLocation == null ? 15.0 : zoom),
             markers: marker,
             myLocationButtonEnabled: true,
             myLocationEnabled: true,
@@ -92,6 +108,10 @@ class _ExplorePageState extends State<ExplorePage> {
             width: screenHeight * 0.2,
             offset: screenHeight * 0.0625,
           ),
+          if (isLoading)
+            Center(
+              child: CircularProgressIndicator(),
+            ),
           Positioned(
               right: screenHeight * 0.075,
               top: screenHeight * 0.0125,
@@ -212,9 +232,14 @@ class _ExplorePageState extends State<ExplorePage> {
     marker.clear();
 
     destinations = places;
+    if (mounted) {
+      await _createBitMapIcon();
+      await _setCustomMarker();
+    }
 
-    await _createBitMapIcon();
-    _setCustomMarker();
+    setState(() {
+      isLoading = false; // Hide loader when data fetch is complete
+    });
   }
 
   // This is for setting custom markers for the user
@@ -306,6 +331,8 @@ class _ExplorePageState extends State<ExplorePage> {
                                         borderRadius:
                                             BorderRadius.circular(5)))),
                             onPressed: () async {
+                              initialLocation = null;
+                              category = null;
                               await _fetchLocationUpdate();
                               setState(() {
                                 isNavigating = true;
@@ -342,10 +369,11 @@ class _ExplorePageState extends State<ExplorePage> {
                 ),
                 destinations![i].siteLatLng);
           });
-
-      setState(() {
-        marker.add(customMarker);
-      });
+      if (mounted) {
+        setState(() {
+          marker.add(customMarker);
+        });
+      }
     }
   }
 
@@ -373,10 +401,11 @@ class _ExplorePageState extends State<ExplorePage> {
           await FirestoreServices().getImageUrl(destinations![i].siteMarker);
 
       BitmapDescriptor customIcon = await createBitmapFromUrl(imageUrl);
-
-      setState(() {
-        bitmapIcons.add(customIcon);
-      });
+      if (mounted) {
+        setState(() {
+          bitmapIcons.add(customIcon);
+        });
+      }
     }
   }
 

@@ -1,4 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:taguig_tourism_mobile_app/app_navigation.dart';
+import 'package:taguig_tourism_mobile_app/explore_page.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class IndividualPlacePage extends StatefulWidget {
@@ -121,8 +125,7 @@ class _IndividualPlacePageState extends State<IndividualPlacePage> {
                         Divider(),
                         SizedBox(height: 10),
                         // Scrollable Description with Carousel
-                        SizedBox(
-                          height: 300,
+                        Expanded(
                           child: SingleChildScrollView(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -193,36 +196,58 @@ class _IndividualPlacePageState extends State<IndividualPlacePage> {
                             ),
                           ),
                         ),
-                      ],
-                    ),
-                    Spacer(),
-                    // Button positioned at the bottom
-                    ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor:
-                            Colors.blue, // Set button background color to blue
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 18, vertical: 6),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(Icons.map,
-                              color: Colors.white), // Icon color remains white
-                          SizedBox(width: 12),
-                          Text(
-                            'View location on map',
-                            style: TextStyle(
-                                fontSize: 16,
-                                color:
-                                    Colors.white), // Text color remains white
+                        // Button positioned at the bottom
+                        ElevatedButton(
+                          onPressed: () {
+                            setState(() {
+                              initialLocation = LatLng(
+                                  double.parse(widget.latitude),
+                                  double.parse(widget.longitude));
+                            });
+
+                            String uid = FirebaseAuth.instance.currentUser!.uid;
+                            String userEmail =
+                                FirebaseAuth.instance.currentUser!.email!;
+
+                            Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => AppNavigation(
+                                  userID: uid,
+                                  index: 2,
+                                  email: userEmail,
+                                ),
+                              ),
+                              (route) => false, // Removes all previous routes
+                            );
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors
+                                .blue, // Set button background color to blue
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 18, vertical: 6),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
                           ),
-                        ],
-                      ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(Icons.map,
+                                  color:
+                                      Colors.white), // Icon color remains white
+                              SizedBox(width: 12),
+                              Text(
+                                'View location on map',
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    color: Colors
+                                        .white), // Text color remains white
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),

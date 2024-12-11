@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:taguig_tourism_mobile_app/services/user_info.dart';
-import 'package:taguig_tourism_mobile_app/user_history_tab.dart';
 import 'package:taguig_tourism_mobile_app/user_profile_tab.dart';
 import 'package:taguig_tourism_mobile_app/user_settings_tab.dart';
 
@@ -29,7 +28,7 @@ class _UserPageState extends State<UserPage> {
         children: [
           Expanded(
             child: DefaultTabController(
-              length: 3,
+              length: 2,
               child: Column(
                 children: [
                   TabBar(
@@ -56,10 +55,6 @@ class _UserPageState extends State<UserPage> {
                           icon:
                               Icon(Icons.person, size: screenHeight * 0.03289)),
                       Tab(
-                          text: 'History',
-                          icon: Icon(Icons.history,
-                              size: screenHeight * 0.03289)),
-                      Tab(
                           text: 'Settings',
                           icon: Icon(Icons.settings,
                               size: screenHeight * 0.03289)),
@@ -69,7 +64,6 @@ class _UserPageState extends State<UserPage> {
                     child: TabBarView(
                       children: [
                         UserProfileTab(userInformation: userInfo!),
-                        UserHistoryTab(),
                         UserSettingsTab(userInfo: userInfo!),
                       ],
                     ),

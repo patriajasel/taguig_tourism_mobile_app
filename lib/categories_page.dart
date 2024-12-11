@@ -1,4 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:taguig_tourism_mobile_app/app_navigation.dart';
+import 'package:taguig_tourism_mobile_app/explore_page.dart';
 import 'package:taguig_tourism_mobile_app/services/explore_info.dart';
 import 'package:taguig_tourism_mobile_app/services/firestore_services.dart';
 import 'individual_place_page.dart'; // Ensure the correct import
@@ -16,6 +20,8 @@ class CategoriesPageState extends State<CategoriesPage> {
   List<bool> likedItems = List.generate(8, (index) => false);
   List<ExploreDestinations>? categoryTitle = [];
   List<String> destinationImage = [];
+
+  bool isLoading = true;
 
   @override
   void initState() {
@@ -36,9 +42,12 @@ class CategoriesPageState extends State<CategoriesPage> {
             await FirestoreServices().getImageUrl(categoryTitle![i].siteBanner);
         destinationImage.add(image);
       }
-
+      if (mounted) {
+        setState(() {
+          isLoading = false;
+        });
+      }
       // Make sure to update the UI
-      setState(() {});
     }
   }
 
@@ -72,198 +81,223 @@ class CategoriesPageState extends State<CategoriesPage> {
         ),
       ),
       backgroundColor: Colors.white.withOpacity(0.9),
-      body: ListView.builder(
-        itemCount: categoryTitle!.length,
-        itemBuilder: (container, index) {
-          return Container(
-            height: screenHeight * 0.214,
-            margin: EdgeInsets.symmetric(
-                horizontal: screenHeight * 0.01,
-                vertical: screenHeight * 0.003), // Add margin for spacing
-            child: Card(
-              elevation: 10,
-              child: Stack(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.all(screenHeight * 0.015),
-                    child: Row(
+      body: isLoading
+          ? Center(
+              child: CircularProgressIndicator(),
+            )
+          : ListView.builder(
+              itemCount: categoryTitle!.length,
+              itemBuilder: (container, index) {
+                return Container(
+                  height: screenHeight * 0.214,
+                  margin: EdgeInsets.symmetric(
+                      horizontal: screenHeight * 0.01,
+                      vertical: screenHeight * 0.003), // Add margin for spacing
+                  child: Card(
+                    elevation: 10,
+                    child: Stack(
                       children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(8.0),
-                          child: Image.network(
-                            destinationImage[index],
-                            height: screenHeight * 0.125,
-                            width: screenHeight *
-                                0.125, // Provide explicit width and height
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        SizedBox(
-                            width: screenHeight *
-                                0.01), // Add spacing between the image and text
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
+                        Padding(
+                          padding: EdgeInsets.all(screenHeight * 0.015),
+                          child: Row(
                             children: [
-                              SizedBox(height: screenHeight * 0.01),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Expanded(
-                                    child: Text(
-                                      categoryTitle![index].siteName,
-                                      maxLines: 2,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: TextStyle(
-                                        fontSize: screenHeight * 0.02,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ),
-                                  IconButton(
-                                    icon: Icon(
-                                      likedItems[index]
-                                          ? Icons.favorite
-                                          : Icons.favorite_border,
-                                      color: likedItems[index]
-                                          ? Colors.red
-                                          : Colors.grey,
-                                      size: screenHeight * 0.023,
-                                    ),
-                                    onPressed: () {
-                                      setState(() {
-                                        likedItems[index] = !likedItems[index];
-                                      });
-                                    },
-                                  ),
-                                ],
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(8.0),
+                                child: Image.network(
+                                  destinationImage[index],
+                                  height: screenHeight * 0.125,
+                                  width: screenHeight *
+                                      0.125, // Provide explicit width and height
+                                  fit: BoxFit.cover,
+                                ),
                               ),
-
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Icon(
-                                    Icons.pin_drop,
-                                    color: Colors.blue,
-                                    size: screenHeight * 0.0175, // Icon size
-                                  ),
-                                  SizedBox(
-                                      width: screenHeight *
-                                          0.005), // Space between icon and text
-                                  Expanded(
-                                    child: Text(
-                                      categoryTitle![index].siteAddress,
-                                      style: TextStyle(
-                                          fontSize: screenHeight * 0.015),
-                                      overflow: TextOverflow
-                                          .ellipsis, // Prevents overflow
-                                      maxLines:
-                                          2, // Limits the text to two lines
-                                    ),
-                                  ),
-                                ],
-                              ), // Spacing between text and buttons
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  ElevatedButton.icon(
-                                    onPressed: () {
-                                      // Navigate to IndividualPlacePage
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              IndividualPlacePage(
-                                            address: categoryTitle![index]
-                                                .siteAddress,
-                                            name:
-                                                categoryTitle![index].siteName,
-                                            banner: destinationImage[index],
-                                            info:
-                                                categoryTitle![index].siteInfo,
-                                            contact: categoryTitle![index]
-                                                .siteContact,
-                                            links:
-                                                categoryTitle![index].siteLinks,
-                                            latitude: categoryTitle![index]
-                                                .siteLatitude,
-                                            longitude: categoryTitle![index]
-                                                .siteLongitude,
+                              SizedBox(
+                                  width: screenHeight *
+                                      0.01), // Add spacing between the image and text
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    SizedBox(height: screenHeight * 0.01),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Expanded(
+                                          child: Text(
+                                            categoryTitle![index].siteName,
+                                            maxLines: 2,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: TextStyle(
+                                              fontSize: screenHeight * 0.02,
+                                              fontWeight: FontWeight.bold,
+                                            ),
                                           ),
                                         ),
-                                      );
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                      minimumSize: Size(
-                                          0,
-                                          screenHeight *
-                                              0.04), // Reduced button height
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: screenHeight * 0.02),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
-                                      ),
-                                      backgroundColor: Colors
-                                          .blueAccent.shade700, // Button color
-                                      foregroundColor:
-                                          Colors.white, // Text color
+                                      ],
                                     ),
-                                    icon: Icon(
-                                      Icons.info,
-                                      size: screenHeight *
-                                          0.015, // Adjusted icon size for smaller button
+
+                                    Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Icon(
+                                          Icons.pin_drop,
+                                          color: Colors.blue,
+                                          size: screenHeight *
+                                              0.0175, // Icon size
+                                        ),
+                                        SizedBox(
+                                            width: screenHeight *
+                                                0.005), // Space between icon and text
+                                        Expanded(
+                                          child: Text(
+                                            categoryTitle![index].siteAddress,
+                                            style: TextStyle(
+                                                fontSize: screenHeight * 0.015),
+                                            overflow: TextOverflow
+                                                .ellipsis, // Prevents overflow
+                                            maxLines:
+                                                2, // Limits the text to two lines
+                                          ),
+                                        ),
+                                      ],
+                                    ), // Spacing between text and buttons
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        ElevatedButton.icon(
+                                          onPressed: () {
+                                            // Navigate to IndividualPlacePage
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    IndividualPlacePage(
+                                                  address: categoryTitle![index]
+                                                      .siteAddress,
+                                                  name: categoryTitle![index]
+                                                      .siteName,
+                                                  banner:
+                                                      destinationImage[index],
+                                                  info: categoryTitle![index]
+                                                      .siteInfo,
+                                                  contact: categoryTitle![index]
+                                                      .siteContact,
+                                                  links: categoryTitle![index]
+                                                      .siteLinks,
+                                                  latitude:
+                                                      categoryTitle![index]
+                                                          .siteLatitude,
+                                                  longitude:
+                                                      categoryTitle![index]
+                                                          .siteLongitude,
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                          style: ElevatedButton.styleFrom(
+                                            minimumSize: Size(
+                                                0,
+                                                screenHeight *
+                                                    0.04), // Reduced button height
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal:
+                                                    screenHeight * 0.02),
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
+                                            ),
+                                            backgroundColor: Colors.blueAccent
+                                                .shade700, // Button color
+                                            foregroundColor:
+                                                Colors.white, // Text color
+                                          ),
+                                          icon: Icon(
+                                            Icons.info,
+                                            size: screenHeight *
+                                                0.015, // Adjusted icon size for smaller button
+                                          ),
+                                          label: Text(
+                                            'View Info',
+                                            style: TextStyle(
+                                              fontSize: screenHeight *
+                                                  0.0125, // Smaller font size
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                            width: screenHeight *
+                                                0.0125), // Space between buttons
+                                        ElevatedButton.icon(
+                                          onPressed: () {
+                                            setState(() {
+                                              initialLocation = LatLng(
+                                                  double.parse(
+                                                      categoryTitle![index]
+                                                          .siteLatitude),
+                                                  double.parse(
+                                                      categoryTitle![index]
+                                                          .siteLongitude));
+                                            });
+
+                                            String uid = FirebaseAuth
+                                                .instance.currentUser!.uid;
+                                            String userEmail = FirebaseAuth
+                                                .instance.currentUser!.email!;
+
+                                            Navigator.pushAndRemoveUntil(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    AppNavigation(
+                                                  userID: uid,
+                                                  index: 2,
+                                                  email: userEmail,
+                                                ),
+                                              ),
+                                              (route) =>
+                                                  false, // Removes all previous routes
+                                            );
+                                          },
+                                          style: ElevatedButton.styleFrom(
+                                            minimumSize: Size(
+                                                0,
+                                                screenHeight *
+                                                    0.04), // Reduced button height
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal:
+                                                    screenHeight * 0.02),
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
+                                            ),
+                                            backgroundColor: Colors.blueAccent
+                                                .shade700, // Button color
+                                            foregroundColor:
+                                                Colors.white, // Text color
+                                          ),
+                                          icon: Icon(
+                                            Icons.map,
+                                            size: screenHeight *
+                                                0.015, // Adjusted icon size for smaller button
+                                          ),
+                                          label: Text(
+                                            'See on Maps',
+                                            style: TextStyle(
+                                              fontSize: screenHeight *
+                                                  0.0125, // Smaller font size
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                    label: Text(
-                                      'View Info',
-                                      style: TextStyle(
-                                        fontSize: screenHeight *
-                                            0.0125, // Smaller font size
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                      width: screenHeight *
-                                          0.0125), // Space between buttons
-                                  ElevatedButton.icon(
-                                    onPressed: () {
-                                      // Handle "See on Maps" action
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                      minimumSize: Size(
-                                          0,
-                                          screenHeight *
-                                              0.04), // Reduced button height
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: screenHeight * 0.02),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
-                                      ),
-                                      backgroundColor: Colors
-                                          .blueAccent.shade700, // Button color
-                                      foregroundColor:
-                                          Colors.white, // Text color
-                                    ),
-                                    icon: Icon(
-                                      Icons.map,
-                                      size: screenHeight *
-                                          0.015, // Adjusted icon size for smaller button
-                                    ),
-                                    label: Text(
-                                      'See on Maps',
-                                      style: TextStyle(
-                                        fontSize: screenHeight *
-                                            0.0125, // Smaller font size
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ],
                           ),
@@ -271,12 +305,9 @@ class CategoriesPageState extends State<CategoriesPage> {
                       ],
                     ),
                   ),
-                ],
-              ),
+                );
+              },
             ),
-          );
-        },
-      ),
     );
   }
 }
