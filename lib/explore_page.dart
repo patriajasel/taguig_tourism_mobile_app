@@ -303,6 +303,7 @@ class _ExplorePageState extends State<ExplorePage> {
                                       links: destinations![i].siteLinks,
                                       latitude: destinations![i].siteLatitude,
                                       longitude: destinations![i].siteLongitude,
+                                      image: destinations![i].siteImage,
                                     )));
                           },
                           child: Text(

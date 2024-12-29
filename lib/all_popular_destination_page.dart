@@ -153,6 +153,7 @@ class _AllPopularDestinationPage extends State<AllPopularDestinationPage> {
                                     links: popularDestination.siteLinks,
                                     latitude: popularDestination.siteLatitude,
                                     longitude: popularDestination.siteLongitude,
+                                    image: popularDestination.siteImage,
                                   ),
                                 ),
                               );

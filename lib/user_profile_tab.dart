@@ -5,7 +5,9 @@ import 'package:taguig_tourism_mobile_app/change_email_page.dart';
 import 'package:taguig_tourism_mobile_app/services/auth_services.dart';
 import 'package:taguig_tourism_mobile_app/services/user_info.dart';
 import 'package:taguig_tourism_mobile_app/widgets/widget_generator.dart';
+import 'package:taguig_tourism_mobile_app/models/profile_image_provider.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 import 'dart:io';
 
 class UserProfileTab extends StatefulWidget {
@@ -48,7 +50,8 @@ class _UserProfileTabState extends State<UserProfileTab> {
           .child("profile_images/${userInfo?.userID}/custom_profile.png");
       await reference.putFile(image);
       String downloadURL = await reference.getDownloadURL();
-      setState(() => profileImageURL = downloadURL);
+      Provider.of<ProfileImageProvider>(context, listen: false).updateProfileImage(downloadURL);
+
 
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
@@ -80,9 +83,7 @@ class _UserProfileTabState extends State<UserProfileTab> {
           .ref()
           .child("profile_images/${userInfo?.userID}/custom_profile.png");
       String downloadURL = await reference.getDownloadURL();
-      setState(() {
-        profileImageURL = downloadURL; // Set the fetched URL
-      });
+      Provider.of<ProfileImageProvider>(context, listen: false).updateProfileImage(downloadURL);
     } catch (e) {
       // Log or handle the error if the image doesn't exist
       print("Failed to fetch profile image: $e");
@@ -91,84 +92,85 @@ class _UserProfileTabState extends State<UserProfileTab> {
 
   @override
   Widget build(BuildContext context) {
-    double screenHeight = MediaQuery.of(context).size.height;
-    return SingleChildScrollView(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            margin: EdgeInsets.all(screenHeight * 0.01315),
-            height: screenHeight * 0.15789,
-            width: screenHeight * 0.15789,
-            decoration: BoxDecoration(
-                gradient: LinearGradient(colors: [
-                  Colors.blueAccent.shade700,
-                  Colors.redAccent.shade700,
-                ], begin: Alignment.topLeft, end: Alignment.bottomRight),
-                shape: BoxShape.circle),
-            child: Padding(
-              // This padding will be the border size
-              padding: EdgeInsets.all(screenHeight * 0.00394),
-              child: Stack(children: [
-                Container(
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    shape: BoxShape.circle,
-                  ),
-                  child: Center(
-                    child: CircleAvatar(
-                      backgroundColor: Colors.white,
-                      radius: screenHeight * 0.075,
-                      child: isLoading
-                          ? CircularProgressIndicator()
-                          : profileImageURL != null
-                              ? SizedBox(
-                                  height: screenHeight * 0.15,
-                                  child: ClipOval(
-                                    child: Image.network(
-                                      profileImageURL!,
-                                      fit: BoxFit.cover,
-                                      loadingBuilder:
-                                          (context, child, progress) {
-                                        return progress == null
-                                            ? child
-                                            : Center(
-                                                child:
-                                                    CircularProgressIndicator(),
-                                              );
-                                      },
-                                      errorBuilder:
-                                          (context, error, stackTrace) {
-                                        return Icon(
-                                          Icons.broken_image,
-                                          size: screenHeight * 0.075,
-                                          color: Colors.red,
-                                        );
-                                      },
-                                    ),
+  double screenHeight = MediaQuery.of(context).size.height;
+  String? profileImageURL =
+      Provider.of<ProfileImageProvider>(context).profileImageURL;
+
+  return SingleChildScrollView(
+    child: Column(
+      children: [
+        Container(
+          margin: EdgeInsets.all(screenHeight * 0.01315),
+          height: screenHeight * 0.15789,
+          width: screenHeight * 0.15789,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(colors: [
+              Colors.blueAccent.shade700,
+              Colors.redAccent.shade700,
+            ], begin: Alignment.topLeft, end: Alignment.bottomRight),
+            shape: BoxShape.circle,
+          ),
+          child: Padding(
+            padding: EdgeInsets.all(screenHeight * 0.00394),
+            child: Stack(children: [
+              Container(
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                  shape: BoxShape.circle,
+                ),
+                child: Center(
+                  child: CircleAvatar(
+                    backgroundColor: Colors.white,
+                    radius: screenHeight * 0.075,
+                    child: isLoading
+                        ? CircularProgressIndicator()
+                        : profileImageURL != null
+                            ? SizedBox(
+                                height: screenHeight * 0.15,
+                                child: ClipOval(
+                                  child: Image.network(
+                                    profileImageURL,
+                                    fit: BoxFit.cover,
+                                    loadingBuilder: (context, child, progress) {
+                                      return progress == null
+                                          ? child
+                                          : Center(
+                                              child: CircularProgressIndicator(),
+                                            );
+                                    },
+                                    errorBuilder: (context, error, stackTrace) {
+                                      return Icon(
+                                        Icons.broken_image,
+                                        size: screenHeight * 0.075,
+                                        color: Colors.red,
+                                      );
+                                    },
                                   ),
-                                )
-                              : Icon(
-                                  Icons.person,
-                                  size: screenHeight * 0.075,
-                                  color: Colors.grey,
                                 ),
-                    ),
+                              )
+                            : Icon(
+                                Icons.person,
+                                size: screenHeight * 0.075,
+                                color: Colors.grey,
+                              ),
                   ),
                 ),
-                Positioned(
-                  right: screenHeight * 0.008,
-                  top: screenHeight * 0.008,
-                  child: GestureDetector(
-                      onTap: () {
-                        pickImage();
-                      },
-                      child: Icon(Icons.camera_alt,
-                          color: Colors.black, size: screenHeight * 0.025)),
-                )
-              ]),
-            ),
+              ),
+              Positioned(
+                right: screenHeight * 0.008,
+                top: screenHeight * 0.008,
+                child: GestureDetector(
+                  onTap: pickImage,
+                  child: Icon(
+                    Icons.camera_alt,
+                    color: Colors.black,
+                    size: screenHeight * 0.025,
+                  ),
+                ),
+              )
+            ]),
           ),
+        ),
           Padding(
             padding: EdgeInsets.only(bottom: screenHeight * 0.00657),
             child: Text(
