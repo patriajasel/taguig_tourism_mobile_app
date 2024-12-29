@@ -13,7 +13,6 @@ class AllPopularDestinationPage extends StatefulWidget {
 
 class _AllPopularDestinationPage extends State<AllPopularDestinationPage> {
   List<ExploreDestinations> allPopularDestinations = [];
-  List<String> allPopularURLs = [];
 
   final List<String> allPopular = [
     "tourist spots",
@@ -29,13 +28,9 @@ class _AllPopularDestinationPage extends State<AllPopularDestinationPage> {
 
       if (popularPlaces != null) {
         for (var popular in popularPlaces) {
-          String imageURL =
-              await FirestoreServices().getImageUrl(popular.siteBanner);
-
           setState(() {
             if (mounted) {
               allPopularDestinations.add(popular);
-              allPopularURLs.add(imageURL);
             }
           });
         }
@@ -63,11 +58,11 @@ class _AllPopularDestinationPage extends State<AllPopularDestinationPage> {
             Colors.transparent, // Make AppBar background transparent
         elevation: 0, // Remove shadow
         flexibleSpace: Container(
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [
-                Colors.blueAccent,
-                Colors.redAccent,
+                Colors.blueAccent.shade700,
+                Colors.redAccent.shade700,
               ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
@@ -85,7 +80,6 @@ class _AllPopularDestinationPage extends State<AllPopularDestinationPage> {
               itemCount: allPopularDestinations.length,
               itemBuilder: (context, index) {
                 final popularDestination = allPopularDestinations[index];
-                final imageURL = allPopularURLs[index];
 
                 return Container(
                   height: screenHeight * 0.2,
@@ -100,8 +94,8 @@ class _AllPopularDestinationPage extends State<AllPopularDestinationPage> {
                         children: [
                           ClipRRect(
                             borderRadius: BorderRadius.circular(8.0),
-                            child: Image.network(
-                              imageURL,
+                            child: Image.asset(
+                              "lib/assets/places/default_banner.png",
                               height: screenHeight * 0.15,
                               width: screenHeight * 0.15,
                               fit: BoxFit.cover,
@@ -145,7 +139,8 @@ class _AllPopularDestinationPage extends State<AllPopularDestinationPage> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => IndividualPlacePage(
-                                    banner: imageURL,
+                                    banner:
+                                        "lib/assets/places/default_banner.png",
                                     name: popularDestination.siteName,
                                     address: popularDestination.siteAddress,
                                     info: popularDestination.siteInfo,

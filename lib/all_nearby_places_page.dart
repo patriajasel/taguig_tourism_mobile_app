@@ -4,12 +4,10 @@ import 'package:taguig_tourism_mobile_app/services/explore_info.dart';
 
 class AllNearbyPlacesPage extends StatefulWidget {
   final List<ExploreDestinations> nearbyPlaces;
-  final List<String> imageLinks;
 
   const AllNearbyPlacesPage({
     super.key,
     required this.nearbyPlaces,
-    required this.imageLinks,
   });
 
   @override
@@ -18,15 +16,12 @@ class AllNearbyPlacesPage extends StatefulWidget {
 
 class _AllNearbyPlacesPage extends State<AllNearbyPlacesPage> {
   late List<ExploreDestinations> nearbyPlaces;
-  late List<String> nearbyImageURL;
 
   @override
   void initState() {
     super.initState();
     setState(() {
       nearbyPlaces = widget.nearbyPlaces;
-      nearbyImageURL = widget.imageLinks;
-      print("Nearby Places: $nearbyPlaces");
     });
   }
 
@@ -69,7 +64,6 @@ class _AllNearbyPlacesPage extends State<AllNearbyPlacesPage> {
               itemCount: nearbyPlaces.length,
               itemBuilder: (context, index) {
                 final place = nearbyPlaces[index];
-                final imageURL = nearbyImageURL[index];
 
                 return Container(
                   height: screenHeight * 0.2,
@@ -84,8 +78,8 @@ class _AllNearbyPlacesPage extends State<AllNearbyPlacesPage> {
                         children: [
                           ClipRRect(
                             borderRadius: BorderRadius.circular(8.0),
-                            child: Image.network(
-                              imageURL,
+                            child: Image.asset(
+                              "lib/assets/places/default_banner.png",
                               height: screenHeight * 0.15,
                               width: screenHeight * 0.15,
                               fit: BoxFit.cover,
@@ -129,7 +123,8 @@ class _AllNearbyPlacesPage extends State<AllNearbyPlacesPage> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => IndividualPlacePage(
-                                    banner: imageURL,
+                                    banner:
+                                        "lib/assets/places/default_banner.png",
                                     name: place.siteName,
                                     address: place.siteAddress,
                                     info: place.siteInfo,

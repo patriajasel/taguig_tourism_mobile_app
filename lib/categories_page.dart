@@ -19,7 +19,6 @@ class CategoriesPageState extends State<CategoriesPage> {
   // Track the like status for each card
   List<bool> likedItems = List.generate(8, (index) => false);
   List<ExploreDestinations>? categoryTitle = [];
-  List<String> destinationImage = [];
 
   bool isLoading = true;
 
@@ -31,17 +30,12 @@ class CategoriesPageState extends State<CategoriesPage> {
 
   Future<void> getCategory() async {
     categoryTitle!.clear();
-    destinationImage.clear();
     List<ExploreDestinations>? category = await FirestoreServices()
         .getDestinationIds(widget.headline.toLowerCase());
 
     if (category != null) {
       categoryTitle = category;
-      for (int i = 0; i < category.length; i++) {
-        String image =
-            await FirestoreServices().getImageUrl(categoryTitle![i].siteBanner);
-        destinationImage.add(image);
-      }
+
       if (mounted) {
         setState(() {
           isLoading = false;
@@ -103,8 +97,8 @@ class CategoriesPageState extends State<CategoriesPage> {
                             children: [
                               ClipRRect(
                                 borderRadius: BorderRadius.circular(8.0),
-                                child: Image.network(
-                                  destinationImage[index],
+                                child: Image.asset(
+                                  "lib/assets/places/default_banner.png",
                                   height: screenHeight * 0.125,
                                   width: screenHeight *
                                       0.125, // Provide explicit width and height
@@ -181,7 +175,7 @@ class CategoriesPageState extends State<CategoriesPage> {
                                                   name: categoryTitle![index]
                                                       .siteName,
                                                   banner:
-                                                      destinationImage[index],
+                                                      "lib/assets/places/default_banner.png",
                                                   info: categoryTitle![index]
                                                       .siteInfo,
                                                   contact: categoryTitle![index]

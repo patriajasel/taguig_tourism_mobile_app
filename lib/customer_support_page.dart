@@ -60,20 +60,33 @@ class _ChatSupportPageState extends State<ChatSupportPage> {
       return 'Model not loaded yet';
     }
 
+    if (userInput.trim().isEmpty) {
+      return "It seems like you didn't type anything. Can I help with something specific?";
+    }
+
     // Preprocess the input and get the input data
     List<int> inputData = await preprocessInput(userInput);
 
     // Ensure inputData has the correct shape for the model ([1, words.length])
     var inputDataReshaped = inputData.reshape([1, inputData.length]);
-    var outputData = List.filled(classes.length, 0.0)
-        .reshape([1, classes.length]); // Adjust shape as needed
+    var outputData =
+        List.filled(classes.length, 0.0).reshape([1, classes.length]);
 
     try {
       _interpreter!.run(inputDataReshaped, outputData);
 
-      // Get the predicted class index
+      // Get the predicted class index and confidence
       int responseIndex = getPredictedClassIndex(outputData[0]);
-      String predictedTag = classes[responseIndex]; // Use the loaded classes
+      double confidence = outputData[0][responseIndex];
+
+      print("Confidence: $confidence");
+
+      String predictedTag = classes[responseIndex];
+
+      if (confidence < 0.7) {
+        return getFallbackResponse();
+      }
+
       return await getResponsesForTag(predictedTag);
     } catch (e) {
       print('Error during inference: $e');
@@ -81,10 +94,23 @@ class _ChatSupportPageState extends State<ChatSupportPage> {
     }
   }
 
-  String getResponseForIndex(int index) {
-    // Map the output index to a chatbot response (using classes.pkl if needed)
-    List<String> responses = ['Hello!', 'How can I help you?', 'Goodbye!'];
-    return responses[index];
+  String getFallbackResponse() {
+    // List of fallback responses
+    List<String> fallbackResponses = [
+      "I'm sorry, I don't have the information you're looking for.",
+      "Unfortunately, I don't have data related to that question.",
+      "It seems your question is outside the scope of my knowledge base.",
+      "I apologize, but I don't have the details needed to answer that question.",
+      "That question is a bit beyond my current capabilities. Can I assist you with something else?",
+      "I'm not equipped with the data to answer that. Could you try rephrasing your question?",
+      "I don't have sufficient information about that topic, but I'm here to help with other queries.",
+      "Sorry, but I can't find any relevant data in my system to answer your question.",
+      "That topic doesn't seem to be covered in my dataset. Let me know if there's another way I can help.",
+      "I'm unable to provide an answer as it falls outside my dataset's coverage."
+    ];
+
+    // Return a random fallback response
+    return fallbackResponses[Random().nextInt(fallbackResponses.length)];
   }
 
   Future<List<int>> preprocessInput(String userInput) async {

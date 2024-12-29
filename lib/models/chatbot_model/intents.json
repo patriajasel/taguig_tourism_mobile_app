@@ -1,7 +1,70 @@
 {
     "intents": [
         {
-            "tag": "greeting",
+            "tag": "Fallback",
+            "patterns": [
+                "I love you",
+                "asdfghjkl",
+                "lkadjsd234234",
+                "are you okay?",
+                "qwerty",
+                "???",
+                "......",
+                "you are stupid",
+                "dakwhdiw9231",
+                "random text",
+                "what's this?",
+                "hahaha",
+                "why?",
+                "no",
+                "maybe",
+                "nothing",
+                "hello?",
+                "test",
+                "can you hear me?",
+                "asldkjasldk",
+                "you are dumb",
+                "this is nonsense",
+                "blah blah blah",
+                "what do you mean?",
+                "why not?",
+                "I don't know",
+                "help",
+                "sdfksjdkf",
+                "random characters",
+                "unknown input",
+                "this doesn't make sense",
+                "jibberish",
+                "stop",
+                "what am I doing?",
+                "why is this happening?",
+                "do you understand?",
+                "doesn't matter",
+                "forget it",
+                "leave me alone",
+                "who are you?",
+                "what is this for?"
+            ],
+            "responses": [
+                "I'm here to help with your questions. Could you ask something else?",
+                "I'm not sure what that means. Let's try asking something else.",
+                "That doesn't seem related to what I can assist with. Please clarify.",
+                "I'm here to assist with your inquiries. Could you provide more details?",
+                "I didn't quite catch that. Can you rephrase your question?",
+                "Hmm, that doesn't seem to match anything I know. Try asking about Taguig or specific information.",
+                "I'm not programmed to respond to that. Could you ask about something else?",
+                "Sorry, I can't understand that. Maybe try rephrasing your question?",
+                "That input is unclear. Can you provide more context?",
+                "It seems that input is unrelated to the topics I can assist with. Please ask another question.",
+                "I'm not sure how to respond to that. Let me know how I can help!",
+                "Hmm, that doesn't look familiar. Try asking about a specific topic.",
+                "I'm here to help, but I didn't understand that. Could you ask again?",
+                "That seems like random input. Can you ask a clear question about something specific?",
+                "Oops! That doesn't match anything I recognize. Please ask me about Taguig or something similar."
+            ]
+        },
+        {
+            "tag": "Greetings",
             "patterns": [
                 "Hello",
                 "Hi",
@@ -9,40 +72,86 @@
                 "What's up?",
                 "Hello, I need help",
                 "Hi, can you help me?",
-                "Hey, I need help"
+                "Hey, I need help",
+                "Good morning",
+                "Good afternoon",
+                "Good evening",
+                "Hi there!",
+                "Greetings!",
+                "Hello there!",
+                "Hey! Can you assist me?",
+                "Hi chatbot!",
+                "I need some help, hello?",
+                "Hey bot, can you help?"
             ],
             "responses": [
                 "Hello! I am a customer chat support. How can I help you?",
                 "Hi there!, I am a chat bot, I'm here to help. What can I do to help?",
                 "Hey, I'm here to assist you. What can I do for you?",
                 "Welcome to GoTaguig App, I am here to help you. What can I do for you?",
-                "Good Day!, I am here to help you. What can I do for you?",
-                "Thank you for reaching out to me, I am here to help you. What can I do for you"
+                "Good Day! I am here to help you. What can I do for you?",
+                "Thank you for reaching out to me. I am here to help you. What can I do for you?",
+                "Hi! How can I make your day better today?",
+                "Hello! Feel free to ask me anything about Taguig or the services we offer."
             ]
         },
         {
             "tag": "Location",
             "patterns": [
-                "Where is Taguig located",
+                "Where is Taguig located?",
                 "Where is Taguig?",
-                "What is the location of Taguig?"
+                "What is the location of Taguig?",
+                "Can you tell me where Taguig is?",
+                "What part of the Philippines is Taguig in?",
+                "Where can I find Taguig?",
+                "Where is Taguig city?",
+                "Is Taguig in Metro Manila?",
+                "Which region is Taguig located in?",
+                "What city is Taguig in?",
+                "In which area is Taguig located?",
+                "Can you locate Taguig for me?",
+                "Which part of Metro Manila is Taguig?",
+                "Where exactly is Taguig?",
+                "What is the exact location of Taguig?",
+                "Taguig location?",
+                "Taguig is in which part of the Philippines?",
+                "Where is Taguig city in the Philippines?",
+                "Taguig is in which city?",
+                "Which area does Taguig belong to?"
             ],
             "responses": [
                 "Taguig is located in the southeastern part of Metro Manila, Philippines.",
-                "Taguig is a city in the Philippines, located in the National Capital Region (NCR). It lies in the southeastern part of Metro Manila. Taguig is known for its rapid urban development, particularly the Bonifacio Global City (BGC) area, a major business district featuring skyscrapers, upscale shopping centers, and vibrant nightlife"
+                "Taguig is a city in the Philippines, located in the National Capital Region (NCR). It lies in the southeastern part of Metro Manila. Taguig is known for its rapid urban development, particularly the Bonifacio Global City (BGC) area, a major business district featuring skyscrapers, upscale shopping centers, and vibrant nightlife.",
+                "Taguig, in Metro Manila, Philippines, is situated in the southeastern area of the region, recognized for its modern urban districts like Bonifacio Global City.",
+                "In the Philippines, Taguig is part of Metro Manila, located in its southeastern region. It’s known for its bustling commercial and residential developments.",
+                "Taguig City is located in the southeastern section of Metro Manila, home to landmarks like Bonifacio Global City (BGC) and the Venice Grand Canal Mall.",
+                "Taguig is in the National Capital Region (NCR) of the Philippines, specifically in the southeastern part of Metro Manila. It’s a hub for business, tourism, and urban living.",
+                "Located in Metro Manila’s southeast, Taguig is a thriving city famous for the Bonifacio Global City area, vibrant neighborhoods, and historical landmarks like the Heroes Cemetery.",
+                "Taguig lies in the southeastern portion of Metro Manila, the National Capital Region of the Philippines, and is easily accessible via major roads like C-5 Road.",
+                "The city of Taguig is part of Metro Manila, in its southeastern area, and is home to key attractions such as The Mind Museum and upscale urban districts like BGC.",
+                "Taguig, a southeastern city in Metro Manila, is a fast-growing urban hub in the Philippines, combining modern development with cultural heritage."
             ]
         },
         {
             "tag": "Landmarks",
             "patterns": [
-                "What are the key landmarks in Taguig",
-                "What can I see in Taguig",
-                "What are the popular destinations in Taguig",
-                "What are the top tourist spots in Taguig?"
+                "What are the key landmarks in Taguig?",
+                "What can I see in Taguig?",
+                "What are the popular destinations in Taguig?",
+                "What are the top tourist spots in Taguig?",
+                "Can you list the tourist spots in Taguig?",
+                "Which landmarks should I visit in Taguig?",
+                "What is Taguig famous for?",
+                "What attractions does Taguig offer?",
+                "What are some iconic places in Taguig?"
             ],
             "responses": [
-                "Key landmarks of Taguig includes Bonifacio Global City (BGC), Market! Market!, Venice Grand Canal Mall, The Fort Strip, Philippine Army Museum and The Mind Museum",
-                "Top tourist spots include Bonifacio Global City (BGC), Venice Grand Canal Mall, The Mind Museum, and Heroes Cemetery (Libingan ng mga Bayani)."
+                "Key landmarks of Taguig include Bonifacio Global City (BGC), Market! Market!, Venice Grand Canal Mall, The Fort Strip, Philippine Army Museum, and The Mind Museum.",
+                "Top tourist spots include Bonifacio Global City (BGC), Venice Grand Canal Mall, The Mind Museum, and Heroes Cemetery (Libingan ng mga Bayani).",
+                "You can explore landmarks like Bonifacio Global City, The Fort Strip, Venice Grand Canal Mall, and the Heroes Cemetery.",
+                "Taguig boasts attractions like The Mind Museum, Market! Market!, and Bonifacio High Street, perfect for shopping and leisure.",
+                "Don't miss out on visiting The Mind Museum, Libingan ng mga Bayani, and the vibrant streets of Bonifacio Global City.",
+                "Taguig is known for its modern landmarks like BGC and Venice Grand Canal Mall, as well as historical sites like Libingan ng mga Bayani."
             ]
         },
         {
@@ -50,10 +159,20 @@
             "patterns": [
                 "What are the major roads in Taguig?",
                 "What are roads leading to Taguig?",
-                "What are the popular roads in Taguig?"
+                "What are the popular roads in Taguig?",
+                "Can you name the main roads in Taguig?",
+                "What highways pass through Taguig?",
+                "What roads connect Taguig to nearby cities?",
+                "Which streets are prominent in Taguig?",
+                "What are the major thoroughfares in Taguig?",
+                "What are some important streets in Taguig?"
             ],
             "responses": [
-                "The major roads in Taguig City includes C-5 Road, Lawton Avenue, McKinley Parkway, and Levi Mariano Avenue."
+                "The major roads in Taguig City include C-5 Road, Lawton Avenue, McKinley Parkway, and Levi Mariano Avenue.",
+                "Taguig is well-connected through major roads such as C-5 Road, Lawton Avenue, McKinley Road, and Cayetano Boulevard.",
+                "Prominent roads in Taguig include Levi Mariano Avenue, Bonifacio High Street, and Bayani Road.",
+                "Taguig features significant roads like C-5 Road, McKinley Parkway, and the BGC-Ortigas Link Bridge for easy access to other areas.",
+                "Main roads like Lawton Avenue, Levi Mariano Avenue, and Cayetano Boulevard are essential for navigating Taguig."
             ]
         },
         {
@@ -78,7 +197,6 @@
 
             ]
         },
-
         {
             "tag": "Train",
             "patterns": [

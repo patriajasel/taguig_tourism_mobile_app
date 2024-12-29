@@ -45,7 +45,6 @@ class _HomePageState extends State<HomePage> {
   bool isLoading = true;
 
   List<ExploreDestinations> popularDestinations = [];
-  List<String> popularURL = [];
 
   List<List<ExploreDestinations>> nearbyCollection = [];
   List<ExploreDestinations> allPlaces = [];
@@ -59,7 +58,6 @@ class _HomePageState extends State<HomePage> {
 
   List<Events> eventList = [];
   List<String> imageDirectory = [];
-  List<String> nearbyImageURL = [];
 
   Position? userPosition;
 
@@ -175,12 +173,8 @@ class _HomePageState extends State<HomePage> {
           await FirestoreServices().getPopularPlaces(collectionName);
       if (popularPlaces != null) {
         for (var popular in popularPlaces) {
-          String imageURL =
-              await FirestoreServices().getImageUrl(popular.siteBanner);
-
           setState(() {
             popularDestinations.add(popular);
-            popularURL.add(imageURL);
           });
         }
       }
@@ -214,18 +208,6 @@ class _HomePageState extends State<HomePage> {
           nearbyPlaces.add(allPlaces[placesLatLng.indexOf(latlng)]);
           print("Nearby place added");
         }
-      }
-    }
-
-    // Fetch images for all nearby places
-    for (var place in nearbyPlaces) {
-      try {
-        String url = await FirestoreServices().getImageUrl(place.siteBanner);
-        if (url.isNotEmpty) {
-          nearbyImageURL.add(url); // Add valid URL
-        }
-      } catch (e) {
-        print("Error fetching image URL: $e");
       }
     }
 
@@ -554,7 +536,7 @@ class _HomePageState extends State<HomePage> {
                                 ],
                               ),
                               CarouselSlider(
-                                items: popularURL
+                                items: popularDestinations
                                     .asMap()
                                     .map((index, e) {
                                       return MapEntry(
@@ -569,7 +551,8 @@ class _HomePageState extends State<HomePage> {
                                                   MaterialPageRoute(
                                                 builder: (context) {
                                                   return IndividualPlacePage(
-                                                    banner: popularURL[index],
+                                                    banner:
+                                                        "lib/assets/places/default_banner.png",
                                                     name: popularDestinations[
                                                             index]
                                                         .siteName,
@@ -618,8 +601,8 @@ class _HomePageState extends State<HomePage> {
                                               ), // Space between text and image
                                               // Image below the name
                                               Flexible(
-                                                child: Image.network(
-                                                  e,
+                                                child: Image.asset(
+                                                  "lib/assets/places/default_banner.png",
                                                   fit: BoxFit
                                                       .cover, // Ensures the image covers the container without stretching
                                                 ),
@@ -683,7 +666,6 @@ class _HomePageState extends State<HomePage> {
                                             builder: (context) =>
                                                 AllNearbyPlacesPage(
                                               nearbyPlaces: nearbyPlaces,
-                                              imageLinks: nearbyImageURL,
                                             ),
                                           ),
                                         );
@@ -734,8 +716,8 @@ class _HomePageState extends State<HomePage> {
                                               child: SizedBox(
                                                 height: screenHeight * 0.13158,
                                                 width: screenHeight * 0.26315,
-                                                child: Image.network(
-                                                  nearbyImageURL[index],
+                                                child: Image.asset(
+                                                  "lib/assets/places/default_banner.png",
                                                   fit: BoxFit.fill,
                                                 ),
                                               ),
@@ -775,7 +757,7 @@ class _HomePageState extends State<HomePage> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        for (int i = 0; i < popularURL.length; i++)
+        for (int i = 0; i < popularDestinations.length; i++)
           Container(
             margin: const EdgeInsets.all(5),
             height: i == currentSlide ? 7 : 5,

@@ -65,7 +65,7 @@ class _IndividualPlacePageState extends State<IndividualPlacePage> {
             child: SizedBox(
               height:
                   260, // Set the height of the image container (adjust as needed)
-              child: Image.network(
+              child: Image.asset(
                 widget.banner,
                 fit: BoxFit.cover, // Ensure the image covers the container
               ),

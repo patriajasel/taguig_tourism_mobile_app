@@ -5,10 +5,8 @@ import 'dart:math';
 
 import 'package:custom_info_window/custom_info_window.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:http/http.dart' as http;
 import 'package:location/location.dart';
 import 'package:taguig_tourism_mobile_app/individual_place_page.dart';
 import 'package:taguig_tourism_mobile_app/services/explore_info.dart';
@@ -26,7 +24,7 @@ class ExplorePage extends StatefulWidget {
 }
 
 class _ExplorePageState extends State<ExplorePage> {
-  final String googleMapsAPIKey = "";
+  final String googleMapsAPIKey = "AIzaSyDX1SZJD42FoDNlN7oMNgtavPalKn8Q-hM";
   static const taguigCity = LatLng(14.520445, 121.053886);
 
   bool isNavigating = false;
@@ -152,6 +150,7 @@ class _ExplorePageState extends State<ExplorePage> {
                               selectedFilter = value;
                             });
                             customInfoWindowController.hideInfoWindow;
+                            isLoading = true;
                             _getLocationsByFilter(selectedFilter);
                           },
                           itemBuilder: (context) {
@@ -233,7 +232,6 @@ class _ExplorePageState extends State<ExplorePage> {
 
     destinations = places;
     if (mounted) {
-      await _createBitMapIcon();
       await _setCustomMarker();
     }
 
@@ -259,10 +257,23 @@ class _ExplorePageState extends State<ExplorePage> {
     });
   }
 
+  Future<BitmapDescriptor> _createBitmapDescriptorFromAsset(
+      String assetPath) async {
+    return BitmapDescriptor.asset(
+      const ImageConfiguration(size: Size(48, 48)),
+      assetPath,
+    );
+  }
+
   // This is for setting the custom markers of the places based on the filter
   Future<void> _setCustomMarker() async {
     for (int i = 0; i < destinations!.length; i++) {
-      print("imagePath URL: ${destinations![i].siteBanner}");
+      BitmapDescriptor customIcon = await _createBitmapDescriptorFromAsset(
+          "lib/assets/places/default_marker.png");
+      bitmapIcons.add(customIcon);
+    }
+
+    for (int i = 0; i < destinations!.length; i++) {
       Marker customMarker = Marker(
           markerId: MarkerId("marker_${destinations![i].siteLatLng}"),
           position: destinations![i].siteLatLng,
@@ -280,9 +291,8 @@ class _ExplorePageState extends State<ExplorePage> {
                         padding: const EdgeInsets.all(10.0),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(10.0),
-                          child: Image.network(
-                            await FirestoreServices()
-                                .getImageUrl(destinations![i].siteBanner),
+                          child: Image.asset(
+                            "lib/assets/places/default_banner.png",
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -291,11 +301,10 @@ class _ExplorePageState extends State<ExplorePage> {
                         padding: const EdgeInsets.symmetric(horizontal: 10.0),
                         child: GestureDetector(
                           onTap: () async {
-                            String image = await FirestoreServices()
-                                .getImageUrl(destinations![i].siteBanner);
                             Navigator.of(context).push(MaterialPageRoute(
                                 builder: (builder) => IndividualPlacePage(
-                                      banner: image,
+                                      banner:
+                                          "lib/assets/places/default_banner.png",
                                       name: destinations![i].siteName,
                                       address: destinations![i].siteAddress,
                                       info: destinations![i].siteInfo,
@@ -372,38 +381,6 @@ class _ExplorePageState extends State<ExplorePage> {
       if (mounted) {
         setState(() {
           marker.add(customMarker);
-        });
-      }
-    }
-  }
-
-  // This is for converting the images in firebase storage into bitmap descriptors
-  Future<BitmapDescriptor> createBitmapFromUrl(String url) async {
-    try {
-      final http.Response response = await http.get(Uri.parse(url));
-
-      if (response.statusCode == 200) {
-        Uint8List bytes = response.bodyBytes;
-
-        return BitmapDescriptor.bytes(bytes, width: 50, height: 50);
-      } else {
-        throw Exception('Failed to load image');
-      }
-    } catch (e) {
-      throw Exception('Error loading image: $e');
-    }
-  }
-
-  // This is for creating the custom marker's icon
-  Future<void> _createBitMapIcon() async {
-    for (var i = 0; i < destinations!.length; i++) {
-      String imageUrl =
-          await FirestoreServices().getImageUrl(destinations![i].siteMarker);
-
-      BitmapDescriptor customIcon = await createBitmapFromUrl(imageUrl);
-      if (mounted) {
-        setState(() {
-          bitmapIcons.add(customIcon);
         });
       }
     }
