@@ -24,7 +24,7 @@ class ExplorePage extends StatefulWidget {
 }
 
 class _ExplorePageState extends State<ExplorePage> {
-  final String googleMapsAPIKey = "AIzaSyDX1SZJD42FoDNlN7oMNgtavPalKn8Q-hM";
+  final String googleMapsAPIKey = "";
   static const taguigCity = LatLng(14.520445, 121.053886);
 
   bool isNavigating = false;
