@@ -8,12 +8,14 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import 'package:taguig_tourism_mobile_app/all_nearby_places_page.dart';
 import 'package:taguig_tourism_mobile_app/all_popular_destination_page.dart';
 import 'package:taguig_tourism_mobile_app/categories_page.dart';
 import 'package:taguig_tourism_mobile_app/explore_page.dart';
 import 'package:taguig_tourism_mobile_app/individual_place_page.dart';
 import 'package:taguig_tourism_mobile_app/models/events.dart';
+import 'package:taguig_tourism_mobile_app/models/profile_image_provider.dart';
 import 'package:taguig_tourism_mobile_app/events_page_single_page.dart';
 import 'package:taguig_tourism_mobile_app/navigation_state.dart';
 import 'package:taguig_tourism_mobile_app/services/explore_info.dart';
@@ -267,6 +269,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
     final navigationState = NavigationState.of(context);
+    String? profileImageURL = Provider.of<ProfileImageProvider>(context).profileImageURL;
 
     if (nearbyPlaces.isNotEmpty) {
       print("Nearby Places home: $nearbyPlaces");
@@ -303,41 +306,22 @@ class _HomePageState extends State<HomePage> {
                               onTap: () {
                                 navigationState?.onChangeScreen(4);
                               },
-                            child: CircleAvatar(
-                              child: isLoading
-                                ? CircularProgressIndicator()
-                                : profileImageURL != null
-                                    ? SizedBox(
-                                        height: screenHeight * 0.15,
-                                        child: ClipOval(
-                                          child: Image.network(
-                                            profileImageURL!,
-                                            fit: BoxFit.cover,
-                                            loadingBuilder:
-                                                (context, child, progress) {
-                                              return progress == null
-                                                  ? child
-                                                  : Center(
-                                                      child:
-                                                          CircularProgressIndicator(),
-                                                    );
-                                            },
-                                            errorBuilder:
-                                                (context, error, stackTrace) {
-                                              return Icon(
-                                                Icons.broken_image,
-                                                size: screenHeight * 0.075,
-                                                color: Colors.red,
-                                              );
-                                            },
-                                          ),
+                              child: CircleAvatar(
+                                radius: screenHeight * 0.02632, // Adjust the size as needed
+                                backgroundColor: Colors.grey[200], // Fallback color for empty avatar
+                                child: profileImageURL != null
+                                    ? ClipOval(
+                                        child: Image.network(
+                                          profileImageURL,
+                                          width: double.infinity, // Ensures the image fills the circle
+                                          height: double.infinity,
+                                          fit: BoxFit.cover, // Maintains the aspect ratio
+                                          errorBuilder: (context, error, stackTrace) {
+                                            return Icon(Icons.broken_image, color: Colors.red);
+                                          },
                                         ),
                                       )
-                                    : Icon(
-                                        Icons.person,
-                                        size: screenHeight * 0.03948,
-                                        color: Colors.grey,
-                                      ),
+                                    : Icon(Icons.person, color: Colors.grey, size: screenHeight * 0.05),
                               ),
                             ),
                           ),
