@@ -188,6 +188,7 @@ class CategoriesPageState extends State<CategoriesPage> {
                                                   longitude:
                                                       categoryTitle![index]
                                                           .siteLongitude,
+                                                  image: categoryTitle![index].siteImage,
                                                 ),
                                               ),
                                             );

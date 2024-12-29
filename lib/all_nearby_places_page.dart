@@ -132,6 +132,7 @@ class _AllNearbyPlacesPage extends State<AllNearbyPlacesPage> {
                                     links: place.siteLinks,
                                     latitude: place.siteLatitude,
                                     longitude: place.siteLongitude,
+                                    image: place.siteImage,
                                   ),
                                 ),
                               );

@@ -13,6 +13,7 @@ class ExploreDestinations {
   final String siteLongitude;
   final String siteBanner;
   final String siteMarker;
+  final String siteImage;
 
   ExploreDestinations({
     required this.siteName,
@@ -25,6 +26,7 @@ class ExploreDestinations {
     required this.siteLongitude,
     required this.siteBanner,
     required this.siteMarker,
+    required this.siteImage
   });
 
   factory ExploreDestinations.fromSnapshot(Map<String, dynamic> snapshot) {
@@ -49,6 +51,7 @@ class ExploreDestinations {
         siteLongitude: snapshot['site_longitude'] ?? '',
         siteBanner: snapshot['site_banner'] ?? '',
         siteMarker: snapshot['site_marker'] ?? '',
+        siteImage: snapshot['site_image'] ?? '',
       );
     } catch (e) {
       print("Error parsing snapshot: $e");

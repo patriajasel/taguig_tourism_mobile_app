@@ -14,6 +14,7 @@ class IndividualPlacePage extends StatefulWidget {
   final String links;
   final String latitude;
   final String longitude;
+  final String image;
 
   const IndividualPlacePage({
     super.key,
@@ -25,6 +26,7 @@ class IndividualPlacePage extends StatefulWidget {
     required this.links,
     required this.latitude,
     required this.longitude,
+    required this.image,
   });
 
   @override
@@ -44,6 +46,13 @@ class _IndividualPlacePageState extends State<IndividualPlacePage> {
     final Uri url = Uri.parse(widget.links);
     if (!await launchUrl(url)) {
       throw 'Could not launch ${widget.links}';
+    }
+  }
+
+  Future<void> _launchImageURL() async {
+    final Uri url = Uri.parse(widget.image);
+    if (!await launchUrl(url)) {
+      throw 'Could not launch ${widget.image}';
     }
   }
 
@@ -192,6 +201,41 @@ class _IndividualPlacePageState extends State<IndividualPlacePage> {
                                 SizedBox(
                                     height:
                                         20), // Add space after the hyperlink
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "See Photo: ",
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 14
+                                      ),
+                                    ),
+                                    
+                                    Expanded(
+                                      child: GestureDetector(
+                                          onTap: widget.image == "Not Available"
+                                              ? null
+                                              : _launchImageURL,
+                                          child: Text(
+                                            widget.image,
+                                            style: TextStyle(
+                                              fontSize: 14,
+                                              color:
+                                                  widget.image == "Not Available"
+                                                      ? null
+                                                      : Colors.blueAccent,
+                                              decoration: widget.image ==
+                                                      "Not Available"
+                                                  ? null
+                                                  : TextDecoration
+                                                      .underline, // Makes it look like a hyperlink
+                                            ),
+                                          ),
+                                        ),
+                                    ),
+                                  ],
+                                ),
                               ],
                             ),
                           ),
