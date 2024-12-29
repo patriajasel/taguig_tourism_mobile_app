@@ -3,6 +3,7 @@
 import 'dart:async';
 
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -65,12 +66,15 @@ class _HomePageState extends State<HomePage> {
 
   Timer? _timer;
 
+  String? profileImageURL;
+
   @override
   void initState() {
     userInfo = widget.userInformation;
     _initialize();
     getAllEvents();
     getPopularPlaceCollection();
+    _fetchProfileImage();
 
     // Set up the Timer
     _timer = Timer.periodic(Duration(minutes: 30), (timer) {
@@ -244,6 +248,21 @@ class _HomePageState extends State<HomePage> {
     return distanceInMeters <= 1000; // Change threshold to 1000 meters
   }
 
+  Future<void> _fetchProfileImage() async {
+    try {
+      Reference reference = FirebaseStorage.instance
+          .ref()
+          .child("profile_images/${userInfo?.userID}/custom_profile.png");
+      String downloadURL = await reference.getDownloadURL();
+      setState(() {
+        profileImageURL = downloadURL; // Set the fetched URL
+      });
+    } catch (e) {
+      // Log or handle the error if the image doesn't exist
+      print("Failed to fetch profile image: $e");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
@@ -284,12 +303,41 @@ class _HomePageState extends State<HomePage> {
                               onTap: () {
                                 navigationState?.onChangeScreen(4);
                               },
-                              child: CircleAvatar(
-                                // ! This widget will be changed to ImageAsset once there is a function for uploading pictures
-                                child: Icon(
-                                  Icons.person,
-                                  size: screenHeight * 0.03948,
-                                ),
+                            child: CircleAvatar(
+                              child: isLoading
+                                ? CircularProgressIndicator()
+                                : profileImageURL != null
+                                    ? SizedBox(
+                                        height: screenHeight * 0.15,
+                                        child: ClipOval(
+                                          child: Image.network(
+                                            profileImageURL!,
+                                            fit: BoxFit.cover,
+                                            loadingBuilder:
+                                                (context, child, progress) {
+                                              return progress == null
+                                                  ? child
+                                                  : Center(
+                                                      child:
+                                                          CircularProgressIndicator(),
+                                                    );
+                                            },
+                                            errorBuilder:
+                                                (context, error, stackTrace) {
+                                              return Icon(
+                                                Icons.broken_image,
+                                                size: screenHeight * 0.075,
+                                                color: Colors.red,
+                                              );
+                                            },
+                                          ),
+                                        ),
+                                      )
+                                    : Icon(
+                                        Icons.person,
+                                        size: screenHeight * 0.03948,
+                                        color: Colors.grey,
+                                      ),
                               ),
                             ),
                           ),
@@ -595,6 +643,7 @@ class _HomePageState extends State<HomePage> {
                                                         popularDestinations[
                                                                 index]
                                                             .siteLongitude,
+                                                    image: popularDestinations[index].siteImage,
                                                   );
                                                 },
                                               ));
