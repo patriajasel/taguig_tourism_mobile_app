@@ -11,8 +11,6 @@ class ExploreDestinations {
   final LatLng siteLatLng;
   final String siteLatitude;
   final String siteLongitude;
-  final String siteBanner;
-  final String siteMarker;
   final String siteImage;
 
   ExploreDestinations({
@@ -24,9 +22,7 @@ class ExploreDestinations {
     required this.siteLatLng,
     required this.siteLatitude,
     required this.siteLongitude,
-    required this.siteBanner,
-    required this.siteMarker,
-    required this.siteImage
+    required this.siteImage,
   });
 
   factory ExploreDestinations.fromSnapshot(Map<String, dynamic> snapshot) {
@@ -49,8 +45,6 @@ class ExploreDestinations {
         siteLatLng: LatLng(latitude, longitude),
         siteLatitude: snapshot['site_latitude'] ?? '',
         siteLongitude: snapshot['site_longitude'] ?? '',
-        siteBanner: snapshot['site_banner'] ?? '',
-        siteMarker: snapshot['site_marker'] ?? '',
         siteImage: snapshot['site_image'] ?? '',
       );
     } catch (e) {
