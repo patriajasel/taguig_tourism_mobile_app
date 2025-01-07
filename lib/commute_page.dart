@@ -51,7 +51,9 @@ class _CommutePageState extends State<CommutePage> {
     "The Heritage Park",
     "Memorial Philippine Army Museum",
     "Manila American Cemetery",
-    "St. Anne Parish Church"
+    "St. Anne Parish Church",
+    "TLC Park",
+    "Mercado Del Lago"
   ];
 
   List<Map<String, dynamic>> commuteData = [];
